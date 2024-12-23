@@ -6,7 +6,11 @@ let
   defaultKubernetes = [
     k9s
     kubectl
-    # helm
+    kind
+    kubernetes-helm
+    oras
+    skopeo
+    docker
   ];
 
   # Define the default Python packages
@@ -45,10 +49,13 @@ let
     imagemagick
     feh
     gotop
+    htop
     zsh
     oh-my-zsh
     fzf
     thefuck
+    yq
+    jq
   ];
 
   # Define development-related packages
