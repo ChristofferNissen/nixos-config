@@ -23,10 +23,10 @@
         };
       };
 
-      #font = {
-      #  normal.family = "JetbrainsMono Nerd Font";
-      #  size = 8.0;
-      #};
+      font = {
+        normal.family = "Fira Code";
+        size = 8.0;
+      };
 
       terminal.shell = {
         # program = "/run/current-system/sw/bin/zsh";

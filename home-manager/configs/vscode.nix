@@ -27,7 +27,8 @@
       terminal.integrated.shell.linux = "${pkgs.zsh}/bin/zsh";
 
       editor = {
-        fontFamily = "'JetbrainsMono Nerd Font', 'monospace', monospace, 'Droid Sans Fallback'";
+        fontFamily = "Fira Code";
+        # fontFamily = "'JetbrainsMono Nerd Font', 'monospace', monospace, 'Droid Sans Fallback'";
         fontLigatures = true;
         inlineSuggest.enabled = true;
         bracketPairColorization.enabled = true;

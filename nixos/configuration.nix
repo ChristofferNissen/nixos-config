@@ -89,6 +89,7 @@
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
   hardware.keyboard.qmk.enable = true;
+  services.udev.packages = [ pkgs.qmk-udev-rules ];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -136,9 +137,7 @@
     wget
 
     # TODO: Move to user packages
-    qmk
-    qmk-udev-rules
-    qmk_hid
+    
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

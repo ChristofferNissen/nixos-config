@@ -33,6 +33,7 @@ let
     autorandr
     tmate
     bluez
+    brightnessctl
   ];
 
   # Define terminal-related packages
@@ -62,7 +63,14 @@ let
   developmentPackages = [
     vim
     go
+    jetbrains.goland
     go-task
+  ];
+
+  qmkPackages = [
+    qmk
+    # qmk-udev-rules
+    qmk_hid
   ];
 
   neovimPackages = [ neovim ];
@@ -74,10 +82,13 @@ in
     [ 
       bitwarden-desktop
       home-manager
+      tidal-hifi
+      discord
     ]
     ++ defaultKubernetes
     ++ miscPackages
     ++ terminalPackages
     ++ developmentPackages
+    ++ qmkPackages
     ++ neovimPackages;
 }
