@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./packages/main.nix
-    ./configs/main.nix
-  ];
-
   home.username = "cn";
   home.homeDirectory = "/home/cn";
 
@@ -20,4 +15,7 @@
   };
 
   home.stateVersion = "24.11";
+
+  imports = [ ./packages/main.nix ./configs/main.nix ];
+  
 }

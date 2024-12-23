@@ -9,12 +9,17 @@ let
 
   bg = "#00000000";
   fg = "#FFFFFF";
-
-  # Colored
   primary = "#91ddff";
-
-  # Dark
   secondary = "#141228";
+  
+  # bg = "#222";
+  # fg = "#dfdfdf";
+
+  # # Colored
+  # primary = "#ffb52a";
+
+  # # Dark
+  # secondary = "#e60053";
 
   # Colored (light)
   tertiary = "#65b2ff";
@@ -34,8 +39,8 @@ in
     enable = true;
 
     package = pkgs.polybar.override {
-      # i3GapsSupport = true;
       alsaSupport = true;
+      i3Support = true;
     };
 
     script = "polybar -q -r top & polybar -q -r bottom &";
@@ -67,9 +72,12 @@ in
         font-0 = "FuraCode Nerd Font:size=12;3";
         font-1 = "FuraCode Nerd Font:style=Bold:size=12;3";
 
-        modules-left = "distro-icon dulS ddrT i3 dulT";
+        # modules-left = "distro-icon dulS ddrT i3 dulT";
+        # modules-right = "durT audio ddlT wireless-network date";
+
+        modules-left = "i3";
         modules-center = "title";
-        modules-right = "durT audio ddlT date";
+        modules-right = "audio wireless-network network date";
 
         locale = "en_US.UTF-8";
       };
@@ -101,7 +109,7 @@ in
         font-0 = "FuraCode Nerd Font:size=12;3";
         font-1 = "FuraCode Nerd Font:style=Bold:size=12;3";
 
-        modules-left = "powermenu ddlS";
+        modules-left = "xkeyboard powermenu ddlS";
 
         modules-right = "ddrS cpu dulS ddrT memory dulT ddrP battery";
 
@@ -228,26 +236,28 @@ in
 
       "module/i3" = {
         type = "internal/i3";
-        pin-workspaces = false;
-        strip-wsnumbers = true;
+        pin-workspaces = true;
+        strip-wsnumbers = false;
+        index-sort = true;
+        enable-click = false;
         format = "<label-state> <label-mode>";
         format-background = tertiary;
 
-        ws-icon-0 = "1;";
-        ws-icon-1 = "2;";
-        ws-icon-2 = "3;﬏";
-        ws-icon-3 = "4;";
-        ws-icon-4 = "5;";
-        ws-icon-5 = "6;";
-        ws-icon-6 = "7;";
-        ws-icon-7 = "8;";
-        ws-icon-8 = "9;";
-        ws-icon-9 = "10;";
+        # ws-icon-0 = "1;";
+        # ws-icon-1 = "2;";
+        # ws-icon-2 = "3;﬏";
+        # ws-icon-3 = "4;";
+        # ws-icon-4 = "5;";
+        # ws-icon-5 = "6;";
+        # ws-icon-6 = "7;";
+        # ws-icon-7 = "8;";
+        # ws-icon-8 = "9;";
+        # ws-icon-9 = "10;";
 
         label-mode = "%mode%";
         label-mode-padding = 1;
 
-        label-unfocused = "%icon%";
+        label-unfocused = "%index%";
         label-unfocused-foreground = quinternary;
         label-unfocused-padding = 1;
 
@@ -256,7 +266,7 @@ in
         label-focused-foreground = secondary;
         label-focused-padding = 1;
 
-        label-visible = "%icon%";
+        label-visible = "%index%";
         label-visible-padding = 1;
 
         label-urgent = "%index%";
@@ -362,10 +372,27 @@ in
         menu-0-2-exec = "systemctl poweroff";
       };
 
-      #"module/wireless-network" = {
-      #  type = "internal/network";
-      #  interval = "wlp2s0";
-      #};
+      "module/wireless-network" = {
+        type = "internal/network";
+        interval = "wlp2s0";
+      };
+
+      "module/xkeyboard" = {
+        type = "internal/xkeyboard";
+        blacklist-0 = "num lock";
+
+        format-prefix = " ";
+        format-prefix-foreground = fg;
+        format-prefix-underline = secondary;
+
+        label-layout = "keyboard: %layout%";
+        label-layout-underline = secondary;
+
+        label-indicator-padding = 2;
+        label-indicator-margin = 1;
+        label-indicator-background = secondary;
+        label-indicator-underline = secondary;
+      };
 
       #--------------------SOLID TRANSITIONS--------------------#
 

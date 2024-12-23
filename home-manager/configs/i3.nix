@@ -11,6 +11,11 @@
 
       window.border = 0;
 
+      fonts = {
+        names = ["DejaVu Sans Mono, FontAwesome 8"];
+        size = 10.0;
+      };
+
       gaps = {
         inner = 10;
         outer = 5;
@@ -23,10 +28,12 @@
         "XF86MonBrightnessDown" = "exec brightnessctl set 4%-";
         "XF86MonBrightnessUp" = "exec brightnessctl set 4%+";
         "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+        "${modifier}+Shift+Return" = "exec ${pkgs.firefox}/bin/firefox";
         "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun";
         "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
         "${modifier}+b" = "exec ${pkgs.brave}/bin/brave";
         "${modifier}+Shift+x" = "exec systemctl suspend";
+        "${modifier}+Shift+z" = "mode \"$keyboard_layout\"";
       };
 
       startup = [
@@ -47,5 +54,16 @@
         }
       ];
     };
+
+    # Extra config from Fedora workstation
+    extraConfig = ''
+      set $keyboard_layout Keyboard Layout: (d) Danish, (e) US English, (esc) Cancel
+      mode "$keyboard_layout" {
+        bindsym d exec --no-startup-id setxkbmap dk, mode "default"
+        bindsym e exec --no-startup-id setxkbmap us, mode "default"
+        bindsym Escape mode "default"
+      }
+    '';
+
   };
 }

@@ -24,7 +24,7 @@
                   "networkmanager"
                   "wheel"
                   "docker"
-                  "dialout" # qmk
+                  # "dialout" # qmk
               ];
               home = "/home/cn";
             };

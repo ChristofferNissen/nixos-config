@@ -69,11 +69,13 @@ let
 
   qmkPackages = [
     qmk
-    # qmk-udev-rules
     qmk_hid
+    # qmk-udev-rules
   ];
 
-  neovimPackages = [ neovim ];
+  neovimPackages = [ 
+    neovim
+  ];
 
 in
 {
