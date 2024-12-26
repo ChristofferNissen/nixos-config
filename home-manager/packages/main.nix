@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, system, ... }:
 
 with pkgs;
 let
@@ -34,6 +34,7 @@ let
     tmate
     bluez
     brightnessctl
+    signal-desktop
   ];
 
   # Define terminal-related packages

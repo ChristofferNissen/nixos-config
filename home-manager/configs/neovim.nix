@@ -7,7 +7,7 @@
     #   set number relativenumber
     # '';
   };
-  # programs.nixvim = {
-  #   enable = true;
-  # };
+  programs.neovim.plugins = with pkgs.vimPlugins; [
+    nvim-treesitter.withAllGrammars
+  ];
 }

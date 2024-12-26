@@ -11,8 +11,10 @@
   # Enable programs
   programs = {
     command-not-found.enable = true;
-    zsh.enable = true;
-    zsh.enableCompletion = true;
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+    };
   };
 
   home.stateVersion = "24.11";
