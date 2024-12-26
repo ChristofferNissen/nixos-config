@@ -1,13 +1,11 @@
 return {
     {
-
         'williamboman/mason.nvim',
         config = function()
             require("mason").setup()
         end
     },
     {
-
         'VonHeikemen/lsp-zero.nvim',
         branch = "v4.x",
         lazy = true,

@@ -21,4 +21,4 @@ require("lazy").setup("plugins", {
         fallback = false,
     }
 })
-require("kidsan")
+require("ChristofferNissen")

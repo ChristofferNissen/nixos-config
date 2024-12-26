@@ -1,4 +1,4 @@
-{ pkgs, system, ... }:
+{ pkgs, system, inputs, ... }:
 
 with pkgs;
 let
@@ -58,6 +58,7 @@ let
     thefuck
     yq
     jq
+    neofetch
   ];
 
   # Define development-related packages
@@ -76,6 +77,7 @@ let
 
   neovimPackages = [ 
     # neovim
+    # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
 in
@@ -87,6 +89,8 @@ in
       home-manager
       tidal-hifi
       discord
+      hyprland
+      inputs.hyprland-qtutils.packages."${pkgs.system}".default
     ]
     ++ defaultKubernetes
     ++ miscPackages

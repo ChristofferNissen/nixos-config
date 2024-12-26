@@ -7,6 +7,7 @@ return {
         -- autotag = {
         --     enable = true
         -- },
+        ensure_installed = {},
         highlight = {
             -- `false` will disable the whole extension
             enable = true,

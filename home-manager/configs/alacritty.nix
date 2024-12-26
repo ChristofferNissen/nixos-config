@@ -24,9 +24,33 @@
       };
 
       font = {
-        normal.family = "Fira Code";
-        size = 8.0;
+        size = 8;
+        normal = {
+          # family = "JetBrains Mono Nerd Font";
+          family = "Fira Code";
+          style = "Regular";
+        };
+        bold = {
+          # family = "JetBrains Mono Nerd Font";
+          family = "Fira Code";
+          style = "Bold";
+        };
+        italic = {
+          # family = "JetBrains Mono Nerd Font";
+          family = "Fira Code";
+          style = "Italic";
+        };
+        bold_italic = {
+          # family = "JetBrains Mono Nerd Font";
+          family = "Fira Code";
+          style = "Bold Italic";
+        };
       };
+
+      # font = {
+      #   normal.family = "Fira Code";
+      #   size = 12.0;
+      # };
 
       terminal.shell = {
         program = "/etc/profiles/per-user/${userName}/bin/zsh";

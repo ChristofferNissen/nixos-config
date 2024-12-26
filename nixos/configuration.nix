@@ -8,7 +8,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    
   ];
 
   # Enable Flakes
@@ -60,13 +59,14 @@
 
   # Fonts!
   fonts.packages = with pkgs; [
-    # nerdfonts
+    # (nerd-fonts.override { fonts = [ "JetBrainsMono" ]; })
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     noto-fonts-emoji
     noto-fonts-extra
     fira-code
+    fira-mono
     fira-code-symbols
   ];
 
@@ -106,6 +106,14 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Hyprland
+  security.polkit.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true; # recommended for most users
+    xwayland.enable = true; # Xwayland can be disabled.
+  };
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -133,6 +141,7 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    kitty # required for the default Hyprland config
   ];
 
   environment.variables.EDITOR = "vim";

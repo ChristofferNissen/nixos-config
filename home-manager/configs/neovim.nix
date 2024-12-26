@@ -1,6 +1,6 @@
 { pkgs, ... }:
-let
 
+let
   treesitterWithGrammars = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
     p.bash
     p.comment
@@ -62,9 +62,9 @@ in
     recursive = true;
   };
 
-  home.file."./.config/nvim/lua/kidsan/init.lua".text = ''
-    require("kidsan.set")
-    require("kidsan.remap")
+  home.file."./.config/nvim/lua/ChristofferNissen/init.lua".text = ''
+    require("ChristofferNissen.set")
+    require("ChristofferNissen.remap")
     vim.opt.runtimepath:append("${treesitter-parsers}")
   '';
 

@@ -7,9 +7,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, hyprland-qtutils,  ... }@inputs:
   let
     userName = "cn";
     system = "x86_64-linux";
@@ -30,7 +31,7 @@
               home = "/home/${userName}";
             };
           }
-          
+
           ./nixos/configuration.nix
 
           home-manager.nixosModules.home-manager
@@ -40,7 +41,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.${userName} = import ./home-manager/home.nix;
           }
-          
+ 
         ];
       };
     };
