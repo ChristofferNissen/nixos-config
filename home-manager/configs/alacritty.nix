@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, userName, ... }:
 
 {
   programs.alacritty = {
@@ -29,8 +29,7 @@
       };
 
       terminal.shell = {
-        # program = "/run/current-system/sw/bin/zsh";
-        program = "/etc/profiles/per-user/cn/bin/zsh";
+        program = "/etc/profiles/per-user/${userName}/bin/zsh";
       };
 
       colors = {

@@ -74,7 +74,7 @@ let
   ];
 
   neovimPackages = [ 
-    neovim
+    # neovim
   ];
 
 in

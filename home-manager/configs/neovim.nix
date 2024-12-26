@@ -7,4 +7,7 @@
     #   set number relativenumber
     # '';
   };
+  # programs.nixvim = {
+  #   enable = true;
+  # };
 }
