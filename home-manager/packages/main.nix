@@ -34,7 +34,6 @@ let
     tmate
     bluez
     brightnessctl
-    signal-desktop
   ];
 
   # Define terminal-related packages
@@ -72,7 +71,6 @@ let
   qmkPackages = [
     qmk
     qmk_hid
-    # qmk-udev-rules
   ];
 
   neovimPackages = [ 
@@ -84,13 +82,15 @@ in
 {
   home.packages =
     with pkgs;
-    [ 
+    [
+      signal-desktop
       bitwarden-desktop
       home-manager
       tidal-hifi
       discord
       hyprland
       inputs.hyprland-qtutils.packages."${pkgs.system}".default
+      wofi
     ]
     ++ defaultKubernetes
     ++ miscPackages
