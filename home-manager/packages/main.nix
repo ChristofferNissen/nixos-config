@@ -91,6 +91,7 @@ in
       hyprland
       inputs.hyprland-qtutils.packages."${pkgs.system}".default
       wofi
+      waybar
     ]
     ++ defaultKubernetes
     ++ miscPackages
