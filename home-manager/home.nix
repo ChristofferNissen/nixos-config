@@ -1,24 +1,17 @@
-{ config, pkgs, userName, ... }:
+{ config, pkgs, userName, stateVersion, ... }:
 
 {
-  
   home.username = "${userName}";
   home.homeDirectory = "/home/${userName}";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # Enable programs
-  programs = {
-    command-not-found.enable = true;
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-    };
+  home.stateVersion = stateVersion;
+
+  home.sessionVariables = {
+    SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
-  home.stateVersion = "24.11";
-
   imports = [ ./packages/main.nix ./configs/main.nix ];
-
 }

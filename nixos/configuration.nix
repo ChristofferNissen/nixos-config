@@ -79,13 +79,15 @@
     windowManager.i3.enable = true;
   };
   services.displayManager = {
-    defaultSession = "none+i3";
+    # defaultSession = "none+i3";
+    defaultSession = "hyprland-uwsm";
   };
 
   # Start bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
+  # QMK
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = [ pkgs.qmk-udev-rules ];
 
@@ -107,7 +109,8 @@
   services.printing.enable = true;
 
   # Hyprland
-  security.polkit.enable = true;
+  #security.polkit.enable = true;
+  security.pam.services.swaylock = {};
   programs.hyprland = {
     enable = true;
     withUWSM = true; # recommended for most users
@@ -138,13 +141,14 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    kitty # required for the default Hyprland config
-  ];
-
-  environment.variables.EDITOR = "vim";
+  environment = {
+    systemPackages = with pkgs; [
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget
+      zsh
+    ];
+    variables.EDITOR = "vim";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -171,6 +175,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.11";
 
 }

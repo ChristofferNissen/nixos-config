@@ -10,7 +10,9 @@ let
     kubernetes-helm
     oras
     skopeo
-    docker
+    containerd
+    nerdctl
+    kaniko
   ];
 
   # Define the default Python packages
@@ -34,6 +36,7 @@ let
     tmate
     bluez
     brightnessctl
+    pamixer
   ];
 
   # Define terminal-related packages
@@ -64,6 +67,7 @@ let
   developmentPackages = [
     vim
     go
+    # rustup
     jetbrains.goland
     go-task
   ];
@@ -77,7 +81,17 @@ let
     # neovim
     # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
-
+  
+  hyprlandPackages = [ 
+    hyprland
+    hypridle
+    hyprlock
+    hyprsunset
+    inputs.hyprland-qtutils.packages."${pkgs.system}".default
+    wofi
+    waybar
+    kitty # required for the default Hyprland config
+  ];
 in
 {
   home.packages =
@@ -88,15 +102,12 @@ in
       home-manager
       tidal-hifi
       discord
-      hyprland
-      inputs.hyprland-qtutils.packages."${pkgs.system}".default
-      wofi
-      waybar
     ]
     ++ defaultKubernetes
     ++ miscPackages
     ++ terminalPackages
     ++ developmentPackages
     ++ qmkPackages
-    ++ neovimPackages;
+    ++ neovimPackages
+    ++ hyprlandPackages;
 }
