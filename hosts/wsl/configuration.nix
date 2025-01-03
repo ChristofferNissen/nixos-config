@@ -1,4 +1,4 @@
-{ pkgs, system, user, ... }:
+{ pkgs, system, userName, ... }:
 
 {
   imports = [ <nixos-wsl/modules> ];
@@ -8,17 +8,10 @@
   nixpkgs.hostPlatform = system;
 
   wsl.enable = true;
-  wsl.defaultUser = user;
+  wsl.defaultUser = userName;
 
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
-
-  users.users.${user} = {
-    isNormalUser = true;
-    description = "Roman Kuznetsov";
-    extraGroups = [ "docker" "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
-  };
 
   security.pki.certificateFiles = [ /etc/pki/tls/certs/ca-zscaler.crt ];
   environment.variables = {
