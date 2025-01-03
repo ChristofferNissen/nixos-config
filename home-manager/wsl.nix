@@ -13,5 +13,5 @@
     SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
-  imports = [ ./packages/main.nix ./packages/extra.nix ./configs/main.nix ./configs/de.nix ];
+  imports = [ ./packages/main.nix ./configs/main.nix ];
 }

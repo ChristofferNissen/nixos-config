@@ -2,18 +2,26 @@
   description = "NixOS and Home Manager configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs = { url = "github:NixOS/nixpkgs?ref=nixos-24.11"; };
+
+    nixpkgs-unstable = { url = "github:NixOS/nixpkgs?ref=master"; };
+
+    # ref: https://github.com/NixOS/nixos-hardware/tree/master
+    nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     hyprland-qtutils = {
       url = "github:hyprwm/hyprland-qtutils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland-qtutils,  ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, hyprland-qtutils,  ... }@inputs:
   let
     userName = "cn";
     description = "Christoffer Nissen";
@@ -38,8 +46,11 @@
             };
           }
 
+          # ref: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
+
           # Create NixOS
-          ./nixos/configuration.nix
+          ./hosts/nixos/configuration.nix
 
           # Create home folder
           home-manager.nixosModules.home-manager
@@ -51,6 +62,45 @@
             home-manager.useUserPackages = true;
             home-manager.users.${userName} = import ./home-manager/home.nix;
           }
+        ];
+      };
+      wsl = nixpkgs.lib.nixosSystem {
+        system = system;
+        specialArgs = { inherit inputs system userName; };
+        modules = [
+          {
+            nixpkgs.config.allowUnfree = true;
+            system.stateVersion = stateVersion;
+          }
+
+          # Create User
+          {
+            users.users.${userName} = {
+              isNormalUser = true;
+              description = description;
+              extraGroups = [
+                "networkmanager"
+                "wheel"
+                "docker"
+              ];
+              home = "/home/${userName}";
+            };
+          }
+
+          # basic configuration
+          ./hosts/wsl/configuration.nix
+
+          # Create home folder
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = { 
+              inherit inputs system userName stateVersion;
+            };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${userName} = import ./home-manager/wsl.nix;
+          }
+          
         ];
       };
     };
