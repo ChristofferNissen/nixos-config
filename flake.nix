@@ -38,8 +38,11 @@
             };
           }
 
+          # ref: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
+
           # Create NixOS
-          ./nixos/configuration.nix
+          ./hosts/nixos/configuration.nix
 
           # Create home folder
           home-manager.nixosModules.home-manager
@@ -51,6 +54,41 @@
             home-manager.useUserPackages = true;
             home-manager.users.${userName} = import ./home-manager/home.nix;
           }
+        ];
+      };
+      wsl = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs system userName stateVersion; };
+        modules = [
+          {
+            nixpkgs.config.allowUnfree = true;
+            system.stateVersion = "24.11";
+          }
+
+          # Create User
+          {
+            users.users.${userName} = {
+              isNormalUser = true;
+              description = description;
+              extraGroups = [
+                "networkmanager"
+                "wheel"
+                "docker"
+              ];
+              home = "/home/${userName}";
+            };
+          }
+
+          # basic configuration
+          ./hosts/wsl/configuration.nix
+
+          # Create home folder
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${userName} = import ./home-manager/wsl.nix;
+          }
+          
         ];
       };
     };
