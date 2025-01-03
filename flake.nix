@@ -65,6 +65,7 @@
         ];
       };
       wsl = nixpkgs.lib.nixosSystem {
+        system = system;
         modules = [
           {
             nixpkgs.config.allowUnfree = true;
