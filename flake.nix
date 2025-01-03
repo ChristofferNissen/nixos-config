@@ -65,7 +65,6 @@
         ];
       };
       wsl = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs system userName stateVersion; };
         modules = [
           {
             nixpkgs.config.allowUnfree = true;
@@ -93,7 +92,7 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { 
-              inherit inputs; inherit userName; inherit stateVersion;
+              inherit inputs userName stateVersion;
             };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
