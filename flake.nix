@@ -69,7 +69,7 @@
         modules = [
           {
             nixpkgs.config.allowUnfree = true;
-            system.stateVersion = "24.11";
+            system.stateVersion = stateVersion;
           }
 
           # Create User
@@ -92,6 +92,9 @@
           # Create home folder
           home-manager.nixosModules.home-manager
           {
+            home-manager.extraSpecialArgs = { 
+              inherit inputs; inherit userName; inherit stateVersion;
+            };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${userName} = import ./home-manager/wsl.nix;
