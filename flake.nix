@@ -66,6 +66,7 @@
       };
       wsl = nixpkgs.lib.nixosSystem {
         system = system;
+        specialArgs = { inherit inputs system userName; };
         modules = [
           {
             nixpkgs.config.allowUnfree = true;

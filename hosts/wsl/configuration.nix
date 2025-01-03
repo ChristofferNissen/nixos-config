@@ -22,4 +22,3 @@
 
   environment.systemPackages = with pkgs; [ gitFull vim ];
 }
-

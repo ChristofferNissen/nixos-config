@@ -68,7 +68,7 @@ let
     vim
     go
     # rustup
-    jetbrains.goland
+    # jetbrains.goland
     go-task
   ];
 
@@ -82,32 +82,17 @@ let
     # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
   
-  hyprlandPackages = [ 
-    hyprland
-    hypridle
-    hyprlock
-    hyprsunset
-    inputs.hyprland-qtutils.packages."${pkgs.system}".default
-    wofi
-    waybar
-    kitty # required for the default Hyprland config
-  ];
 in
 {
   home.packages =
     with pkgs;
     [
-      signal-desktop
-      bitwarden-desktop
       home-manager
-      tidal-hifi
-      discord
     ]
     ++ defaultKubernetes
     ++ miscPackages
     ++ terminalPackages
     ++ developmentPackages
     ++ qmkPackages
-    ++ neovimPackages
-    ++ hyprlandPackages;
+    ++ neovimPackages;
 }
