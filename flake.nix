@@ -94,7 +94,7 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { 
-              inherit inputs userName stateVersion;
+              inherit inputs system userName stateVersion;
             };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
