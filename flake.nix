@@ -2,18 +2,26 @@
   description = "NixOS and Home Manager configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs = { url = "github:NixOS/nixpkgs?ref=nixos-24.11"; };
+
+    nixpkgs-unstable = { url = "github:NixOS/nixpkgs?ref=master"; };
+
+    # ref: https://github.com/NixOS/nixos-hardware/tree/master
+    nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     hyprland-qtutils = {
       url = "github:hyprwm/hyprland-qtutils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland-qtutils,  ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, hyprland-qtutils,  ... }@inputs:
   let
     userName = "cn";
     description = "Christoffer Nissen";
