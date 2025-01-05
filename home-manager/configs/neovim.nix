@@ -58,9 +58,14 @@ in
   };
 
   home.file."./.config/nvim/" = {
-    source = ./nvim;
+    # source = ./nvim;
+    source = builtins.fetchGit {
+      url = "https://github.com/christoffernissen/lazyvim-config";
+      # rev = "07fca786154551f90f36535bfb21f8ca4abd5027";
+    };
     recursive = true;
   };
+
 
   home.file."./.config/nvim/lua/ChristofferNissen/init.lua".text = ''
     require("ChristofferNissen.set")
