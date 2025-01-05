@@ -61,6 +61,7 @@ let
     yq
     jq
     neofetch
+    tmux
   ];
 
   # Define development-related packages
