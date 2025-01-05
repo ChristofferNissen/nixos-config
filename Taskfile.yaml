@@ -9,7 +9,7 @@ tasks:
 
   switch:
     cmds:
-      - sudo nixos-rebuild switch --flake .#x1
+      - sudo nixos-rebuild switch --flake .#x1 --impure
 
   build:
     cmds:
