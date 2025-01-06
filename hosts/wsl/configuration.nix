@@ -19,6 +19,8 @@
   };
 
   security.sudo.extraConfig = ''Defaults env_keep += "NIX_SSL_CERT_FILE"'';
+    
+  programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [ gitFull vim ];
 }
