@@ -7,6 +7,7 @@
     userEmail = "christoffer.nissen" + "@" + "gmail.com";
     extraConfig = {
         init = { defaultBranch = "main"; };
+        push = { autoSetupRemote = true; };
     };
   };
 }

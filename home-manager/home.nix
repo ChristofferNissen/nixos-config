@@ -13,5 +13,15 @@
     SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
+  programs.git = {
+    enable = true;
+    userName = "Christoffer Nissen";
+    userEmail = "christoffer.nissen" + "@" + "gmail.com";
+    extraConfig = {
+        init = { defaultBranch = "main"; };
+        push = { autoSetupRemote = true; };
+    };
+  };
+
   imports = [ ./packages/main.nix ./packages/extra.nix ./configs/main.nix ./configs/de.nix ];
 }

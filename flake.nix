@@ -100,6 +100,8 @@
             home-manager.useUserPackages = true;
             home-manager.users.${userName} = import ./home-manager/wsl.nix;
           }
+
+          
           
         ];
       };
