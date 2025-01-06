@@ -15,6 +15,11 @@ let
     kaniko
   ];
 
+  cloudPackages = [
+    azure-cli
+    kubelogin
+  ];
+
   # Define the default Python packages
   defaultPython = python3.withPackages (
     python-packages: with python-packages; [
@@ -91,6 +96,7 @@ in
       home-manager
     ]
     ++ defaultKubernetes
+    ++ cloudPackages
     ++ miscPackages
     ++ terminalPackages
     ++ developmentPackages
