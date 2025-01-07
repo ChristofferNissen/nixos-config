@@ -60,11 +60,10 @@ in
   home.file."./.config/nvim/" = {
     source = builtins.fetchGit {
       url = "https://github.com/christoffernissen/lazyvim-config";
-      rev = "fe7b5fe06d8eb4cae877179b39bd9c035763b2f6";
+      rev = "6637a9e2326b68891f903ed6cec1c840c00efcf2";
     };
     recursive = true;
   };
-
 
   home.file."./.config/nvim/lua/ChristofferNissen/init.lua".text = ''
     require("ChristofferNissen.set")

@@ -67,6 +67,10 @@ let
     jq
     neofetch
     tmux
+    zig
+    gcc
+    yamlfmt
+    yamllint
   ];
 
   # Define development-related packages
