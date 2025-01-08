@@ -1,9 +1,17 @@
-{ pkgs, system, userName, ... }:
+{
+  pkgs,
+  system,
+  userName,
+  ...
+}:
 
 {
   imports = [ <nixos-wsl/modules> ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   nixpkgs.hostPlatform = system;
 
@@ -19,12 +27,15 @@
   };
 
   security.sudo.extraConfig = ''Defaults env_keep += "NIX_SSL_CERT_FILE"'';
-    
+
   programs.nix-ld.enable = true;
 
   # QMK
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = [ pkgs.qmk-udev-rules ];
 
-  environment.systemPackages = with pkgs; [ gitFull vim ];
+  environment.systemPackages = with pkgs; [
+    gitFull
+    vim
+  ];
 }

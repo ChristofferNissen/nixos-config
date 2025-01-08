@@ -12,7 +12,7 @@
       window.border = 0;
 
       fonts = {
-        names = ["DejaVu Sans Mono, FontAwesome 8"];
+        names = [ "DejaVu Sans Mono, FontAwesome 8" ];
         size = 10.0;
       };
 

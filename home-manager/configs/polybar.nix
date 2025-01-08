@@ -11,7 +11,7 @@ let
   fg = "#FFFFFF";
   primary = "#91ddff";
   secondary = "#141228";
-  
+
   # bg = "#222";
   # fg = "#dfdfdf";
 

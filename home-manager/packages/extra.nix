@@ -1,8 +1,13 @@
-{ pkgs, system, inputs, ... }:
+{
+  pkgs,
+  system,
+  inputs,
+  ...
+}:
 
 with pkgs;
 let
-  hyprlandPackages = [ 
+  hyprlandPackages = [
     hyprland
     hypridle
     hyprlock

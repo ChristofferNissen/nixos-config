@@ -6,8 +6,12 @@
     userName = "Christoffer Nissen";
     userEmail = "christoffer.nissen" + "@" + "gmail.com";
     extraConfig = {
-        init = { defaultBranch = "main"; };
-        push = { autoSetupRemote = true; };
+      init = {
+        defaultBranch = "main";
+      };
+      push = {
+        autoSetupRemote = true;
+      };
     };
   };
 }

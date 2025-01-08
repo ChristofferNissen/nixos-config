@@ -29,9 +29,13 @@
         "fzf"
         "thefuck"
         "direnv"
+        "kubectl"
+        "tmux"
       ];
       theme = "robbyrussell";
     };
+    localVariables = {
+        ZSH_TMUX_AUTOSTART = "true";
+    };
   };
 }
-

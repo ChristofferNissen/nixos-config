@@ -100,14 +100,14 @@
 
   # Configure console keymap
   #console.keyMap = "dk-latin1";
-  #console.keyMap = "us";	
+  #console.keyMap = "us";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
   # Hyprland
   #security.polkit.enable = true;
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
   programs.hyprland = {
     enable = true;
     withUWSM = true; # recommended for most users

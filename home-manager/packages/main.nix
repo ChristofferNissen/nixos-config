@@ -1,4 +1,9 @@
-{ pkgs, system, inputs, ... }:
+{
+  pkgs,
+  system,
+  inputs,
+  ...
+}:
 
 with pkgs;
 let
@@ -42,6 +47,7 @@ let
     bluez
     brightnessctl
     pamixer
+    nixfmt-rfc-style
   ];
 
   # Define terminal-related packages
@@ -67,10 +73,10 @@ let
     jq
     neofetch
     tmux
-    zig
     gcc
     yamlfmt
     yamllint
+    tt
   ];
 
   # Define development-related packages
@@ -78,8 +84,11 @@ let
     vim
     go
     golangci-lint
-    # rustup
-    # jetbrains.goland
+    zig
+    rustup
+    gleam
+    erlang
+    #jetbrains.goland
     go-task
     lazygit
   ];
@@ -89,11 +98,11 @@ let
     qmk_hid
   ];
 
-  neovimPackages = [ 
+  neovimPackages = [
     # neovim
     # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
-  
+
 in
 {
   home.packages =

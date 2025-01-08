@@ -1,4 +1,10 @@
-{ config, pkgs, userName, stateVersion, ... }:
+{
+  config,
+  pkgs,
+  userName,
+  stateVersion,
+  ...
+}:
 
 {
   home.username = "${userName}";
@@ -18,10 +24,17 @@
     userName = "Christoffer Nissen";
     userEmail = "cnis" + "@" + "bankingcircle.com";
     extraConfig = {
-        init = { defaultBranch = "main"; };
-        push = { autoSetupRemote = true; };
+      init = {
+        defaultBranch = "main";
+      };
+      push = {
+        autoSetupRemote = true;
+      };
     };
   };
 
-  imports = [ ./packages/main.nix ./configs/main.nix ];
+  imports = [
+    ./packages/main.nix
+    ./configs/main.nix
+  ];
 }
