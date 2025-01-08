@@ -77,9 +77,11 @@ let
   developmentPackages = [
     vim
     go
+    golangci-lint
     # rustup
     # jetbrains.goland
     go-task
+    lazygit
   ];
 
   qmkPackages = [

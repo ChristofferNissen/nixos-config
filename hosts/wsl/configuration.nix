@@ -22,5 +22,9 @@
     
   programs.nix-ld.enable = true;
 
+  # QMK
+  hardware.keyboard.qmk.enable = true;
+  services.udev.packages = [ pkgs.qmk-udev-rules ];
+
   environment.systemPackages = with pkgs; [ gitFull vim ];
 }
