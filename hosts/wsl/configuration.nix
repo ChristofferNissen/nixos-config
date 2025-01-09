@@ -33,6 +33,9 @@
   # QMK
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = [ pkgs.qmk-udev-rules ];
+    
+  # Docker
+  virtualisation.docker.enable = true;
 
   environment.systemPackages = with pkgs; [
     gitFull
