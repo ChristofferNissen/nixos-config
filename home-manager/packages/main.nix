@@ -1,5 +1,6 @@
 {
   pkgs,
+  unstable,
   system,
   inputs,
   ...
@@ -86,8 +87,7 @@ let
     golangci-lint
     zig
     rustup
-    gleam
-    erlang
+    
     #jetbrains.goland
     go-task
     lazygit
@@ -105,11 +105,13 @@ let
 
 in
 {
-  home.packages =
-    with pkgs;
-    [
+  home.packages = 
+    (with unstable; [
+      gleam
+      erlang
+    ]) ++ (with pkgs; [
       home-manager
-    ]
+    ])
     ++ defaultKubernetes
     ++ cloudPackages
     ++ miscPackages
@@ -117,4 +119,5 @@ in
     ++ developmentPackages
     ++ qmkPackages
     ++ neovimPackages;
+   
 }
