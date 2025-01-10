@@ -9,6 +9,10 @@
     # ref: https://github.com/NixOS/nixos-hardware/tree/master
     nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
 
+    # ref: https://github.com/nix-community/NixOS-WSL/
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +34,7 @@
       nixpkgs,
       nixpkgs-unstable,
       nixos-hardware,
+      nixos-wsl,
       home-manager,
       hyprland-qtutils,
       catppuccin,
@@ -83,7 +88,7 @@
         };
         wsl = nixpkgs.lib.nixosSystem {
           system = system;
-          specialArgs = { inherit inputs system userName; };
+          specialArgs = { inherit inputs nixos-wsl system userName; };
           modules = [
             {
               nixpkgs.config.allowUnfree = true;
@@ -106,6 +111,22 @@
 
             # basic configuration
             ./hosts/wsl/configuration.nix
+            
+            # wsl specific configuration
+            nixos-wsl.nixosModules.default
+            {
+                system.stateVersion = stateVersion;
+                wsl.enable = true;
+                wsl.defaultUser = userName;
+
+                # WSL Configuration
+                wsl.wslConf.automount.enabled = false;
+                
+                wsl.wslConf.boot.command = "neofetch";
+                wsl.wslConf.boot.systemd = true;
+                
+                wsl.wslConf.network.generateResolvConf = false;
+            }
 
             # Create home folder
             home-manager.nixosModules.home-manager

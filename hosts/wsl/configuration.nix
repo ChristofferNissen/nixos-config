@@ -1,22 +1,16 @@
 {
   pkgs,
   system,
-  userName,
   ...
 }:
 
 {
-  imports = [ <nixos-wsl/modules> ];
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
 
   nixpkgs.hostPlatform = system;
-
-  wsl.enable = true;
-  wsl.defaultUser = userName;
 
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
@@ -33,7 +27,7 @@
   # QMK
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = [ pkgs.qmk-udev-rules ];
-    
+ 
   # Docker
   virtualisation.docker.enable = true;
 

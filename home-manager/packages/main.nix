@@ -78,6 +78,7 @@ let
     yamlfmt
     yamllint
     tt
+    lazydocker
   ];
 
   # Define development-related packages
@@ -87,11 +88,12 @@ let
     golangci-lint
     zig
     rustup
-    
     #jetbrains.goland
     go-task
     lazygit
+    mdbook
   ];
+
 
   qmkPackages = [
     qmk

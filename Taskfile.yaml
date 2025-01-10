@@ -2,15 +2,18 @@
 version: "3"
 
 tasks:
-
   format:
     cmds:
       - fd '.nix' | xargs nixfmt
 
   switch:
+    vars:
+      CONFIG: '{{.CONFIG | default "x1"}}'
     cmds:
-      - sudo nixos-rebuild switch --flake .#x1 --impure
+      - sudo nixos-rebuild switch --flake .#{{ .CONFIG }} --impure
 
   build:
+    vars:
+      CONFIG: '{{.CONFIG | default "x1"}}'
     cmds:
-      - sudo nixos-rebuild build --flake .#x1
+      - sudo nixos-rebuild build --flake .#{{ .CONFIG }}
