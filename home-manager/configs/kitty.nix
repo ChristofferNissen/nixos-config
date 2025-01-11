@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   programs.kitty = {
@@ -8,4 +8,7 @@
     '';
   };
 
+  catppuccin.kitty = {
+    enable = true;
+  };
 }

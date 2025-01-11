@@ -1,8 +1,6 @@
 { inputs, pkgs, ... }:
 
 {
-  imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
-
   programs.tmux = {
     enable = true;
     baseIndex = 1;

@@ -34,6 +34,7 @@
   };
 
   imports = [
+    ./common.nix
     ./packages/main.nix
     ./configs/main.nix
   ];
