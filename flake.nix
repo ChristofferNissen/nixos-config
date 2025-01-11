@@ -2,12 +2,18 @@
   description = "NixOS and Home Manager configuration";
 
   inputs = {
-    nixpkgs = { url = "github:NixOS/nixpkgs?ref=nixos-24.11"; };
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs?ref=nixos-24.11";
+    };
 
-    nixpkgs-unstable = { url = "github:NixOS/nixpkgs?ref=master"; };
+    nixpkgs-unstable = {
+      url = "github:NixOS/nixpkgs?ref=master";
+    };
 
     # ref: https://github.com/NixOS/nixos-hardware/tree/master
-    nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
 
     # ref: https://github.com/nix-community/NixOS-WSL/
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
@@ -16,12 +22,12 @@
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+      #inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     hyprland-qtutils = {
       url = "github:hyprwm/hyprland-qtutils";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     catppuccin.url = "github:catppuccin/nix";
@@ -45,7 +51,7 @@
       description = "Christoffer Nissen";
       system = "x86_64-linux";
       stateVersion = "24.11";
-      unstable = import nixpkgs-unstable {inherit system;};
+      unstable = import nixpkgs-unstable { inherit system; };
     in
     {
       nixosConfigurations = {
@@ -77,6 +83,7 @@
             {
               home-manager.extraSpecialArgs = {
                 inherit inputs;
+                inherit unstable;
                 inherit userName;
                 inherit stateVersion;
               };
@@ -88,7 +95,14 @@
         };
         wsl = nixpkgs.lib.nixosSystem {
           system = system;
-          specialArgs = { inherit inputs nixos-wsl system userName; };
+          specialArgs = {
+            inherit
+              inputs
+              nixos-wsl
+              system
+              userName
+              ;
+          };
           modules = [
             {
               nixpkgs.config.allowUnfree = true;
@@ -111,21 +125,21 @@
 
             # basic configuration
             ./hosts/wsl/configuration.nix
-            
+
             # wsl specific configuration
             nixos-wsl.nixosModules.default
             {
-                system.stateVersion = stateVersion;
-                wsl.enable = true;
-                wsl.defaultUser = userName;
+              system.stateVersion = stateVersion;
+              wsl.enable = true;
+              wsl.defaultUser = userName;
 
-                # WSL Configuration
-                wsl.wslConf.automount.enabled = false;
-                
-                wsl.wslConf.boot.command = "neofetch";
-                wsl.wslConf.boot.systemd = true;
-                
-                wsl.wslConf.network.generateResolvConf = false;
+              # WSL Configuration
+              wsl.wslConf.automount.enabled = false;
+
+              wsl.wslConf.boot.command = "neofetch";
+              wsl.wslConf.boot.systemd = true;
+
+              wsl.wslConf.network.generateResolvConf = false;
             }
 
             # Create home folder

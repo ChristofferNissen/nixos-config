@@ -94,7 +94,6 @@ let
     mdbook
   ];
 
-
   qmkPackages = [
     qmk
     qmk_hid
@@ -107,11 +106,13 @@ let
 
 in
 {
-  home.packages = 
+  home.packages =
     (with unstable; [
       gleam
       erlang
-    ]) ++ (with pkgs; [
+      rebar3
+    ])
+    ++ (with pkgs; [
       home-manager
     ])
     ++ defaultKubernetes
@@ -121,5 +122,5 @@ in
     ++ developmentPackages
     ++ qmkPackages
     ++ neovimPackages;
-   
+
 }

@@ -180,7 +180,7 @@
         "hyprland-qt-support": "hyprland-qt-support",
         "hyprutils": "hyprutils",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "systems": "systems_2"
       },

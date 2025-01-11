@@ -35,8 +35,8 @@
       theme = "robbyrussell";
     };
     localVariables = {
-        ZSH_TMUX_AUTOSTART = "false";
-        ZSH_TMUX_AUTOSTART_ONCE = "true";
+      ZSH_TMUX_AUTOSTART = "false";
+      ZSH_TMUX_AUTOSTART_ONCE = "true";
     };
   };
 }
