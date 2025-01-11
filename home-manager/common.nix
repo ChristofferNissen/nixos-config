@@ -19,6 +19,7 @@
   home.stateVersion = stateVersion;
 
   home.sessionVariables = {
+    NIXOS_OZONE_WAYLAND = "1";
     SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
@@ -35,4 +36,5 @@
     };
   };
 }
+
 
