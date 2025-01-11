@@ -1,109 +1,83 @@
-// -*- mode: json -*-
-
 {
 	"layer": "top",
-	"position": "bottom",
-
+	"position": "top",
 	"modules-left": [
-		"hyprland/workspaces",
-		"custom/right-arrow-dark"
+		"hyprland/workspaces"
 	],
 	"modules-center": [
-		"custom/left-arrow-dark",
-		"clock#1",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"clock#2",
-		"custom/right-arrow-dark",
-		"custom/right-arrow-light",
-		"clock#3",
-		"custom/right-arrow-dark"
+		"custom/music"
 	],
 	"modules-right": [
-		"custom/left-arrow-dark",
 		"pulseaudio",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"memory",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"cpu",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
+		"backlight",
 		"battery",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"disk",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"tray"
+		"clock",
+		"tray",
+		"hyprland/language",
+		"custom/lock",
+		"custom/power"
 	],
-
-	"custom/left-arrow-dark": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/left-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-dark": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-
-	"sway/workspaces": {
-		"disable-scroll": true,
-		"format": "{name}"
-	},
-
-	"clock#1": {
-		"format": "{:%a}",
-		"tooltip": false
-	},
-	"clock#2": {
-		"format": "{:%H:%M}",
-		"tooltip": false
-	},
-	"clock#3": {
-		"format": "{:%d/%m}",
-		"tooltip": false
-	},
-
-	"pulseaudio": {
-		"format": "{icon} {volume:2}%",
-		"format-bluetooth": "{icon}  {volume}%",
-		"format-muted": "MUTE",
+	"hyprland/workspaces": {
+		"on-click": "activate",
+		"on-scroll-up": "hyprctl dispatch workspace e-1",
+		"on-scroll-down": "hyprctl dispatch workspace e+1",
+		"format": "{icon}",
+		"all-outputs": true,
 		"format-icons": {
-			"headphones": "",
-			"default": [
-				"",
-				""
-			]
-		},
-		"scroll-step": 5,
-		"on-click": "pamixer -t",
-		"on-click-right": "pavucontrol"
+			"1": "",
+			"2": "󰈹",
+			"3": "",
+			"4": "󰎉",
+			"5": "󰛳",
+			"default": ""
+		}
 	},
-	"memory": {
-		"interval": 5,
-		"format": "Mem {}%"
+	"tray": {
+		"icon-size": 21,
+		"spacing": 10
 	},
-	"cpu": {
+	"custom/music": {
+		"format": " {}",
+		"escape": true,
 		"interval": 5,
-		"format": "CPU {usage:2}%"
+		"tooltip": false,
+		"exec": "playerctl metadata --format='{{ title }}'",
+		"on-click": "playerctl play-pause",
+		"max-length": 50
+	},
+	"clock": {
+		"timezone": "Asia/Tehran",
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"format-alt": " {:%d/%m/%Y}",
+		"format": " {:%H:%M}"
+	},
+	"backlight": {
+		"device": "nvidia_0",
+		"format": "{icon}",
+		"on-scroll-up": "brightnessctl s '+10%'",
+		"on-scroll-down": "brightnessctl s '10%-'",
+		"on-click": "((( $(brightnessctl g) == 100 )) && brightnessctl s '0') || (brightnessctl s '+10%')",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			""
+		]
 	},
 	"battery": {
 		"states": {
-			"good": 95,
 			"warning": 30,
 			"critical": 15
 		},
-		"format": "{icon} {capacity}%",
+		"format": "{icon}",
+		"format-charging": "󰂄",
+		"format-plugged": "",
+		"format-alt": "{icon}",
 		"format-icons": [
 			"",
 			"",
@@ -112,12 +86,36 @@
 			""
 		]
 	},
-	"disk": {
-		"interval": 5,
-		"format": "Disk {percentage_used:2}%",
-		"path": "/"
+	"pulseaudio": {
+		// "scroll-step": 1, // %, can be a float
+		"format": "{icon} {volume}%",
+		"format-muted": "",
+		"format-icons": {
+			"default": [
+				"",
+				"",
+				" "
+			]
+		},
+		"on-click": "pavucontrol"
 	},
-	"tray": {
-		"icon-size": 20
+	"custom/lock": {
+		"tooltip": false,
+		"on-click": "hyprlock &",
+		"format": ""
+	},
+	"custom/power": {
+		"tooltip": false,
+		"on-click": "wlogout &",
+		"format": "⏻"
+	},
+	"hyprland/language": {
+		"format": " {}",
+		"format-en": "en",
+		"format-fa": "fa",
+		"interval": 1,
+		"keyboard-name": "gaming-keyboard",
+		"on-click": "hyprctl switchxkblayout gaming-keyboard next"
 	}
 }
+

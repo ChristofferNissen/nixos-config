@@ -7,9 +7,9 @@
   ...
 }:
 
-{ 
+{
   imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
-  
+
   home.username = "${userName}";
   home.homeDirectory = "/home/${userName}";
 
@@ -36,5 +36,3 @@
     };
   };
 }
-
-

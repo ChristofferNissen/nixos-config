@@ -31,6 +31,10 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
   };
 
   outputs =
@@ -43,6 +47,7 @@
       home-manager,
       hyprland-qtutils,
       catppuccin,
+      ghostty,
       ...
     }@inputs:
     let

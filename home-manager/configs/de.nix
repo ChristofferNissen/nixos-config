@@ -8,6 +8,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./ghostty.nix
     ./hyprland.nix
     ./i3.nix
     ./kitty.nix

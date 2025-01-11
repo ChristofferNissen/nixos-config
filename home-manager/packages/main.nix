@@ -49,6 +49,7 @@ let
     brightnessctl
     pamixer
     nixfmt-rfc-style
+    playerctl
   ];
 
   # Define terminal-related packages
@@ -107,7 +108,8 @@ let
 in
 {
   home.packages =
-    (with unstable; [
+    [ inputs.ghostty.packages."x86_64-linux".default ]
+    ++ (with unstable; [
       gleam
       erlang
       rebar3
