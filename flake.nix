@@ -31,7 +31,6 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
-
   };
 
   outputs =
