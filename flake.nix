@@ -35,6 +35,8 @@
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
+
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
   };
 
   outputs =
@@ -48,6 +50,7 @@
       hyprland-qtutils,
       catppuccin,
       ghostty,
+      zen-browser,
       ...
     }@inputs:
     let
@@ -150,13 +153,11 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = {
-                inherit
-                  inputs
-                  unstable
-                  system
-                  userName
-                  stateVersion
-                  ;
+                inherit inputs;
+                inherit unstable;
+                inherit system;
+                inherit userName;
+                inherit stateVersion;
               };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

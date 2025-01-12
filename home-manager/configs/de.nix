@@ -16,5 +16,6 @@
     ./rofi.nix
     ./swaylock.nix
     ./vscode.nix
+    ./zen-browser.nix
   ];
 }
