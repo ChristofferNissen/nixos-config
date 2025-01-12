@@ -67,6 +67,7 @@ let
     feh
     gotop
     htop
+    btop
     zsh
     oh-my-zsh
     fzf
