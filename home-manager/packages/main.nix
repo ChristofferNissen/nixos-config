@@ -19,6 +19,8 @@ let
     containerd
     nerdctl
     kaniko
+    argocd
+    cilium-cli
   ];
 
   cloudPackages = [
@@ -82,6 +84,7 @@ let
     yamllint
     tt
     lazydocker
+    tldr
   ];
 
   # Define development-related packages

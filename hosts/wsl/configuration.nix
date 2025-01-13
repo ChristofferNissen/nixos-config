@@ -22,6 +22,7 @@
 
   security.sudo.extraConfig = ''Defaults env_keep += "NIX_SSL_CERT_FILE"'';
 
+  # Nix-LD
   programs.nix-ld.enable = true;
 
   # QMK

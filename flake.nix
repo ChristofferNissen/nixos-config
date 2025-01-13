@@ -141,12 +141,12 @@
               wsl.defaultUser = userName;
 
               # WSL Configuration
-              wsl.wslConf.automount.enabled = false;
+              wsl.wslConf.automount.enabled = true;
 
               wsl.wslConf.boot.command = "neofetch";
               wsl.wslConf.boot.systemd = true;
 
-              wsl.wslConf.network.generateResolvConf = false;
+              wsl.wslConf.network.generateResolvConf = true;
             }
 
             # Create home folder

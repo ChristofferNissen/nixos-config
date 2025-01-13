@@ -8,6 +8,22 @@
   programs = {
     command-not-found.enable = true;
   };
+  home.packages = with pkgs; [
+    zsh-powerlevel10k
+    meslo-lgs-nf
+  ];
+
+  programs.zsh.initExtra = ''
+    source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+    source ~/.p10k.zsh
+  '';
+  home.file = {
+    ".p10k.zsh" = {
+        source = ./zsh/p10k.zsh;
+        executable = true;
+    };
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -29,8 +45,16 @@
         "fzf"
         "thefuck"
         "direnv"
-        "kubectl"
         "tmux"
+        "kubectl"
+        "kubectx"
+        "argocd"
+        "azure"
+        "helm"
+        "kind"
+        "golang"
+        "tmux"
+        "tldr"
       ];
       theme = "robbyrussell";
     };
