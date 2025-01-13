@@ -14,7 +14,6 @@
     ./kitty.nix
     ./polybar.nix
     ./rofi.nix
-    ./swaylock.nix
     ./vscode.nix
     ./zen-browser.nix
   ];
