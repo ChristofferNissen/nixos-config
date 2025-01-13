@@ -35,24 +35,24 @@
   };
   systemd.user.timers = {
     "az-aks-get-credentials-neu" = {
-        Timer = {
-            OnCalendar = "Mon 06:00";
-            Persistent = true;
-            Unit = "az-aks-get-credentials-neu.service";
-        };
-        Install = {
-            WantedBy = [ "timers.target" ];
-        };
+      Timer = {
+        OnCalendar = "Mon 06:00";
+        Persistent = true;
+        Unit = "az-aks-get-credentials-neu.service";
+      };
+      Install = {
+        WantedBy = [ "timers.target" ];
+      };
     };
     "az-aks-get-credentials-weu" = {
-        Timer = {
-          OnCalendar = "Mon 06:00";
-          Persistent = true;
-          Unit = "az-aks-get-credentials-weu.service";
-        };
-        Install = {
-            WantedBy = [ "timers.target" ];
-        };
+      Timer = {
+        OnCalendar = "Mon 06:00";
+        Persistent = true;
+        Unit = "az-aks-get-credentials-weu.service";
+      };
+      Install = {
+        WantedBy = [ "timers.target" ];
+      };
     };
   };
 

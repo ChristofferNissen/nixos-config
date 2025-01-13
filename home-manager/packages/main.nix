@@ -85,12 +85,14 @@ let
     tt
     lazydocker
     tldr
+    bat
   ];
 
   # Define development-related packages
   developmentPackages = [
     vim
     go
+    ko
     golangci-lint
     zig
     rustup

@@ -19,8 +19,8 @@
   '';
   home.file = {
     ".p10k.zsh" = {
-        source = ./zsh/p10k.zsh;
-        executable = true;
+      source = ./zsh/p10k.zsh;
+      executable = true;
     };
   };
 
@@ -33,6 +33,7 @@
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
       k = "kubectl";
+      cat = "bat";
     };
     history = {
       size = 10000;
