@@ -50,6 +50,7 @@ let
     pamixer
     nixfmt-rfc-style
     playerctl
+    ripgrep
   ];
 
   # Define terminal-related packages
