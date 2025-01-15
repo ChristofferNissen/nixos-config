@@ -24,7 +24,6 @@
           ExecStart = "/etc/profiles/per-user/${userName}/bin/az aks get-credentials -n neu-aks-shared-disp --resource-group neu-aks-shared-dev-rg --file /home/${userName}/.kube/config --overwrite --only-show-errors";
         };
       };
-
       "az-aks-get-credentials-weu" = {
         Service = {
           Type = "oneshot";

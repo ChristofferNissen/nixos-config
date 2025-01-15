@@ -34,6 +34,7 @@
       update = "sudo nixos-rebuild switch";
       k = "kubectl";
       cat = "bat";
+      ggraph = "git log --decorate --graph --oneline --all";
     };
     history = {
       size = 10000;

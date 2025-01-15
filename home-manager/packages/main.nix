@@ -21,6 +21,7 @@ let
     kaniko
     argocd
     cilium-cli
+    crossplane-cli
   ];
 
   cloudPackages = [
@@ -53,6 +54,7 @@ let
     nixfmt-rfc-style
     playerctl
     ripgrep
+    stylua
   ];
 
   # Define terminal-related packages
@@ -94,12 +96,15 @@ let
     go
     ko
     golangci-lint
+    mockgen
     zig
     rustup
     #jetbrains.goland
     go-task
     lazygit
     mdbook
+    tenv
+    bruno
   ];
 
   qmkPackages = [

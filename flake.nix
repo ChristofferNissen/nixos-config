@@ -1,4 +1,3 @@
-
 {
   description = "NixOS and Home Manager configuration";
 
