@@ -113,6 +113,8 @@ let
   ];
 
   neovimPackages = [
+    marksman
+    markdownlint-cli2
     # neovim
     # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
