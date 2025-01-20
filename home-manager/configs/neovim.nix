@@ -24,10 +24,12 @@ let
       p.nix
       p.python
       p.rust
+      p.ron
       p.toml
       p.typescript
       p.vue
       p.yaml
+      p.gleam
     ])
   );
 
@@ -45,6 +47,12 @@ in
     black
     nodejs_22
     gh
+    #lynx
+    # tiktoken_core
+    wget
+    luarocks
+    biome
+    shfmt
   ];
 
   programs.neovim = {
@@ -61,7 +69,7 @@ in
   home.file."./.config/nvim/" = {
     source = builtins.fetchGit {
       url = "https://github.com/christoffernissen/lazyvim-config";
-      rev = "8c63f1fd2be5b9a7a0fd98d540d280c9cfe1c133";
+      rev = "ddb9b563f934a155c2b754d5ce3aecd73c0c1675";
     };
     recursive = true;
   };
@@ -69,6 +77,7 @@ in
   home.file."./.config/nvim/lua/ChristofferNissen/init.lua".text = ''
     require("ChristofferNissen.set")
     require("ChristofferNissen.remap")
+    require("ChristofferNissen.options")
     vim.opt.runtimepath:append("${treesitter-parsers}")
   '';
 

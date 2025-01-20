@@ -11,11 +11,13 @@
   home.packages = with pkgs; [
     zsh-powerlevel10k
     meslo-lgs-nf
+    kubectx
   ];
 
   programs.zsh.initExtra = ''
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     source ~/.p10k.zsh
+    export YSU_MESSAGE_POSITION="after"
   '';
   home.file = {
     ".p10k.zsh" = {
@@ -33,13 +35,28 @@
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
       k = "kubectl";
-      cat = "bat";
+      kx = "kubectx";
+      kn = "kubens";
+      kxc = "kubectx -c";
+      knc = "kubens -c";
       ggraph = "git log --decorate --graph --oneline --all";
     };
     history = {
       size = 10000;
       path = "${config.xdg.dataHome}/zsh/history";
     };
+    plugins = [
+        {
+          # will source you-should-use.plugin.zsh
+          name = "you-should-use";
+          src = pkgs.fetchFromGitHub {
+            owner = "MichaelAquilina";
+            repo = "zsh-you-should-use";
+            rev = "1.9.0";
+            sha256 = "sha256-+3iAmWXSsc4OhFZqAMTwOL7AAHBp5ZtGGtvqCnEOYc0=";
+          };
+        }
+    ];
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -57,8 +74,11 @@
         "golang"
         "tmux"
         "tldr"
+        "kube-ps1"
+        "terraform"
+        "zoxide"
       ];
-      theme = "robbyrussell";
+      # theme = "robbyrussell";
     };
     localVariables = {
       ZSH_TMUX_AUTOSTART = "false";

@@ -94,6 +94,8 @@ let
   developmentPackages = [
     vim
     go
+    gotools
+    gofumpt
     ko
     golangci-lint
     mockgen

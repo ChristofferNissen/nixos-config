@@ -28,7 +28,19 @@
 
       # Set default escape-time
       set-option -sg escape-time 10
+
+      # kube-tmux
+      # set -g status-right "#(/run/current-system/sw/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan)"
     '';
+  };
+  
+  home.file = {
+    ".tmux/kube-tmux" = {
+        source = builtins.fetchGit {
+          url = "https://github.com/jonmosco/kube-tmux";
+        };
+        recursive = true;
+    };
   };
 
   catppuccin.tmux = {
@@ -45,9 +57,9 @@
       set -g @catppuccin_window_text_color "#{@thm_surface_0}"
       set -g @catppuccin_status_left_separator "█"
 
-      set -g status-right "#{E:@catppuccin_status_host}#{E:@catppuccin_status_date_time}"
+      set -g status-right "#(/run/current-system/sw/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan) #{E:@catppuccin_status_host}#{E:@catppuccin_status_date_time}"
+      set -g status-right-length 200
       set -g status-left ""
     '';
   };
-
 }
