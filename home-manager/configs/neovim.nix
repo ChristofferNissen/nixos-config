@@ -47,7 +47,7 @@ in
     black
     nodejs_22
     gh
-    #lynx
+    # lynx
     # tiktoken_core
     wget
     luarocks
@@ -69,7 +69,7 @@ in
   home.file."./.config/nvim/" = {
     source = builtins.fetchGit {
       url = "https://github.com/christoffernissen/lazyvim-config";
-      rev = "ddb9b563f934a155c2b754d5ce3aecd73c0c1675";
+      rev = "e70fe4d1c5ba1f16d75497847b9c0137acda1a78";
     };
     recursive = true;
   };
