@@ -89,6 +89,7 @@ let
     tldr
     bat
     hwatch
+    xdg-utils
   ];
 
   # Define development-related packages
@@ -130,6 +131,7 @@ in
       gleam
       erlang
       rebar3
+      bitwarden-cli
     ])
     ++ (with pkgs; [
       home-manager
