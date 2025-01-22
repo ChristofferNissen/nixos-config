@@ -88,6 +88,7 @@ let
     lazydocker
     tldr
     bat
+    hwatch
   ];
 
   # Define development-related packages
