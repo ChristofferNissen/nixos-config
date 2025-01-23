@@ -22,6 +22,9 @@ let
     argocd
     cilium-cli
     crossplane-cli
+    kubespy
+    kubectl-tree
+    stern
   ];
 
   cloudPackages = [
