@@ -21,6 +21,7 @@
   home.sessionVariables = {
     NIXOS_OZONE_WAYLAND = "1";
     SHELL = "${pkgs.zsh}/bin/zsh";
+    KUBE_EDITOR = "vim";
   };
 
   programs.git = {
