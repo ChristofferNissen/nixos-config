@@ -1,0 +1,218 @@
+plugins:
+  # Manage argo-rollouts
+  # See https://argoproj.github.io/argo-rollouts/
+  # <g> Get rollout details
+  # <w> Watch rollout progress
+  # <p> (with confirmation) Promote rollout
+  # <r> (with confirmation) Restart rollout
+  argo-rollouts-get:
+    shortCut: g
+    confirm: false
+    description: Get details
+    scopes:
+      - rollouts
+    command: bash
+    background: false
+    args:
+      - -c
+      - kubectl argo rollouts get rollout $NAME --context $CONTEXT -n $NAMESPACE |& less
+  argo-rollouts-watch:
+    shortCut: w
+    confirm: false
+    description: Watch progress
+    scopes:
+      - rollouts
+    command: bash
+    background: false
+    args:
+      - -c
+      - kubectl argo rollouts get rollout $NAME --context $CONTEXT -n $NAMESPACE -w
+  argo-rollouts-promote:
+    shortCut: p
+    confirm: true
+    description: Promote
+    scopes:
+      - rollouts
+    command: bash
+    background: false
+    args:
+      - -c
+      - kubectl argo rollouts promote $NAME --context $CONTEXT -n $NAMESPACE |& less
+  argo-rollouts-restart:
+    shortCut: r
+    confirm: true
+    description: Restart
+    scopes:
+      - rollouts
+    command: bash
+    background: false
+    args:
+      - -c
+      - kubectl argo rollouts restart $NAME --context $CONTEXT -n $NAMESPACE |& less
+  argocd:
+    shortCut: "s"
+    description: Sync ArgoCD Application
+    scopes:
+      - application
+    command: argocd
+    args:
+      - app
+      - sync
+      - $NAME
+      - --app-namespace
+      - $NAMESPACE
+    background: true
+    confirm: true
+  # crossplane-trace list all the relationships with a resource (Claim, Composite, or Managed Resource)
+  # Requires 'crossplane' cli binary installed
+  crossplane-trace:
+    shortCut: t
+    confirm: false
+    description: "Crossplane Trace"
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - |
+        if [ -n "$NAMESPACE" ]; then
+          crossplane beta trace --context $CONTEXT -n $NAMESPACE $RESOURCE_NAME.$RESOURCE_GROUP $NAME -owide | less -K
+        else
+          crossplane beta trace --context $CONTEXT $RESOURCE_NAME.$RESOURCE_GROUP $NAME -owide | less -K
+        fi
+  # crossplane-watch requires 'crossplane' cli and 'viddy' binaries installed
+  # 'viddy' is a modern implementation of 'watch' command written in rust. Read more on https://github.com/sachaos/viddy.
+  crossplane-watch:
+    shortCut: w
+    confirm: false
+    description: "Crossplane Watch"
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - |
+        if [ -n "$NAMESPACE" ]; then
+          viddy -pw 'crossplane beta trace --context $CONTEXT -n $NAMESPACE $RESOURCE_NAME.$RESOURCE_GROUP $NAME -owide'
+        else
+          viddy -pw 'crossplane beta trace --context $CONTEXT $RESOURCE_NAME.$RESOURCE_GROUP $NAME -owide'
+        fi
+  #--- Create debug container for selected pod in current namespace
+  # See https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container
+  debug:
+    shortCut: Shift-D
+    description: Add debug container
+    dangerous: true
+    scopes:
+      - containers
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.13 --share-processes -- bash"
+  helm-default-values:
+    shortCut: Shift-V
+    confirm: false
+    description: Chart Default Values
+    scopes:
+      - helm
+    command: sh
+    background: false
+    args:
+      - -c
+      - >-
+        revision=$(helm history -n $NAMESPACE --kube-context $CONTEXT $COL-NAME | grep deployed | cut -d$'\t' -f1 | tr -d ' \t'); kubectl get secrets --context $CONTEXT -n $NAMESPACE sh.helm.release.v1.$COL-NAME.v$revision -o yaml | yq e '.data.release' - | base64 -d | base64 -d | gunzip | jq -r '.chart.values' | yq -P | less -K
+  # Requires helm-diff plugin installed: https://github.com/databus23/helm-diff
+  # In helm view: <Shift-D> Diff with Previous Revision
+  # In helm-history view: <Shift-Q> Diff with Current Revision
+  helm-diff-previous:
+    shortCut: Shift-D
+    confirm: false
+    description: Diff with Previous Revision
+    scopes:
+      - helm
+    command: bash
+    background: false
+    args:
+      - -c
+      - >-
+        LAST_REVISION=$(($COL-REVISION-1)); helm diff revision $COL-NAME $COL-REVISION $LAST_REVISION --kube-context $CONTEXT --namespace $NAMESPACE --color | less -RK
+  helm-diff-current:
+    shortCut: Shift-Q
+    confirm: false
+    description: Diff with Current Revision
+    scopes:
+      - history
+    command: bash
+    background: false
+    args:
+      - -c
+      - >-
+        RELEASE_NAME=$(echo $NAME | cut -d':' -f1); LATEST_REVISION=$(helm history -n $NAMESPACE --kube-context $CONTEXT $RELEASE_NAME | grep deployed | cut -d$'\t' -f1 | tr -d ' \t'); helm diff revision $RELEASE_NAME $LATEST_REVISION $COL-REVISION --kube-context $CONTEXT --namespace $NAMESPACE --color | less -RK
+  helm-values:
+    shortCut: v
+    confirm: false
+    description: Values
+    scopes:
+      - helm
+    command: sh
+    background: false
+    args:
+      - -c
+      - "helm get values $COL-NAME -n $NAMESPACE --kube-context $CONTEXT | less -K"
+  # watch events on selected resources
+  # requires linux "watch" command
+  # change '-n' to adjust refresh time in seconds
+  watch-events:
+    shortCut: Shift-E
+    confirm: false
+    description: Get Events
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl events --context $CONTEXT --namespace $NAMESPACE --for $RESOURCE_NAME.$RESOURCE_GROUP/$NAME --watch"
+  # custom plugins
+  # See https://github.com/cnrancher/k9s/blob/master/docs/plugins.md
+  # for more information
+  lazypim-active-overview:
+    shortCut: o
+    confirm: false
+    description: Show Azure PIM Overview (Active Assignments)
+    scopes:
+      - contexts
+    command: sh
+    background: false
+    args:
+      - -c
+      - |
+        viddy -n 30s /home/cn/configs/lazypim/lazypim overview -a
+  lazypim-overview:
+    shortCut: Shift-O
+    confirm: false
+    description: Show Azure PIM Overview (Active and Passive Assignments)
+    scopes:
+      - contexts
+    command: sh
+    background: false
+    args:
+      - -c
+      - |
+        /home/cn/configs/lazypim/lazypim overview | less -K
+  lazypim-activate-role:
+    shortCut: Ctrl-O
+    confirm: false
+    description: Activate Azure PIM Role
+    scopes:
+      - contexts
+    command: sh
+    background: false
+    args:
+      - -c
+      - |
+        /home/cn/configs/lazypim/lazypim && sleep 5 && viddy -n 10s /home/cn/configs/lazypim/lazypim overview -a

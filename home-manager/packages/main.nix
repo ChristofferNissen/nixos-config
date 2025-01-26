@@ -92,6 +92,7 @@ let
     tldr
     bat
     hwatch
+    viddy
     xdg-utils
   ];
 

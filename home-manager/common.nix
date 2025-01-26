@@ -8,7 +8,10 @@
 }:
 
 {
-  imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+  imports = [ 
+    inputs.catppuccin.homeManagerModules.catppuccin
+    ./packages/helm.nix
+  ];
 
   home.username = "${userName}";
   home.homeDirectory = "/home/${userName}";
