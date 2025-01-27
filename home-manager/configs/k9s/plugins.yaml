@@ -216,3 +216,14 @@ plugins:
       - -c
       - |
         /home/cn/configs/lazypim/lazypim && sleep 5 && viddy -n 10s /home/cn/configs/lazypim/lazypim overview -a
+  lazykubeconfig:
+    shortCut: Ctrl+R
+    confirm: false
+    description: Refresh Kubeconfigs for all clusters
+    scopes:
+      - contexts
+    command: sh
+    args:
+      - -c
+      - |
+        /home/cn/configs/lazykubeconfig/lazykubeconfig && sleep 5
