@@ -32,11 +32,11 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
+    ghostty.url = "github:ghostty-org/ghostty";
 
     zen-browser.url = "github:MarceColl/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
   };
 
   outputs =
