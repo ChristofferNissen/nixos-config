@@ -99,8 +99,23 @@ plugins:
         else
           viddy -pw 'crossplane beta trace --context $CONTEXT $RESOURCE_NAME.$RESOURCE_GROUP $NAME -owide'
         fi
-  #--- Create debug container for selected pod in current namespace
+  # --- Create debug container for selected pod in current namespace
   # See https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container
+  open-terminal:
+    shortCut: Ctrl-T
+    confirm: false
+    description: Open a terminal in the current context
+    scopes:
+      - all
+    command: /usr/bin/sh
+    background: false
+    args:
+      - -c
+      - bash -c "kubectl config use-context $CONTEXT && echo -e \"\e[1;42mk9s bash terminal.\nCtrl + d or 'exit' to go back to k9s\e[0m\" && bash"
+      # New window for terminal can be opened with any emulator
+      #- x-terminal-emulator -e bash -c "kubectl config use-context $CONTEXT && echo -e \"\e[1;42mk9s bash terminal.\nCtrl + d or 'exit' to go back to k9s\e[0m\" && bash"
+      # example with tilix:
+      #- tilix -e bash -c "kubectl config use-context $CONTEXT && echo -e \"\e[1;42mk9s bash terminal.\nCtrl + d or 'exit' to go back to k9s\e[0m\" && bash"
   debug:
     shortCut: Shift-D
     description: Add debug container
@@ -113,6 +128,16 @@ plugins:
     args:
       - -c
       - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.13 --share-processes -- bash"
+  dive:
+    shortCut: d
+    confirm: false
+    description: "Dive image"
+    scopes:
+      - containers
+    command: dive
+    background: false
+    args:
+      - $COL-IMAGE
   helm-default-values:
     shortCut: Shift-V
     confirm: false
@@ -206,7 +231,7 @@ plugins:
         /home/cn/configs/lazypim/lazypim overview | less -K
   lazypim-activate-role:
     shortCut: Ctrl-O
-    confirm: false
+    confirm: true
     description: Activate Azure PIM Role
     scopes:
       - contexts
@@ -217,13 +242,38 @@ plugins:
       - |
         /home/cn/configs/lazypim/lazypim && sleep 5 && viddy -n 10s /home/cn/configs/lazypim/lazypim overview -a
   lazykubeconfig:
-    shortCut: Ctrl+R
-    confirm: false
-    description: Refresh Kubeconfigs for all clusters
+    shortCut: Ctrl-K
+    confirm: true
+    description: Refresh Kube configs
     scopes:
       - contexts
     command: sh
+    background: false
     args:
       - -c
       - |
         /home/cn/configs/lazykubeconfig/lazykubeconfig && sleep 5
+  azlogin:
+    shortCut: Shift-L
+    confirm: false
+    description: AZ Device Login
+    scopes:
+      - contexts
+    command: sh
+    background: false
+    args:
+      - -c
+      - |
+        xdg-open https://login.microsoftonline.com/common/oauth2/deviceauth
+  azloginadmin:
+    shortCut: Ctrl-L
+    confirm: false
+    description: AZ Device Login (admin)
+    scopes:
+      - contexts
+    command: sh
+    background: false
+    args:
+      - -c
+      - |
+        /mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe https://login.microsoftonline.com/common/oauth2/deviceauth

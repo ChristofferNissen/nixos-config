@@ -20,11 +20,13 @@ let
     nerdctl
     kaniko
     argocd
+    fluxcd
     cilium-cli
     crossplane-cli
     kubespy
     kubectl-tree
     stern
+    dive
   ];
 
   cloudPackages = [
@@ -104,12 +106,14 @@ let
     gofumpt
     ko
     golangci-lint
+    delve
     mockgen
     zig
     rustup
     #jetbrains.goland
     go-task
     lazygit
+    sapling
     mdbook
     tenv
     bruno
