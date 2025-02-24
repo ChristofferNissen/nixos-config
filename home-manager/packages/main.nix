@@ -143,6 +143,7 @@ in
     ])
     ++ (with pkgs; [
       home-manager
+      vlc
     ])
     ++ defaultKubernetes
     ++ cloudPackages
