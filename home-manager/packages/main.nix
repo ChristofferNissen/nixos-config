@@ -8,28 +8,7 @@
 
 with pkgs;
 let
-  # Define the default Kubernetes packages
-  defaultKubernetes = [
-    k9s
-    kubectl
-    kind
-    kubernetes-helm
-    oras
-    skopeo
-    containerd
-    nerdctl
-    kaniko
-    argocd
-    fluxcd
-    cilium-cli
-    crossplane-cli
-    kubespy
-    kubectl-tree
-    stern
-    dive
-  ];
-
-  cloudPackages = [
+  cloudProviderPackages = [
     azure-cli
     kubelogin
   ];
@@ -98,27 +77,6 @@ let
     xdg-utils
   ];
 
-  # Define development-related packages
-  developmentPackages = [
-    vim
-    go
-    gotools
-    gofumpt
-    ko
-    golangci-lint
-    delve
-    mockgen
-    zig
-    rustup
-    #jetbrains.goland
-    go-task
-    lazygit
-    sapling
-    mdbook
-    tenv
-    bruno
-  ];
-
   qmkPackages = [
     qmk
     qmk_hid
@@ -136,21 +94,59 @@ in
   home.packages =
     [ inputs.ghostty.packages."x86_64-linux".default ]
     ++ (with unstable; [
-      gleam
-      erlang
-      rebar3
       bitwarden-cli
     ])
+    # Kubernetes
+    ++ (with unstable; [
+        k9s
+        kubectl
+        kind
+        kubernetes-helm
+        oras
+        skopeo
+        containerd
+        nerdctl
+        kaniko
+        argocd
+        fluxcd
+        cilium-cli
+        crossplane-cli
+        kubespy
+        kubectl-tree
+        stern
+        dive
+    ])
+    # Development
+    ++ (with unstable; [
+        vim
+        # go
+        go_1_24 # TODO: remove once unstable go is updated
+        gotools
+        gofumpt
+        ko
+        golangci-lint
+        delve
+        mockgen
+        zig
+        rustup
+        #jetbrains.goland
+        go-task
+        lazygit
+        sapling
+        mdbook
+        tenv
+        bruno
+        gleam
+        erlang
+        rebar3
+      ])
     ++ (with pkgs; [
       home-manager
       vlc
     ])
-    ++ defaultKubernetes
-    ++ cloudPackages
+    ++ cloudProviderPackages
     ++ miscPackages
     ++ terminalPackages
-    ++ developmentPackages
     ++ qmkPackages
     ++ neovimPackages;
-
 }
