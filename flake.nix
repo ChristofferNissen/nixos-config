@@ -34,9 +34,10 @@
 
     ghostty.url = "github:ghostty-org/ghostty";
 
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
+    # ladybird.url = "github:LadybirdBrowser/ladybird";
   };
 
   outputs =
@@ -51,6 +52,7 @@
       catppuccin,
       ghostty,
       zen-browser,
+      # ladybird,
       ...
     }@inputs:
     let

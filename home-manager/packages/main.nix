@@ -92,7 +92,10 @@ let
 in
 {
   home.packages =
-    [ inputs.ghostty.packages."x86_64-linux".default ]
+    [
+      inputs.ghostty.packages."x86_64-linux".default
+      # inputs.ladybird.packages."x86_64-linux".default
+    ]
     ++ (with unstable; [
       bitwarden-cli
     ])
