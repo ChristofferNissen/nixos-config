@@ -43,9 +43,9 @@ in
     ripgrep
     fd
     lua-language-server
-    #rust-analyzer-unwrapped
+    # rust-analyzer-unwrapped
     black
-    nodejs_22
+    # nodejs_22
     gh
     # lynx
     # tiktoken_core
@@ -69,7 +69,7 @@ in
   home.file."./.config/nvim/" = {
     source = builtins.fetchGit {
       url = "https://github.com/christoffernissen/lazyvim-config";
-      rev = "86929fdec04e2da91992649fb8a579527e639db2";
+      rev = "12a2f6b11723edf8a17af266e69b3d8ba7194e50";
     };
     recursive = true;
   };
