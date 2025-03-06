@@ -1,6 +1,12 @@
+{ config, pkgs, lib, ... }:
+
+
 {
   programs.hyprlock.enable = true;
 
+  home.packages = with pkgs; [
+      wl-clipboard
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
