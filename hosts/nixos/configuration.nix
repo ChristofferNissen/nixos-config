@@ -20,6 +20,9 @@
     };
   };
 
+  # Nix-LD
+  programs.nix-ld.enable = true;
+
   # Containerization engine
   virtualisation.docker.enable = true;
 

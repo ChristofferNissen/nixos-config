@@ -69,7 +69,7 @@ in
   home.file."./.config/nvim/" = {
     source = builtins.fetchGit {
       url = "https://github.com/christoffernissen/lazyvim-config";
-      rev = "6e54eb8cdbda4a388de2c69fe28f68c7f36c1638";
+      rev = "024dfea3f64c018f16d57be60c0a398a9496f74b";
     };
     recursive = true;
   };
