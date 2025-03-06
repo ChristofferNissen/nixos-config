@@ -85,6 +85,11 @@
   # Start bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  # hardware.bluetooth.package = pkgs.bluez5-experimental; # the Bluetooth stack to use
+  # hardware.bluetooth.settings.Policy.AutoEnable = true;
+  # hardware.bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
+  # services.blueman.enable = true;
+  hardware.enableAllFirmware = true;
 
   # QMK
   hardware.keyboard.qmk.enable = true;
