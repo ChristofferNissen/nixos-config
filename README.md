@@ -2,6 +2,8 @@
 
 This project contains dotfiles for NixOS, a Linux distribution built on the Nix package manager. The dotfiles are used to customize the user's environment and provide a consistent setup across different machines.
 
+Inspiration: https://github.com/kuznero/dotfiles
+
 ## Purpose
 
 The purpose of this project is to simplify the management of dotfiles and configurations on NixOS. By centralizing all the dotfiles in one place, it becomes easier to version control, share, and replicate the desired environment on multiple machines.
