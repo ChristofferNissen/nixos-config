@@ -30,6 +30,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  networking.extraHosts = ''
+    127.0.0.1 grafana.local
+  '';
   networking.hostName = "nixos"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -86,12 +92,12 @@
   };
 
   # Start bluetooth
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  # hardware.bluetooth.package = pkgs.bluez5-experimental; # the Bluetooth stack to use
-  # hardware.bluetooth.settings.Policy.AutoEnable = true;
+  # hardware.bluetooth.enable = true; # enables support for Bluetooth
+  # hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  # hardware.bluetooth.package = pkgs.bluez; # the Bluetooth stack to use
+  # # hardware.bluetooth.settings.Policy.AutoEnable = true;
   # hardware.bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
-  # services.blueman.enable = true;
+  # # services.blueman.enable = true;
   hardware.enableAllFirmware = true;
 
   # QMK
@@ -117,7 +123,7 @@
 
   # Hyprland
   #security.polkit.enable = true;
-  security.pam.services.swaylock = { };
+  # security.pam.services.swaylock = { };
   programs.hyprland = {
     enable = true;
     withUWSM = true; # recommended for most users

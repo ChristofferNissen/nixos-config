@@ -17,6 +17,7 @@ let
     waybar
     kitty # required for the default Hyprland config
     pavucontrol
+    seatd
   ];
 in
 {

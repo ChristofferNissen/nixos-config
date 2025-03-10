@@ -32,7 +32,7 @@ let
     arandr
     autorandr
     tmate
-    bluez
+    # bluez
     brightnessctl
     pamixer
     nixfmt-rfc-style
