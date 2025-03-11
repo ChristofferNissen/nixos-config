@@ -55,6 +55,7 @@ in
     shfmt
     gomodifytags
     impl
+    packer
   ];
 
   programs.neovim = {
