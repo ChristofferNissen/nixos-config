@@ -53,6 +53,8 @@ in
     luarocks
     biome
     shfmt
+    gomodifytags
+    impl
   ];
 
   programs.neovim = {
@@ -69,7 +71,7 @@ in
   home.file."./.config/nvim/" = {
     source = builtins.fetchGit {
       url = "https://github.com/christoffernissen/lazyvim-config";
-      rev = "024dfea3f64c018f16d57be60c0a398a9496f74b";
+      rev = "65264e8050ccc2ea0fac5d58c22c08a51dec9b3d";
     };
     recursive = true;
   };

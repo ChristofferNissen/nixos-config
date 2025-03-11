@@ -40,6 +40,7 @@
       kxc = "kubectx -c";
       knc = "kubens -c";
       ggraph = "git log --decorate --graph --oneline --all";
+      cd = "z";
     };
     history = {
       size = 10000;
