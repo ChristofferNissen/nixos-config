@@ -56,6 +56,11 @@ in
     gomodifytags
     impl
     packer
+    tectonic
+    texliveSmall
+    vimPlugins.luasnip
+    mermaid-cli
+    ghostscript
   ];
 
   programs.neovim = {
@@ -66,13 +71,29 @@ in
 
     plugins = [
       treesitterWithGrammars
+      
+      # neotest and dependencies
+        pkgs.vimPlugins.neotest
+        pkgs.vimPlugins.nvim-nio
+        pkgs.vimPlugins.plenary-nvim
+        pkgs.vimPlugins.FixCursorHold-nvim
+        pkgs.vimPlugins.nvim-treesitter
+        (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: [plugins.go]))
+        pkgs.vimPlugins.neotest-golang
+
+        ## debugging
+        pkgs.vimPlugins.nvim-dap
+        pkgs.vimPlugins.nvim-dap-ui
+        pkgs.vimPlugins.nvim-nio
+        pkgs.vimPlugins.nvim-dap-virtual-text
+        pkgs.vimPlugins.nvim-dap-go
     ];
   };
 
   home.file."./.config/nvim/" = {
     source = builtins.fetchGit {
       url = "https://github.com/christoffernissen/lazyvim-config";
-      rev = "65264e8050ccc2ea0fac5d58c22c08a51dec9b3d";
+      rev = "108699fd91a69988070e334df88f17332416e1c2";
     };
     recursive = true;
   };
