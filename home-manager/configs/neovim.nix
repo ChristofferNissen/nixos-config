@@ -51,14 +51,7 @@ let
     rev = "65264e8050ccc2ea0fac5d58c22c08a51dec9b3d";
   };
 
-  # cleanedRepo = pkgs.runCommand "cleaned-repo" {} ''
-  #   cp -r ${repo} $out
-  #   rm -f $out/.config/nvim/lua/ChristofferNissen/init.lua
-  # '';
   patchedRepo = pkgs.runCommand "patched-repo" { buildInputs = [ pkgs.patch ]; } ''
-    # cp -r ${repo} $out
-    # patch $out/lua/ChristofferNissen/init.lua < ${patchFile}
-
     temp_dir=$(mktemp -d)
     cp -r ${repo} $temp_dir/
     ls -lah $temp_dir
@@ -116,21 +109,6 @@ in
     ];
   };
 
-  # home.file."./.config/nvim/" = {
-  #   source = builtins.fetchGit {
-  #     url = "https://github.com/christoffernissen/lazyvim-config";
-  #     rev = "65264e8050ccc2ea0fac5d58c22c08a51dec9b3d";
-  #   };
-  #   recursive = true;
-  # };
-  #
-  # home.file."./.config/nvim/lua/ChristofferNissen/init.lua".text = ''
-  #   require("ChristofferNissen.set")
-  #   require("ChristofferNissen.remap")
-  #   require("ChristofferNissen.options")
-  #   vim.opt.runtimepath:append("${treesitter-parsers}")
-  # '';
-
   home.file = {
     "./.config/nvim/" = {
       source = patchedRepo;
@@ -144,80 +122,4 @@ in
       source = treesitterWithGrammars;
     };
   };
-
-  # home.file = {
-  #   "./.config/nvim/" = {
-  #     source = cleanedRepo;
-  #     recursive = true;
-  #   };
-  #
-  #   "./.config/nvim/lua/ChristofferNissen/init.lua" = {
-  #     source = cleanedRepo + "/.config/nvim/lua/ChristofferNissen/init.lua";
-  #     force = true; # Ensure the file is overwritten
-  #     onChange = ''
-  #       # cp ./.config/nvim/lua/ChristofferNissen/init.lua init.lua
-  #       chmod +w ./.config/nvim/lua/ChristofferNissen/init.lua
-  #       # chmod +w init.lua
-  #       ${pkgs.patch}/bin/patch init.lua < ${patchFile}
-  #       # mv init.lua $out
-  #
-  #       # temp_file=$(mktemp)
-  #       # cp ./.config/nvim/lua/ChristofferNissen/init.lua $temp_file
-  #       # chmod +w $temp_file
-  #       # ${pkgs.patch}/bin/patch $temp_file < ${patchFile}
-  #       # mv $temp_file ./.config/nvim/lua/ChristofferNissen/init.lua
-  #     '';
-  #   };
-  # };
-
-  # home.file = {
-  #   "./.config/nvim/" = {
-  #     source = builtins.fetchGit {
-  #       url = "https://github.com/christoffernissen/lazyvim-config";
-  #       rev = "65264e8050ccc2ea0fac5d58c22c08a51dec9b3d";
-  #     };
-  #     recursive = true;
-  #   };
-  #
-  #   # Apply the patch to the init.lua file
-  #   "./.config/nvim/lua/ChristofferNissen/init.lua" = {
-  #     source = ./init.lua;
-  #     force = true; # Ensure the file is overwritten
-  #     onChange = ''
-  #       patch /home/cn/.config/nvim/lua/ChristofferNissen/init.lua < ${patchFile}
-  #     '';
-  #   };
-
-    # # Apply the patch to the init.lua file
-    # "./.config/nvim/lua/ChristofferNissen/init.lua" = {
-    #   source = pkgs.runCommand "patched-init.lua" { buildInputs = [ pkgs.patch ]; } ''
-    #     cp ${/home/cn/.config/nvim/lua/ChristofferNissen/init.lua} init.lua
-    #     chmod +w init.lua
-    #     patch init.lua ${patchFile}
-    #     cat init.lua
-    #     mv init.lua $out
-    #   '';
-    #   # force = true; # Ensure the file is overwritten
-    # }; 
-
-    # # Explicitly overwrite the init.lua file
-    # "./.config/nvim/lua/ChristofferNissen/init.lua" = {
-    #   text = ''
-    #     require("ChristofferNissen.set")
-    #     require("ChristofferNissen.remap")
-    #     require("ChristofferNissen.options")
-    #     vim.opt.runtimepath:append("${treesitter-parsers}")
-    #   '';
-    #   force = true; # Ensure the file is overwritten
-    # }; 
-
-  # };
-
-  # Treesitter is configured as a locally developed module in lazy.nvim
-  # we hardcode a symlink here so that we can refer to it in our lazy config
-  # home.file."./.local/share/nvim/nix/nvim-treesitter/" = {
-  #   recursive = true;
-  #   source = treesitterWithGrammars;
-  # };
-
 }
