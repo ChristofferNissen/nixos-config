@@ -48,7 +48,7 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/lazyvim-config";
     ref = "main";
-    rev = "65264e8050ccc2ea0fac5d58c22c08a51dec9b3d";
+    rev = "cc3b77d772c5abcfea36b0925051428d56631922";
   };
 
   patchedRepo = pkgs.runCommand "patched-repo" { buildInputs = [ pkgs.patch ]; } ''
