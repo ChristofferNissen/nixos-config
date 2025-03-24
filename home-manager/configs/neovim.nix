@@ -48,7 +48,7 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/lazyvim-config";
     ref = "main";
-    rev = "cc3b77d772c5abcfea36b0925051428d56631922";
+    rev = "a22bc7be6e0b7e7cf21453c7532e6a9dd2ecc881";
   };
 
   patchedRepo = pkgs.runCommand "patched-repo" { buildInputs = [ pkgs.patch ]; } ''
@@ -66,6 +66,7 @@ in
     ripgrep
     fd
     lua-language-server
+    yaml-language-server
     black
     gh
     wget
