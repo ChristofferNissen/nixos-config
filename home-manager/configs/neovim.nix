@@ -46,9 +46,9 @@ let
   '';
 
   repo = builtins.fetchGit {
-    url = "https://github.com/ChristofferNissen/lazyvim-config";
+    url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "a22bc7be6e0b7e7cf21453c7532e6a9dd2ecc881";
+    rev = "bbca21cd82b5c5c5869186cd814c26fc06438128";
   };
 
   patchedRepo = pkgs.runCommand "patched-repo" { buildInputs = [ pkgs.patch ]; } ''
@@ -92,21 +92,21 @@ in
     plugins = [
         treesitterWithGrammars
 
-        ## neotest and dependencies
-        pkgs.vimPlugins.neotest
-        pkgs.vimPlugins.nvim-nio
-        pkgs.vimPlugins.plenary-nvim
-        pkgs.vimPlugins.FixCursorHold-nvim
-        pkgs.vimPlugins.nvim-treesitter
-        (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: [plugins.go]))
-        pkgs.vimPlugins.neotest-golang
-
-        ## debugging
-        pkgs.vimPlugins.nvim-dap
-        pkgs.vimPlugins.nvim-dap-ui
-        pkgs.vimPlugins.nvim-nio
-        pkgs.vimPlugins.nvim-dap-virtual-text
-        pkgs.vimPlugins.nvim-dap-go
+        # ## neotest and dependencies
+        # pkgs.vimPlugins.neotest
+        # pkgs.vimPlugins.nvim-nio
+        # pkgs.vimPlugins.plenary-nvim
+        # pkgs.vimPlugins.FixCursorHold-nvim
+        # pkgs.vimPlugins.nvim-treesitter
+        # (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: [plugins.go]))
+        # pkgs.vimPlugins.neotest-golang
+        #
+        # ## debugging
+        # pkgs.vimPlugins.nvim-dap
+        # pkgs.vimPlugins.nvim-dap-ui
+        # pkgs.vimPlugins.nvim-nio
+        # pkgs.vimPlugins.nvim-dap-virtual-text
+        # pkgs.vimPlugins.nvim-dap-go
     ];
   };
 

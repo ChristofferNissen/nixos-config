@@ -100,6 +100,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.${userName} = import ./home-manager/home.nix;
             }
+
           ];
         };
         wsl = nixpkgs.lib.nixosSystem {
@@ -165,6 +166,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.${userName} = import ./home-manager/wsl.nix;
             }
+
           ];
         };
       };
