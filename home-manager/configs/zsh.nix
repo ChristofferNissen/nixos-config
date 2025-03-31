@@ -17,6 +17,7 @@
   programs.zsh.initExtra = ''
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     source ~/.p10k.zsh
+    export GOBIN=$HOME/go/bin
     export PATH=$HOME/go/bin:$PATH
     # export YSU_MESSAGE_POSITION="after"
   '';

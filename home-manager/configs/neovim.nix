@@ -48,7 +48,7 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "bbca21cd82b5c5c5869186cd814c26fc06438128";
+    rev = "819d71fe78234a74b30da66fa41315d1930989bb";
   };
 
   patchedRepo = pkgs.runCommand "patched-repo" { buildInputs = [ pkgs.patch ]; } ''
