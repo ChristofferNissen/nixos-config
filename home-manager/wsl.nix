@@ -20,7 +20,6 @@
       "az-aks-get-credentials-neu" = {
         Service = {
           Type = "oneshot";
-          # ExecStart = "${pkgs.azure-cli}/bin/az aks get-credentials -n neu-aks-shared-disp --resource-group neu-aks-shared-dev-rg --file /"
           ExecStart = "/etc/profiles/per-user/${userName}/bin/az aks get-credentials -n neu-aks-shared-disp --resource-group neu-aks-shared-dev-rg --file /home/${userName}/.kube/config --overwrite --only-show-errors";
         };
       };

@@ -12,6 +12,6 @@
     ./packages/main.nix
     ./packages/extra.nix
     ./configs/main.nix
-    ./configs/de.nix
+    ./configs/desktopenvironment.nix
   ];
 }

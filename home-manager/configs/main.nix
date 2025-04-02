@@ -8,8 +8,8 @@
   imports = [
     ./neovim.nix
     ./nixpkgs.nix
-    ./tmux.nix
-    ./zsh.nix
-    ./k9s.nix
+    ./term/tmux.nix
+    ./term/zsh.nix
+    ./term/k9s.nix
   ];
 }

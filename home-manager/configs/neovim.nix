@@ -1,4 +1,4 @@
-{ pkgs, unstable,  ... }:
+{ unstable,  ... }:
 
 let
   repo = builtins.fetchGit {

@@ -113,8 +113,7 @@ in
     # Development
     ++ (with unstable; [
         vim
-        # go
-        go_1_24 # TODO: remove once unstable go is updated
+        go
         gotools
         gofumpt
         ko
