@@ -37,7 +37,6 @@ let
     pamixer
     nixfmt-rfc-style
     playerctl
-    ripgrep
     stylua
   ];
 
@@ -80,13 +79,6 @@ let
   qmkPackages = [
     qmk
     qmk_hid
-  ];
-
-  neovimPackages = [
-    marksman
-    markdownlint-cli2
-    # neovim
-    # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
 in
@@ -149,6 +141,6 @@ in
     ++ cloudProviderPackages
     ++ miscPackages
     ++ terminalPackages
-    ++ qmkPackages
-    ++ neovimPackages;
+    ++ qmkPackages;
 }
+
