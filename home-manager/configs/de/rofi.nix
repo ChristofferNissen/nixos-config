@@ -14,5 +14,4 @@
     source = ./rofi/.local/share/rofi/themes;
     recursive = true;
   };
-
 }

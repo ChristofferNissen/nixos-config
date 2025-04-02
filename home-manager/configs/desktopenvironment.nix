@@ -7,11 +7,11 @@
 
 {
   imports = [
-    ./de/hyprland.nix
-    ./de/i3.nix
+    ./de/hyprland/hyprland.nix
+    ./de/hyprland/polybar.nix
+    ./de/i3/i3.nix
     ./term/ghostty.nix
     ./term/kitty.nix
-    ./de/polybar.nix
     ./de/rofi.nix
     ./de/vscode.nix
     ./de/zen-browser.nix
