@@ -41,7 +41,6 @@ in
 
   home.file = {
     "./.config/nvim/" = {
-      # source = patchedRepo;
       source = repo;
       recursive = true;
     };
