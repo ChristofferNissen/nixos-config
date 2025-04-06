@@ -1,10 +1,10 @@
-{ unstable,  ... }:
+{ unstable, ... }:
 
 let
   repo = builtins.fetchGit {
-      url = "https://github.com/ChristofferNissen/nvim-config";
-      ref = "main";
-      rev = "8b200ad3c774a2e2ce1b09f4e081798354c6cff8";
+    url = "https://github.com/ChristofferNissen/nvim-config";
+    ref = "main";
+    rev = "a4418ea3adeed696065d8ee965d5704f4031943a";
   };
 in
 {
@@ -39,6 +39,7 @@ in
     tflint
     python312Packages.pylatexenc
     nixd
+    zls
   ];
 
   programs.neovim = {
