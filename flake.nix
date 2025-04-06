@@ -85,7 +85,7 @@
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
 
             # Create NixOS
-            ./hosts/nixos/configuration.nix
+            ./hosts/x1/configuration.nix
 
             # Create home folder
             home-manager.nixosModules.home-manager
