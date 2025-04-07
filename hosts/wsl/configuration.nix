@@ -39,8 +39,10 @@
     gitFull
     vim
   ];
-  
+
   # Install firefox.
   programs.firefox.enable = true;
 
+  # https://nixos.wiki/wiki/Storage_optimization
+  nix.settings.auto-optimise-store = true;
 }
