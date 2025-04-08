@@ -4,7 +4,7 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "8a6ba92d2bde19266462e7d1b077c95a2862ca72";
+    rev = "1ea8c8aedebe141a31ce47547ddd3ed5725e2bdc";
   };
 in
 {
@@ -31,6 +31,7 @@ in
     marksman
     markdownlint-cli2
     terraform-ls
+    gopls
     gosimports
     gofumpt
     gomodifytags
