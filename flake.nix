@@ -42,17 +42,11 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nixpkgs-unstable,
       nixos-hardware,
       nixos-wsl,
       home-manager,
-      hyprland-qtutils,
-      catppuccin,
-      ghostty,
-      zen-browser,
-      # ladybird,
       ...
     }@inputs:
     let
@@ -123,6 +117,7 @@
               ;
           };
           modules = [
+
             # Create User
             {
               users.users.${userName} = {
