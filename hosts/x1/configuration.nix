@@ -3,9 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  config,
   pkgs,
-  stateVersion,
   ...
 }:
 
@@ -17,13 +15,6 @@
     "nix-command"
     "flakes"
   ];
-
-  # nixpkgs = {
-  #   config = {
-  #     allowUnfree = true;
-  #     allowUnfreePredicate = (_: true);
-  #   };
-  # };
 
   # Nix-LD
   programs.nix-ld.enable = true;
@@ -188,5 +179,5 @@
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ]; # Optional; allows customizing optimisation schedule
 
-  system.stateVersion = stateVersion;
+  system.stateVersion = "24.11";
 }

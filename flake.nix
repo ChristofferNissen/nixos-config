@@ -85,6 +85,14 @@
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
 
             # Create NixOS
+            {
+              nixpkgs = {
+                config = {
+                  allowUnfree = true;
+                  allowUnfreePredicate = (_: true);
+                };
+              };
+            }
             ./hosts/x1/configuration.nix
 
             # Create home folder
@@ -140,10 +148,7 @@
 
               # WSL Configuration
               wsl.wslConf.automount.enabled = true;
-
-              # wsl.wslConf.boot.command = "neofetch";
               wsl.wslConf.boot.systemd = true;
-
               wsl.wslConf.network.generateResolvConf = true;
             }
 
