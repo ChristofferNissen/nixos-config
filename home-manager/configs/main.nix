@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    ./nixpkgs.nix
     ./neovim.nix
     ./term/tmux.nix
     ./term/zsh.nix

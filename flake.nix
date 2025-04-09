@@ -67,6 +67,7 @@
         x1 = nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
+
             # Create user
             {
               users.users.${userName} = {
