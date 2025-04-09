@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  stateVersion,
+  ...
+}:
 
 {
   imports = [ /etc/nixos/hardware-configuration.nix ];
@@ -13,12 +18,12 @@
     "flakes"
   ];
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = (_: true);
-    };
-  };
+  # nixpkgs = {
+  #   config = {
+  #     allowUnfree = true;
+  #     allowUnfreePredicate = (_: true);
+  #   };
+  # };
 
   # Nix-LD
   programs.nix-ld.enable = true;
@@ -33,9 +38,6 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.extraHosts = ''
-    127.0.0.1 grafana.local
-  '';
   networking.hostName = "nixos"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -45,6 +47,10 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  networking.extraHosts = ''
+    127.0.0.1 grafana.local
+  '';
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -114,10 +120,6 @@
     variant = "";
   };
 
-  # Configure console keymap
-  #console.keyMap = "dk-latin1";
-  #console.keyMap = "us";
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -186,12 +188,5 @@
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ]; # Optional; allows customizing optimisation schedule
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11";
-
+  system.stateVersion = stateVersion;
 }

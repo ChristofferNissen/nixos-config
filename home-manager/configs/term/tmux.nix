@@ -33,13 +33,13 @@
       # set -g status-right "#(/run/current-system/sw/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan)"
     '';
   };
-  
+
   home.file = {
     ".tmux/kube-tmux" = {
-        source = builtins.fetchGit {
-          url = "https://github.com/jonmosco/kube-tmux";
-        };
-        recursive = true;
+      source = builtins.fetchGit {
+        url = "https://github.com/jonmosco/kube-tmux";
+      };
+      recursive = true;
     };
   };
 

@@ -1,6 +1,5 @@
 {
   inputs,
-  config,
   pkgs,
   userName,
   stateVersion,
@@ -8,9 +7,10 @@
 }:
 
 {
-  imports = [ 
+  home.stateVersion = stateVersion;
+
+  imports = [
     inputs.catppuccin.homeModules.catppuccin
-    ./packages/helm.nix
   ];
 
   home.username = "${userName}";
@@ -18,8 +18,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  home.stateVersion = stateVersion;
 
   home.sessionVariables = {
     NIXOS_OZONE_WAYLAND = "1";

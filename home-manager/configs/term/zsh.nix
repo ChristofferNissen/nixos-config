@@ -5,9 +5,11 @@
     enable = true;
     enableZshIntegration = true;
   };
+
   programs = {
     command-not-found.enable = true;
   };
+
   home.packages = with pkgs; [
     zsh-powerlevel10k
     meslo-lgs-nf
@@ -49,16 +51,16 @@
       path = "${config.xdg.dataHome}/zsh/history";
     };
     plugins = [
-        {
-          # will source you-should-use.plugin.zsh
-          name = "you-should-use";
-          src = pkgs.fetchFromGitHub {
-            owner = "MichaelAquilina";
-            repo = "zsh-you-should-use";
-            rev = "1.9.0";
-            sha256 = "sha256-+3iAmWXSsc4OhFZqAMTwOL7AAHBp5ZtGGtvqCnEOYc0=";
-          };
-        }
+      {
+        # will source you-should-use.plugin.zsh
+        name = "you-should-use";
+        src = pkgs.fetchFromGitHub {
+          owner = "MichaelAquilina";
+          repo = "zsh-you-should-use";
+          rev = "1.9.0";
+          sha256 = "sha256-+3iAmWXSsc4OhFZqAMTwOL7AAHBp5ZtGGtvqCnEOYc0=";
+        };
+      }
     ];
     oh-my-zsh = {
       enable = true;

@@ -14,6 +14,5 @@
     window-decoration = false
     command = "/run/current-system/sw/bin/zsh"
   '';
-    
 
 }

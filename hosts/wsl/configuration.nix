@@ -15,11 +15,11 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
 
+  # Zscaler
   security.pki.certificateFiles = [ /etc/pki/tls/certs/ca-zscaler.crt ];
   environment.variables = {
     "NIX_SSL_CERT_FILE" = "/etc/ssl/certs/ca-certificates.crt";
   };
-
   security.sudo.extraConfig = ''Defaults env_keep += "NIX_SSL_CERT_FILE"'';
 
   # Set your time zone.
@@ -45,4 +45,5 @@
 
   # https://nixos.wiki/wiki/Storage_optimization
   nix.settings.auto-optimise-store = true;
+
 }

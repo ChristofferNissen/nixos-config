@@ -14,16 +14,16 @@ let
   ];
 
   # Define the default Python packages
-  defaultPython = python3.withPackages (
-    python-packages: with python-packages; [
-      black
-      flake8
-      setuptools
-      wheel
-      twine
-      virtualenv
-    ]
-  );
+  # defaultPython = python3.withPackages (
+  #   python-packages: with python-packages; [
+  #     black
+  #     flake8
+  #     setuptools
+  #     wheel
+  #     twine
+  #     virtualenv
+  #   ]
+  # );
 
   # Define miscellaneous packages
   miscPackages = [
@@ -83,6 +83,10 @@ let
 
 in
 {
+  imports = [
+    ./helm.nix
+  ];
+
   home.packages =
     [
       # inputs.ladybird.packages."x86_64-linux".default
@@ -92,47 +96,47 @@ in
     ])
     # Kubernetes
     ++ (with unstable; [
-        k9s
-        kubectl
-        kind
-        kubernetes-helm
-        oras
-        skopeo
-        containerd
-        nerdctl
-        kaniko
-        argocd
-        fluxcd
-        cilium-cli
-        crossplane-cli
-        kubespy
-        kubectl-tree
-        stern
-        dive
+      k9s
+      kubectl
+      kind
+      kubernetes-helm
+      oras
+      skopeo
+      containerd
+      nerdctl
+      kaniko
+      argocd
+      fluxcd
+      cilium-cli
+      crossplane-cli
+      kubespy
+      kubectl-tree
+      stern
+      dive
     ])
     # Development
     ++ (with unstable; [
-        vim
-        go
-        gotools
-        gofumpt
-        ko
-        golangci-lint
-        delve
-        mockgen
-        zig
-        rustup
-        #jetbrains.goland
-        go-task
-        lazygit
-        sapling
-        mdbook
-        tenv
-        bruno
-        gleam
-        erlang
-        rebar3
-      ])
+      vim
+      go
+      gotools
+      gofumpt
+      ko
+      golangci-lint
+      delve
+      mockgen
+      zig
+      rustup
+      #jetbrains.goland
+      go-task
+      lazygit
+      sapling
+      mdbook
+      tenv
+      bruno
+      gleam
+      erlang
+      rebar3
+    ])
     ++ (with pkgs; [
       home-manager
       vlc
@@ -142,4 +146,3 @@ in
     ++ terminalPackages
     ++ qmkPackages;
 }
-
