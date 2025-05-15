@@ -72,6 +72,7 @@ let
     hwatch
     viddy
     xdg-utils
+    ncdu
   ];
 
   qmkPackages = [
