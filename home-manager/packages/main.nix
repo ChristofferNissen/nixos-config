@@ -132,10 +132,12 @@ in
       mdbook
       tenv
       bruno
-      gleam
-      erlang
-      rebar3
     ])
+    # ++ (with pkgs; [
+    #   gleam
+    #   erlang
+    #   rebar3
+    # ])
     ++ (with pkgs; [
       home-manager
       vlc
