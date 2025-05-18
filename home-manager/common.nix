@@ -23,6 +23,8 @@
     NIXOS_OZONE_WAYLAND = "1";
     SHELL = "${pkgs.zsh}/bin/zsh";
     KUBE_EDITOR = "vim";
+    DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_9_0}/share/dotnet";
+    # DOTNET_ROOT = "/etc/profiles/per-user/${userName}/bin/dotnet";
   };
 
   programs.git = {

@@ -21,6 +21,11 @@
     source ~/.p10k.zsh
     export GOBIN=$HOME/go/bin
     export PATH=$HOME/go/bin:$PATH
+    export PATH="$HOME/.local/share/nvim/mason/bin/:$PATH"
+    export PATH=$PATH:$HOME/.dotnet/tools
+    # export DOTNET_ROOT=$HOME/.dotnet
+    # export PATH=$PATH:$DOTNET_ROOT
+
     # export YSU_MESSAGE_POSITION="after"
   '';
   home.file = {

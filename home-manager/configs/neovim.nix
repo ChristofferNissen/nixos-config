@@ -4,7 +4,7 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "67a629c62a31ccdf20b0558783875f38da4bc140";
+    rev = "37a764ac66ff1d70f682bf76213ff92204fb7e1a";
   };
 in
 {
@@ -12,35 +12,18 @@ in
     tree-sitter
     ripgrep
     fd
-    lua-language-server
-    yaml-language-server
-    docker-compose-language-service
-    dockerfile-language-server-nodejs
-    black
-    gh
     wget
     luarocks
     biome
-    shfmt
-    # packer
     tectonic
     texliveSmall
     vimPlugins.luasnip
     mermaid-cli
     ghostscript
-    marksman
-    markdownlint-cli2
-    terraform-ls
-    gopls
-    gosimports
-    gofumpt
-    gomodifytags
-    impl
-    delve
-    tflint
     python312Packages.pylatexenc
     nixd
-    zls
+    nodejs_22
+    omnisharp-roslyn
   ];
 
   programs.neovim = {
