@@ -144,11 +144,12 @@ in
       dotnetPackages.Nuget
       # csharp-ls
     ])
-    # ++ (with pkgs; [
-    #   gleam
-    #   erlang
-    #   rebar3
-    # ])
+    # Gleam
+    ++ (with pkgs; [
+      gleam
+      erlang
+      rebar3
+    ])
     ++ (with pkgs; [
       home-manager
       vlc

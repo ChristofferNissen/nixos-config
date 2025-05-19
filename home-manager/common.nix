@@ -24,6 +24,7 @@
     SHELL = "${pkgs.zsh}/bin/zsh";
     KUBE_EDITOR = "vim";
     DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_9_0}/share/dotnet";
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 1;
   };
 
   programs.git = {
