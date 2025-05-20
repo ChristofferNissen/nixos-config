@@ -4,7 +4,7 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "aec8097f34e34f4f026b69445496ef0e229db8a9";
+    rev = "2e2369170da2760417866d6a18cc0b3b54ab7128";
   };
 in
 {
@@ -30,8 +30,8 @@ in
     package = unstable.neovim-unwrapped;
     enable = true;
     vimAlias = true;
-    coc.enable = false;
-    withNodeJs = true;
+    # coc.enable = false;
+    # withNodeJs = true;
   };
 
   home.file = {
