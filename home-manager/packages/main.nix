@@ -73,6 +73,8 @@ let
     viddy
     xdg-utils
     ncdu
+    dig
+    openssl
   ];
 
   qmkPackages = [
