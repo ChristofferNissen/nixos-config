@@ -30,8 +30,6 @@ in
     package = unstable.neovim-unwrapped;
     enable = true;
     vimAlias = true;
-    # coc.enable = false;
-    # withNodeJs = true;
   };
 
   home.file = {

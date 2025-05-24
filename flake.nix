@@ -2,10 +2,7 @@
   description = "NixOS and Home Manager configuration";
 
   inputs = {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs?ref=nixos-24.11";
-    };
-
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable = {
       url = "github:NixOS/nixpkgs?ref=master";
     };
@@ -19,11 +16,9 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-      #inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    darwin.url = "github:LnL7/nix-darwin";
+
+    home-manager.url = "github:nix-community/home-manager";
 
     hyprland-qtutils = {
       url = "github:hyprwm/hyprland-qtutils";
@@ -46,6 +41,7 @@
       nixpkgs-unstable,
       nixos-hardware,
       nixos-wsl,
+      darwin,
       home-manager,
       ...
     }@inputs:
@@ -57,6 +53,42 @@
       unstable = import nixpkgs-unstable { inherit system; };
     in
     {
+      darwinConfigurations =
+        let
+          system = "aarch64-darwin"; # Change to "x86_64-darwin" if needed
+          unstable = import nixpkgs-unstable { inherit system; };
+        in
+        {
+          "mac" = darwin.lib.darwinSystem {
+            system = system;
+            modules = [
+
+              {
+                users.users.${userName} = {
+                  home = "/Users/${userName}";
+                };
+              }
+
+              ./hosts/mac/darwin-configuration.nix
+
+              home-manager.darwinModules.home-manager
+              {
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                  inherit unstable;
+                  inherit system;
+                  inherit userName;
+                  inherit stateVersion;
+                };
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.${userName} = import ./home-manager/mac.nix;
+              }
+
+            ];
+            specialArgs = { inherit inputs; };
+          };
+        };
       nixosConfigurations = {
         x1 = nixpkgs.lib.nixosSystem {
           system = system;
@@ -101,7 +133,7 @@
               };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${userName} = import ./home-manager/home.nix;
+              home-manager.users.${userName} = import ./home-manager/linux.nix;
             }
 
           ];
@@ -162,7 +194,6 @@
               home-manager.useUserPackages = true;
               home-manager.users.${userName} = import ./home-manager/wsl.nix;
             }
-
           ];
         };
       };

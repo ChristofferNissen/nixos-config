@@ -17,3 +17,7 @@ tasks:
       CONFIG: '{{.CONFIG | default "x1"}}'
     cmds:
       - sudo nixos-rebuild build --flake .#{{ .CONFIG }}
+
+  build-mac:
+    cmds:
+      - sudo nix --extra-experimental-features "nix-command flakes"  run nix-darwin/master#darwin-rebuild -- switch --flake .#mac --impure

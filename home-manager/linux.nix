@@ -1,9 +1,13 @@
 {
+  userName,
   ...
 }:
 
 {
-  programs.git.userEmail = "christoffer.nissen" + "@" + "gmail.com";
+  programs.git.userEmail = "christoffer.nissen@gmail.com";
+
+  home.username = "${userName}";
+  home.homeDirectory = "/home/${userName}";
 
   imports = [
     ./common.nix

@@ -23,21 +23,6 @@ let
   #   ]
   # );
 
-  # Define miscellaneous packages
-  miscPackages = [
-    appimage-run
-    appimagekit
-    arandr
-    autorandr
-    tmate
-    # bluez
-    brightnessctl
-    pamixer
-    nixfmt-rfc-style
-    playerctl
-    stylua
-  ];
-
   # Define terminal-related packages
   terminalPackages = [
     alacritty
@@ -45,7 +30,6 @@ let
     neofetch
     zip
     unzip
-    escrotum
     tree
     gnupg
     aria2
@@ -75,11 +59,14 @@ let
     ncdu
     dig
     openssl
+    tmate
+    stylua
+    nixfmt-rfc-style
+    direnv
   ];
 
   qmkPackages = [
     qmk
-    qmk_hid
   ];
 
 in
@@ -92,9 +79,6 @@ in
     [
       # inputs.ladybird.packages."x86_64-linux".default
     ]
-    ++ (with unstable; [
-      bitwarden-cli
-    ])
     # Kubernetes
     ++ (with unstable; [
       k9s
@@ -103,9 +87,6 @@ in
       kubernetes-helm
       oras
       skopeo
-      containerd
-      nerdctl
-      kaniko
       argocd
       fluxcd
       cilium-cli
@@ -154,10 +135,8 @@ in
     ])
     ++ (with pkgs; [
       home-manager
-      vlc
     ])
     ++ cloudProviderPackages
-    ++ miscPackages
     ++ terminalPackages
     ++ qmkPackages;
 }

@@ -4,7 +4,10 @@
 }:
 
 {
-  programs.git.userEmail = "cnis" + "@" + "bankingcircle.com";
+  programs.git.userEmail = "cnis@bankingcircle.com";
+
+  home.username = "${userName}";
+  home.homeDirectory = "/home/${userName}";
 
   imports = [
     ./common.nix
