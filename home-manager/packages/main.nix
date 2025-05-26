@@ -63,6 +63,7 @@ let
     stylua
     nixfmt-rfc-style
     direnv
+    gnumake
   ];
 
   qmkPackages = [
