@@ -57,19 +57,20 @@
   };
 
   # Fonts!
-  fonts.packages = with pkgs; [
-    #(nerd-fonts.override { fonts = [ "JetBrainsMono" ]; })
-    jetbrains-mono
-    nerdfonts
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    noto-fonts-emoji
-    noto-fonts-extra
-    fira-code
-    fira-mono
-    fira-code-symbols
-  ];
+  fonts.packages =
+    with pkgs;
+    [
+      jetbrains-mono
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-emoji
+      noto-fonts-extra
+      fira-code
+      fira-mono
+      fira-code-symbols
+    ]
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # enable firmware udpate daemon
   services.fwupd.enable = true;
@@ -120,7 +121,7 @@
   };
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

@@ -1,5 +1,6 @@
 {
   pkgs,
+  unstable,
   inputs,
   ...
 }:
@@ -21,7 +22,7 @@ let
   # Define miscellaneous packages
   miscPackages = [
     appimage-run
-    appimagekit
+    # appimagekit
     arandr
     autorandr
     # bluez
