@@ -1,29 +1,20 @@
 ---
 version: "3"
-
 tasks:
   format:
-    cmds:
-      - fd '.nix' | xargs nixfmt
-
+    cmds: [fd '.nix' | xargs nixfmt]
   switch:
     vars:
       CONFIG: '{{.CONFIG | default "x1"}}'
-    cmds:
-      - sudo nixos-rebuild switch --flake .#{{ .CONFIG }} --impure
-
+    cmds: ["sudo nixos-rebuild switch --flake .#{{ .CONFIG }} --impure"]
   build:
     vars:
       CONFIG: '{{.CONFIG | default "x1"}}'
-    cmds:
-      - sudo nixos-rebuild build --flake .#{{ .CONFIG }}
-
+    cmds: ["sudo nixos-rebuild build --flake .#{{ .CONFIG }}"]
   check-nix:
-    cmds:
-      - which nix
-
+    cmds: [which nix]
   build-mac:
-    deps:
-      - check-nix
+    deps: [check-nix]
     cmds:
-      - sudo nix --extra-experimental-features "nix-command flakes"  run nix-darwin/master#darwin-rebuild -- switch --flake .#mac --impure
+      - sudo nix --extra-experimental-features "nix-command flakes"  run nix-darwin/master#darwin-rebuild
+        -- switch --flake .#mac --impure

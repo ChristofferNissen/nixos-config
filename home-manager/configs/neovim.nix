@@ -4,10 +4,9 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "8a3d4c993058f5bc8f00d6a274b602e81730ad1c";
+    rev = "a83cc52a3f9577d6407564d59e86feee16283417";
   };
-in
-{
+in {
   home.packages = with unstable; [
     tree-sitter
     ripgrep
@@ -24,6 +23,15 @@ in
     nixd
     nodejs_22
     omnisharp-roslyn
+    inotify-tools
+    php84Packages.composer
+    jdk17
+    julia
+    php
+    luajit
+    lua51Packages.tiktoken_core
+    lua51Packages.luasql-sqlite3
+    sqlite
   ];
 
   programs.neovim = {

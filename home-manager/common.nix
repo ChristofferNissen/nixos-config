@@ -1,17 +1,9 @@
-{
-  inputs,
-  pkgs,
-  userName,
-  stateVersion,
-  ...
-}:
+{ inputs, pkgs, userName, stateVersion, ... }:
 
 {
   home.stateVersion = stateVersion;
 
-  imports = [
-    inputs.catppuccin.homeModules.catppuccin
-  ];
+  imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -28,12 +20,9 @@
     enable = true;
     userName = "Christoffer Nissen";
     extraConfig = {
-      init = {
-        defaultBranch = "main";
-      };
-      push = {
-        autoSetupRemote = true;
-      };
+      init = { defaultBranch = "main"; };
+      push = { autoSetupRemote = true; };
+      core = { editor = "nvim"; };
     };
   };
 }

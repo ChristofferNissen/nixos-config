@@ -85,7 +85,6 @@
         "tmux"
         "tldr"
         "kube-ps1"
-        "terraform"
         "zoxide"
       ];
       # theme = "robbyrussell";

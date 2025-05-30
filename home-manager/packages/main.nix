@@ -1,31 +1,16 @@
-{
-  pkgs,
-  unstable,
-  ...
-}:
+{ pkgs, unstable, ... }:
 
 with pkgs;
 let
-  cloudProviderPackages = [
-    azure-cli
-    kubelogin
-  ];
+  cloudProviderPackages = [ azure-cli kubelogin ];
 
-  # Define the default Python packages
-  # defaultPython = python3.withPackages (
-  #   python-packages: with python-packages; [
-  #     black
-  #     flake8
-  #     setuptools
-  #     wheel
-  #     twine
-  #     virtualenv
-  #   ]
-  # );
+  pythonPackages = [
+    (unstable.python312.withPackages
+      (ps: with ps; [ pip black flake8 setuptools wheel twine virtualenv ]))
+  ];
 
   # Define terminal-related packages
   terminalPackages = [
-    alacritty
     any-nix-shell
     neofetch
     zip
@@ -47,8 +32,6 @@ let
     neofetch
     tmux
     gcc
-    yamlfmt
-    yamllint
     tt
     lazydocker
     tldr
@@ -60,27 +43,21 @@ let
     dig
     openssl
     tmate
-    stylua
-    nixfmt-rfc-style
+    # stylua
+    # nixfmt-rfc-style
     direnv
     gnumake
   ];
 
-  qmkPackages = [
-    qmk
-  ];
+  qmkPackages = [ qmk ];
 
-in
-{
-  imports = [
-    ./helm.nix
-  ];
+in {
+  imports = [ ./helm.nix ];
 
-  home.packages =
-    [
-      # inputs.ladybird.packages."x86_64-linux".default
-    ]
-    # Kubernetes
+  home.packages = [
+    # inputs.ladybird.packages."x86_64-linux".default
+  ]
+  # Kubernetes
     ++ (with unstable; [
       k9s
       kubectl
@@ -116,28 +93,13 @@ in
       mdbook
       tenv
       bruno
-      (
-        with dotnetCorePackages;
-        combinePackages [
-          sdk_8_0
-          sdk_9_0
-          sdk_10_0
-        ]
-      )
+      (with dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 sdk_10_0 ])
       dotnet-ef
       dotnetPackages.Nuget
       # csharp-ls
     ])
     # Gleam
-    ++ (with pkgs; [
-      gleam
-      erlang
-      rebar3
-    ])
-    ++ (with pkgs; [
-      home-manager
-    ])
-    ++ cloudProviderPackages
-    ++ terminalPackages
-    ++ qmkPackages;
+    ++ (with pkgs; [ gleam erlang rebar3 ]) ++ (with pkgs; [ home-manager ])
+    ++ cloudProviderPackages ++ terminalPackages ++ qmkPackages
+    ++ pythonPackages;
 }

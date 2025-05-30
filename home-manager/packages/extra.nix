@@ -1,9 +1,4 @@
-{
-  pkgs,
-  unstable,
-  inputs,
-  ...
-}:
+{ pkgs, unstable, inputs, ... }:
 
 with pkgs;
 let
@@ -31,26 +26,14 @@ let
     playerctl
     escrotum
     qmk_hid
+    lynx
   ];
 in
 {
   home.packages =
-    (with pkgs; [
-      signal-desktop
-      bitwarden-desktop
-      tidal-hifi
-      discord
-      vlc
-    ])
-    ++ (with unstable; [
-      bitwarden-cli
-    ])
+    (with pkgs; [ signal-desktop bitwarden-desktop tidal-hifi discord vlc ])
+    ++ (with unstable; [ bitwarden-cli alacritty ])
     # Kubernetes (linux only)
-    ++ (with unstable; [
-      containerd
-      nerdctl
-      kaniko
-    ])
-    ++ miscPackages
+    ++ (with unstable; [ containerd nerdctl kaniko ]) ++ miscPackages
     ++ hyprlandPackages;
 }
