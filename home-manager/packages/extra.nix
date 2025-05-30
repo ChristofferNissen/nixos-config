@@ -28,8 +28,7 @@ let
     qmk_hid
     lynx
   ];
-in
-{
+in {
   home.packages =
     (with pkgs; [ signal-desktop bitwarden-desktop tidal-hifi discord vlc ])
     ++ (with unstable; [ bitwarden-cli alacritty ])

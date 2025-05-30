@@ -2,15 +2,9 @@
 
 {
   # Enable Flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-  ];
+  environment.systemPackages = with pkgs; [ git vim ];
 
   programs.zsh.enable = true;
   # Add more darwin-specific settings or packages here

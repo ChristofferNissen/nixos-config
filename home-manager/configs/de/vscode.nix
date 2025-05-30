@@ -5,18 +5,15 @@
     enable = true;
     package = pkgs.vscode;
 
-    extensions = (
-      with pkgs.vscode-extensions;
-      [
-        # brettm12345.nixfmt-vscode
-        bbenoist.nix
-        yzhang.markdown-all-in-one
-        golang.go
-        github.copilot
-        github.copilot-chat
-        ziglang.vscode-zig
-      ]
-    );
+    extensions = (with pkgs.vscode-extensions; [
+      # brettm12345.nixfmt-vscode
+      bbenoist.nix
+      yzhang.markdown-all-in-one
+      golang.go
+      github.copilot
+      github.copilot-chat
+      ziglang.vscode-zig
+    ]);
     # ++ (let unstable = import <nixos-unstable> { };
     # in [ unstable.vscode-extensions.ms-vsliveshare.vsliveshare ]);
 
@@ -41,7 +38,8 @@
 
       ocamlformat-vscode-extension = {
         customOcamlformatPath = "ocamlformat";
-        ocamlformatOption = "--enable-outside-detected-project,--break-cases=fit-or-vertical,--cases-exp-indent=4,--if-then-else=k-r,--type-decl-indent=4";
+        ocamlformatOption =
+          "--enable-outside-detected-project,--break-cases=fit-or-vertical,--cases-exp-indent=4,--if-then-else=k-r,--type-decl-indent=4";
       };
 
       #jupyter.widgetScriptSources = [ "jsdelivr.com" "unpkg.com" ]; # required by qgrid
@@ -53,9 +51,7 @@
       #"[ocaml]" = {
       #  editor.defaultFormatter = "hoddy3190.ocamlformat-vscode-extension";
       #};
-      "[css]" = {
-        editor.defaultFormatter = "MikeBovenlander.formate";
-      };
+      "[css]" = { editor.defaultFormatter = "MikeBovenlander.formate"; };
       window.menuBarVisibility = "toggle";
       files.exclude = {
         "**/.git" = true;

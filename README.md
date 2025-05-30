@@ -2,7 +2,7 @@
 
 This project contains dotfiles for NixOS, a Linux distribution built on the Nix package manager. The dotfiles are used to customize the user's environment and provide a consistent setup across different machines.
 
-Inspiration: https://github.com/kuznero/dotfiles
+Inspiration: <https://github.com/kuznero/dotfiles>
 
 ## Purpose
 

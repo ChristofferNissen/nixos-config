@@ -2,19 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
   # Enable Flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Nix-LD
   programs.nix-ld.enable = true;
@@ -57,8 +51,7 @@
   };
 
   # Fonts!
-  fonts.packages =
-    with pkgs;
+  fonts.packages = with pkgs;
     [
       jetbrains-mono
       noto-fonts
@@ -69,8 +62,8 @@
       fira-code
       fira-mono
       fira-code-symbols
-    ]
-    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    ] ++ builtins.filter lib.attrsets.isDerivation
+    (builtins.attrValues pkgs.nerd-fonts);
 
   # enable firmware udpate daemon
   services.fwupd.enable = true;
@@ -174,7 +167,8 @@
 
   # https://nixos.wiki/wiki/Storage_optimization
   nix.optimise.automatic = true;
-  nix.optimise.dates = [ "03:45" ]; # Optional; allows customizing optimisation schedule
+  nix.optimise.dates =
+    [ "03:45" ]; # Optional; allows customizing optimisation schedule
 
   system.stateVersion = "24.11";
 }

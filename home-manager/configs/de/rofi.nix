@@ -1,9 +1,7 @@
 { pkgs, ... }:
 
 {
-  programs.rofi = {
-    enable = true;
-  };
+  programs.rofi = { enable = true; };
 
   home.file."./.config/rofi" = {
     source = ./rofi/.config/rofi;

@@ -26,6 +26,7 @@ Import the WSL container using PowerShell:
 ```powershell
 wsl --import NixOS .\NixOS\ .\Downloads\nixos-wsl.tar.gz --version 2
 ```
+
 Start it with PowerShell:
 
 ```powershell
@@ -57,7 +58,7 @@ Then, change `/etc/nixos/configuration.nix` file and ensure it has this line:
   '';
 ```
 
-Run 
+Run
 
 ```bash
 sudo -E NIX_SSL_CERT_FILE=/etc/pki/tls/certs/ca-zscaler.crt nixos-rebuild switch

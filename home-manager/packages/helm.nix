@@ -1,18 +1,10 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 let
-  my-kubernetes-helm =
-    with pkgs;
+  my-kubernetes-helm = with pkgs;
     wrapHelm kubernetes-helm {
-      plugins = with pkgs.kubernetes-helmPlugins; [
-        helm-secrets
-        helm-diff
-      ];
+      plugins = with pkgs.kubernetes-helmPlugins; [ helm-secrets helm-diff ];
     };
-in
-{
+in {
   home.packages = [
     my-kubernetes-helm
     # (pkgs.wrapHelm pkgs.kubernetes-helm { plugins = [

@@ -33,7 +33,7 @@
         "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
         "${modifier}+b" = "exec ${pkgs.brave}/bin/brave";
         "${modifier}+Shift+x" = "exec systemctl suspend";
-        "${modifier}+Shift+z" = "mode \"$keyboard_layout\"";
+        "${modifier}+Shift+z" = ''mode "$keyboard_layout"'';
       };
 
       startup = [

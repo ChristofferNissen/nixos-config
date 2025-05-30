@@ -6,15 +6,9 @@
     enableZshIntegration = true;
   };
 
-  programs = {
-    command-not-found.enable = true;
-  };
+  programs = { command-not-found.enable = true; };
 
-  home.packages = with pkgs; [
-    zsh-powerlevel10k
-    meslo-lgs-nf
-    kubectx
-  ];
+  home.packages = with pkgs; [ zsh-powerlevel10k meslo-lgs-nf kubectx ];
 
   programs.zsh.initContent = ''
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
@@ -55,18 +49,16 @@
       size = 10000;
       path = "${config.xdg.dataHome}/zsh/history";
     };
-    plugins = [
-      {
-        # will source you-should-use.plugin.zsh
-        name = "you-should-use";
-        src = pkgs.fetchFromGitHub {
-          owner = "MichaelAquilina";
-          repo = "zsh-you-should-use";
-          rev = "1.9.0";
-          sha256 = "sha256-+3iAmWXSsc4OhFZqAMTwOL7AAHBp5ZtGGtvqCnEOYc0=";
-        };
-      }
-    ];
+    plugins = [{
+      # will source you-should-use.plugin.zsh
+      name = "you-should-use";
+      src = pkgs.fetchFromGitHub {
+        owner = "MichaelAquilina";
+        repo = "zsh-you-should-use";
+        rev = "1.9.0";
+        sha256 = "sha256-+3iAmWXSsc4OhFZqAMTwOL7AAHBp5ZtGGtvqCnEOYc0=";
+      };
+    }];
     oh-my-zsh = {
       enable = true;
       plugins = [

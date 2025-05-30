@@ -33,8 +33,7 @@ let
   # Red
   urgency = "#e74c3c";
 
-in
-{
+in {
   services.polybar = {
     enable = true;
 
@@ -136,7 +135,8 @@ in
 
       "module/distro-icon" = {
         type = "custom/script";
-        exec = "${pkgs.coreutils}/bin/uname -r | ${pkgs.coreutils}/bin/cut -d- -f1";
+        exec =
+          "${pkgs.coreutils}/bin/uname -r | ${pkgs.coreutils}/bin/cut -d- -f1";
         interval = 999999999;
 
         format = " <label>";
