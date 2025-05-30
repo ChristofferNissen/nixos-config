@@ -1,7 +1,4 @@
-{
-  userName,
-  ...
-}:
+{ userName, ... }:
 
 {
   programs.git.userEmail = "cnis@bankingcircle.com";
@@ -9,11 +6,7 @@
   home.username = "${userName}";
   home.homeDirectory = "/home/${userName}";
 
-  imports = [
-    ./common.nix
-    ./packages/main.nix
-    ./configs/main.nix
-  ];
+  imports = [ ./common.nix ./packages/main.nix ./configs/main.nix ];
 
   # SYSTEMD
   # systemd.user = {
