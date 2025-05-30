@@ -16,5 +16,6 @@ tasks:
   build-mac:
     deps: [check-nix]
     cmds:
-      - sudo nix --extra-experimental-features "nix-command flakes"  run nix-darwin/master#darwin-rebuild
+      - sudo nix --extra-experimental-features "nix-command flakes"
+        run nix-darwin/master#darwin-rebuild
         -- switch --flake .#mac --impure

@@ -6,7 +6,8 @@ let
     ref = "main";
     rev = "a83cc52a3f9577d6407564d59e86feee16283417";
   };
-in {
+in
+{
   home.packages = with unstable; [
     tree-sitter
     ripgrep
@@ -23,10 +24,10 @@ in {
     nixd
     nodejs_22
     omnisharp-roslyn
-    inotify-tools
+    # inotify-tools
     php84Packages.composer
     jdk17
-    julia
+    # julia
     php
     luajit
     lua51Packages.tiktoken_core
