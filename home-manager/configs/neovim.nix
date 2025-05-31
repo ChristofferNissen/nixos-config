@@ -4,7 +4,7 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "9e6e70e611d1fa60d69abaa9d44795b4aae15c42";
+    rev = "6ee258580c52bc5a9301424dd405c41af2d19ecc";
   };
 in {
   home.packages = with unstable; [
@@ -23,10 +23,8 @@ in {
     nixd
     nodejs_22
     omnisharp-roslyn
-    # inotify-tools
     php84Packages.composer
     jdk17
-    # julia
     php
     luajit
     lua51Packages.tiktoken_core

@@ -28,11 +28,13 @@ let
     qmk_hid
     lynx
   ];
+  neovimPackages = [ julia inotify-tools ];
+
 in {
   home.packages =
     (with pkgs; [ signal-desktop bitwarden-desktop tidal-hifi discord vlc ])
     ++ (with unstable; [ bitwarden-cli alacritty ])
     # Kubernetes (linux only)
     ++ (with unstable; [ containerd nerdctl kaniko ]) ++ miscPackages
-    ++ hyprlandPackages;
+    ++ neovimPackages ++ hyprlandPackages;
 }
