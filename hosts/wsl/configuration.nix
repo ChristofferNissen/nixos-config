@@ -1,7 +1,10 @@
 { pkgs, system, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   nixpkgs.hostPlatform = system;
 
@@ -31,16 +34,16 @@
   environment.systemPackages = with pkgs; [
     gitFull
     vim
-    jdk17.override
-    {
-      cacert = pkgs.runCommand "mycacert" { } ''
-        mkdir -p $out/etc/ssl/certs
-        cat ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt \
-          ${
-            /etc/pki/tls/certs/ca-zscaler.crt
-          } > $out/etc/ssl/certs/ca-bundle.crt
-      '';
-    }
+    # jdk17.override
+    # {
+    #   cacert = pkgs.runCommand "mycacert" { } ''
+    #     mkdir -p $out/etc/ssl/certs
+    #     cat ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt \
+    #       ${
+    #         /etc/pki/tls/certs/ca-zscaler.crt
+    #       } > $out/etc/ssl/certs/ca-bundle.crt
+    #   '';
+    # }
   ];
 
   # Install firefox.
