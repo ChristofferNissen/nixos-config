@@ -36,6 +36,7 @@ in {
     package = unstable.neovim-unwrapped;
     enable = true;
     vimAlias = true;
+    extraLuaPackages = ps: [ ps.jsregexp ];
   };
 
   home.file = {
