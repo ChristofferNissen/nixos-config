@@ -13,6 +13,8 @@
   programs.zsh.initContent = ''
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     source ~/.p10k.zsh
+    eval "$(pay-respects zsh --alias)"
+
     export GOBIN=$HOME/go/bin
     export PATH=$HOME/go/bin:$PATH
     export PATH="$HOME/.local/share/nvim/mason/bin/:$PATH"
@@ -64,7 +66,6 @@
       plugins = [
         "git"
         "fzf"
-        "thefuck"
         "direnv"
         "tmux"
         "kubectl"

@@ -26,7 +26,7 @@ let
     zsh
     oh-my-zsh
     fzf
-    thefuck
+    pay-respects
     yq
     jq
     neofetch
