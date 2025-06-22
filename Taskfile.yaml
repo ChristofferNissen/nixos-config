@@ -1,6 +1,11 @@
 ---
 version: "3"
 tasks:
+  clean:
+    cmds:
+      - nix-store --optimize
+      - home-manager expire-generations "$(date)"
+      - sudo nix-collect-garbage -d
   format:
     cmds: [fd '.nix' | xargs nixfmt]
   switch:

@@ -63,7 +63,7 @@
       fira-mono
       fira-code-symbols
     ] ++ builtins.filter lib.attrsets.isDerivation
-    (builtins.attrValues pkgs.nerd-fonts);
+      (builtins.attrValues pkgs.nerd-fonts);
 
   # enable firmware udpate daemon
   services.fwupd.enable = true;
@@ -169,6 +169,12 @@
   nix.optimise.automatic = true;
   nix.optimise.dates =
     [ "03:45" ]; # Optional; allows customizing optimisation schedule
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   system.stateVersion = "24.11";
 }
