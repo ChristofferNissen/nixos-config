@@ -54,6 +54,7 @@ in {
 
   home.packages = [
     # inputs.ladybird.packages."x86_64-linux".default
+    yarn
   ]
   # Kubernetes
     ++ (with unstable; [
