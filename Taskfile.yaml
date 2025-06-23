@@ -1,8 +1,14 @@
 ---
 version: "3"
 tasks:
+  repair:
+    cmds:
+      - sudo nix-store --verify --check-contents --repair
   clean:
     cmds:
+      - go clean -modcache
+      - go clean -cache
+      - docker system prune -a -f
       - nix-store --optimize
       - home-manager expire-generations "$(date)"
       - sudo nix-collect-garbage -d
