@@ -63,7 +63,7 @@
       fira-mono
       fira-code-symbols
     ] ++ builtins.filter lib.attrsets.isDerivation
-      (builtins.attrValues pkgs.nerd-fonts);
+    (builtins.attrValues pkgs.nerd-fonts);
 
   # enable firmware udpate daemon
   services.fwupd.enable = true;

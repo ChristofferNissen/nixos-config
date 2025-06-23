@@ -6,8 +6,7 @@ let
     ref = "main";
     rev = "c7c9555686e393c464786b65982c6c06774a1b3d";
   };
-in
-{
+in {
   home.packages = with unstable; [
     tree-sitter
     ripgrep
@@ -32,11 +31,7 @@ in
     package = unstable.neovim-unwrapped;
     enable = true;
     vimAlias = true;
-    extraLuaPackages = ps: [
-      ps.jsregexp
-      ps.tiktoken_core
-      ps.luasql-sqlite3
-    ];
+    extraLuaPackages = ps: [ ps.jsregexp ps.tiktoken_core ps.luasql-sqlite3 ];
   };
 
   home.file = {
