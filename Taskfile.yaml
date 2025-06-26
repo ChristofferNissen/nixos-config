@@ -1,32 +1,42 @@
 ---
 version: "3"
 tasks:
+  check-nix:
+    desc: "Check if nix is installed"
+    cmds: [which nix]
   repair:
+    desc: "Repair nix store"
     cmds:
       - sudo nix-store --verify --check-contents --repair
   clean:
+    desc: "Clean system"
     cmds:
       - go clean -modcache
       - go clean -cache
       - docker system prune -a -f
-      - nix-store --optimize
-      - home-manager expire-generations "$(date)"
-      - sudo nix-collect-garbage -d
+      - nix run github:nix-community/nh -- clean
   format:
+    desc: "Format nix files"
     cmds: [fd '.nix' | xargs nixfmt]
   switch:
-    vars:
-      CONFIG: '{{.CONFIG | default "x1"}}'
-    cmds: ["sudo nixos-rebuild switch --flake .#{{ .CONFIG }} --impure"]
-  build:
-    vars:
-      CONFIG: '{{.CONFIG | default "x1"}}'
-    cmds: ["sudo nixos-rebuild build --flake .#{{ .CONFIG }}"]
-  check-nix:
-    cmds: [which nix]
-  build-mac:
+    desc: "Switch OS configuration using nh (platform-specific: 'darwin' for macOS, 'os' for others)"
     deps: [check-nix]
+    vars:
+      CONFIG: '{{.CONFIG | default "x1"}}'
+    env:
+      SUBCOMMAND: '{{if eq OS "darwin"}}darwin{{else}}os{{end}}'
+      OS:
+        sh: uname | tr '[:upper:]' '[:lower:]'
     cmds:
-      - sudo nix --extra-experimental-features "nix-command flakes"
-        run nix-darwin/master#darwin-rebuild
-        -- switch --flake .#mac --impure
+      - nix run github:nix-community/nh -- "$SUBCOMMAND" switch . -H {{.CONFIG}} -- --impure
+  build:
+    desc: "Build OS configuration using nh from github:nix-community/nh"
+    deps: [check-nix]
+    vars:
+      CONFIG: '{{.CONFIG | default "x1"}}'
+    env:
+      SUBCOMMAND: '{{if eq OS "darwin"}}darwin{{else}}os{{end}}'
+      OS:
+        sh: uname | tr '[:upper:]' '[:lower:]'
+    cmds:
+      - nix run github:nix-community/nh -- "$SUBCOMMAND" build . -H {{.CONFIG}} -- --impure

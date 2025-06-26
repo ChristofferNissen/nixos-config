@@ -76,6 +76,7 @@ in {
     # Development
     ++ (with unstable; [
       vim
+      nh
       go
       gotools
       gofumpt
