@@ -14,7 +14,7 @@ tasks:
       - go clean -modcache
       - go clean -cache
       - docker system prune -a -f
-      - nix run github:nix-community/nh -- clean
+      - nix run github:nix-community/nh -- clean all
   format:
     desc: "Format nix files"
     cmds: [fd '.nix' | xargs nixfmt]
