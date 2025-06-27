@@ -4,9 +4,10 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "b5dc3fcc3d8254da7e6a7ab8d9510927b30415f9";
+    rev = "f240c6e92edc1e85dc929464525b74c71b6a3ea4";
   };
-in {
+in
+{
   home.packages = with unstable; [
     tree-sitter
     ripgrep
