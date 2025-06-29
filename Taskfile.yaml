@@ -1,25 +1,25 @@
 ---
-version: "3"
+version: '3'
 tasks:
   check-nix:
-    desc: "Check if nix is installed"
+    desc: Check if nix is installed
     cmds: [which nix]
   repair:
-    desc: "Repair nix store"
-    cmds:
-      - sudo nix-store --verify --check-contents --repair
+    desc: Repair nix store
+    cmds: [sudo nix-store --verify --check-contents --repair]
   clean:
-    desc: "Clean system"
+    desc: Clean system
     cmds:
       - go clean -modcache
       - go clean -cache
       - docker system prune -a -f
       - nix run github:nix-community/nh -- clean all
   format:
-    desc: "Format nix files"
+    desc: Format nix files
     cmds: [fd '.nix' | xargs nixfmt]
   switch:
-    desc: "Switch OS configuration using nh (platform-specific: 'darwin' for macOS, 'os' for others)"
+    desc: "Switch OS configuration using nh (platform-specific: 'darwin' for macOS,\
+      \ 'os' for others)"
     deps: [check-nix]
     vars:
       CONFIG: '{{.CONFIG | default "x1"}}'
@@ -28,9 +28,10 @@ tasks:
       OS:
         sh: uname | tr '[:upper:]' '[:lower:]'
     cmds:
-      - nix run github:nix-community/nh -- "$SUBCOMMAND" switch . -H {{.CONFIG}} -- --impure
+      - nix run github:nix-community/nh -- "$SUBCOMMAND" switch . -H {{.CONFIG}} --
+        --impure
   build:
-    desc: "Build OS configuration using nh from github:nix-community/nh"
+    desc: Build OS configuration using nh from github:nix-community/nh
     deps: [check-nix]
     vars:
       CONFIG: '{{.CONFIG | default "x1"}}'
@@ -39,4 +40,5 @@ tasks:
       OS:
         sh: uname | tr '[:upper:]' '[:lower:]'
     cmds:
-      - nix run github:nix-community/nh -- "$SUBCOMMAND" build . -H {{.CONFIG}} -- --impure
+      - nix run github:nix-community/nh -- "$SUBCOMMAND" build . -H {{.CONFIG}} --
+        --impure

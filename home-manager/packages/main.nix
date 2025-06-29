@@ -49,57 +49,59 @@ let
 
   qmkPackages = [ qmk ];
 
-in {
+in
+{
   imports = [ ./helm.nix ];
 
   home.packages = [
     # inputs.ladybird.packages."x86_64-linux".default
     yarn
+    powershell
   ]
   # Kubernetes
-    ++ (with unstable; [
-      k9s
-      kubectl
-      kind
-      kubernetes-helm
-      oras
-      skopeo
-      argocd
-      fluxcd
-      cilium-cli
-      crossplane-cli
-      kubespy
-      kubectl-tree
-      stern
-      dive
-    ])
-    # Development
-    ++ (with unstable; [
-      vim
-      nh
-      go
-      gotools
-      gofumpt
-      ko
-      golangci-lint
-      delve
-      mockgen
-      zig
-      rustup
-      #jetbrains.goland
-      go-task
-      lazygit
-      sapling
-      mdbook
-      tenv
-      bruno
-      (with dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 ]) # sdk_10_0
-      dotnet-ef
-      dotnetPackages.Nuget
-      # csharp-ls
-    ])
-    # Gleam
-    ++ (with pkgs; [ gleam erlang rebar3 ]) ++ (with pkgs; [ home-manager ])
-    ++ cloudProviderPackages ++ terminalPackages ++ qmkPackages
-    ++ pythonPackages;
+  ++ (with unstable; [
+    k9s
+    kubectl
+    kind
+    kubernetes-helm
+    oras
+    skopeo
+    argocd
+    fluxcd
+    cilium-cli
+    crossplane-cli
+    kubespy
+    kubectl-tree
+    stern
+    dive
+  ])
+  # Development
+  ++ (with unstable; [
+    vim
+    nh
+    go
+    gotools
+    gofumpt
+    ko
+    golangci-lint
+    delve
+    mockgen
+    zig
+    rustup
+    #jetbrains.goland
+    go-task
+    lazygit
+    sapling
+    mdbook
+    tenv
+    bruno
+    (with dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 ]) # sdk_10_0
+    dotnet-ef
+    dotnetPackages.Nuget
+    # csharp-ls
+  ])
+  # Gleam
+  ++ (with pkgs; [ gleam erlang rebar3 ]) ++ (with pkgs; [ home-manager ])
+  ++ cloudProviderPackages ++ terminalPackages ++ qmkPackages
+  ++ pythonPackages;
 }
