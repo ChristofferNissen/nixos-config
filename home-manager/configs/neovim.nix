@@ -6,8 +6,7 @@ let
     ref = "main";
     rev = "84d51be6b673f4966e3e3f39c735a0d117fa8053";
   };
-in
-{
+in {
   home.packages = with unstable; [
     tree-sitter
     ripgrep
@@ -26,6 +25,7 @@ in
     jdk17
     php
     luajit
+    sqlite
   ];
 
   programs.neovim = {
@@ -33,6 +33,10 @@ in
     enable = true;
     vimAlias = true;
     extraLuaPackages = ps: [ ps.jsregexp ps.tiktoken_core ps.luasql-sqlite3 ];
+  };
+
+  home.sessionVariables = {
+    LIBSQLITE = "${unstable.sqlite.out}/lib/libsqlite3.so";
   };
 
   home.file = {
