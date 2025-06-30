@@ -4,9 +4,10 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "84d51be6b673f4966e3e3f39c735a0d117fa8053";
+    rev = "32c5f27dfc5f0565e405f4a7ba3fd936d3118fcd";
   };
-in {
+in
+{
   home.packages = with unstable; [
     tree-sitter
     ripgrep
@@ -26,6 +27,8 @@ in {
     php
     luajit
     sqlite
+    julia-bin
+    mercurial
   ];
 
   programs.neovim = {
