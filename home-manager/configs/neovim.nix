@@ -4,11 +4,11 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "c51cb255afd27ee6e17335f76f0edda29cd3e339";
+    rev = "5535e5c26301bf88a9340374880c23e6e39607e6";
   };
 in
 {
-  home.packages = with unstable; [
+  home.packages = (with unstable; [
     tree-sitter
     ripgrep
     fd
@@ -23,23 +23,20 @@ in
     nixd
     nodejs_22
     php84Packages.composer
-    jdk17
+    jdk21
+    kotlin
+    gradle
     php
     luajit
-    sqlite
     julia-bin
     mercurial
-  ];
+  ]);
 
   programs.neovim = {
     package = unstable.neovim-unwrapped;
     enable = true;
     vimAlias = true;
     extraLuaPackages = ps: [ ps.jsregexp ps.tiktoken_core ps.luasql-sqlite3 ];
-  };
-
-  home.sessionVariables = {
-    LIBSQLITE = "${unstable.sqlite.out}/lib/libsqlite3.so";
   };
 
   home.file = {

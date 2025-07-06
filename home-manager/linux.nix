@@ -1,4 +1,4 @@
-{ userName, ... }:
+{ pkgs, userName, ... }:
 
 {
   programs.git.userEmail = "christoffer.nissen@gmail.com";
@@ -12,6 +12,7 @@
     ./common.nix
     ./packages/main.nix
     ./packages/extra.nix
+    ./packages/sqlite.nix
     ./configs/main.nix
     ./configs/desktopenvironment.nix
   ];
