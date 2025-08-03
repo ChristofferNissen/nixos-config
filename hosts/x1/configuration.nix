@@ -28,6 +28,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = true;
 
   networking.extraHosts = ''
     127.0.0.1 grafana.local
@@ -63,7 +64,7 @@
       fira-mono
       fira-code-symbols
     ] ++ builtins.filter lib.attrsets.isDerivation
-    (builtins.attrValues pkgs.nerd-fonts);
+      (builtins.attrValues pkgs.nerd-fonts);
 
   # enable firmware udpate daemon
   services.fwupd.enable = true;

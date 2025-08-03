@@ -28,9 +28,10 @@ let
     qmk_hid
     lynx
   ];
-  neovimPackages = [ julia inotify-tools ];
+  neovimPackages = [ inotify-tools ];
 
-in {
+in
+{
   home.packages =
     (with pkgs; [ signal-desktop bitwarden-desktop tidal-hifi discord vlc ])
     ++ (with unstable; [ bitwarden-cli alacritty ])
