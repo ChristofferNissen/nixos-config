@@ -119,11 +119,14 @@
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
+    audio.enable = true;
     pulse.enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -143,8 +146,25 @@
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
       zsh
+      # thinkfan
+      # https://nixos.wiki/wiki/Battle.net
+      vulkan-tools
+      (wineWowPackages.full.override {
+        wineRelease = "staging";
+        mingwSupport = true;
+      })
+      winetricks
+      # lutris
+      mesa
     ];
     variables.EDITOR = "vim";
+  };
+
+  # Graphics driver intel gpu
+  services.xserver.videoDrivers = [ "modesetting" "intel" ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

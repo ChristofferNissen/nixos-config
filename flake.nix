@@ -25,9 +25,12 @@
     catppuccin.url = "github:catppuccin/nix";
 
     ghostty.url = "github:ghostty-org/ghostty";
+    ghostty.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixgl.url = "github:nix-community/nixGL";
 
     # ladybird.url = "github:LadybirdBrowser/ladybird";
   };

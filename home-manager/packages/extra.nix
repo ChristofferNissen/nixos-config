@@ -8,12 +8,15 @@ let
     hyprlock
     hyprsunset
     inputs.hyprland-qtutils.packages."${pkgs.system}".default
+    libinput
+    libnotify
     wofi
     waybar
     kitty # required for the default Hyprland config
     pavucontrol
     seatd
   ];
+
   # Define miscellaneous packages
   miscPackages = [
     appimage-run
