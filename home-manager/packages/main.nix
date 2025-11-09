@@ -2,8 +2,6 @@
 
 with pkgs;
 let
-  cloudProviderPackages = [ azure-cli kubelogin ];
-
   pythonPackages = [
     (unstable.python312.withPackages
       (ps: with ps; [ pip black flake8 setuptools wheel twine virtualenv ]))
@@ -102,6 +100,5 @@ in
   ])
   # Gleam
   ++ (with pkgs; [ gleam erlang rebar3 ]) ++ (with pkgs; [ home-manager ])
-  ++ cloudProviderPackages ++ terminalPackages ++ qmkPackages
-  ++ pythonPackages;
+  ++ terminalPackages ++ qmkPackages ++ pythonPackages;
 }

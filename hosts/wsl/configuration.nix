@@ -26,7 +26,12 @@
   services.udev.packages = [ pkgs.qmk-udev-rules ];
 
   # Docker
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = {
+      "features" = { "containerd-snapshotter" = true; };
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     gitFull

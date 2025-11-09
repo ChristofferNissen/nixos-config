@@ -1,7 +1,7 @@
-{ pkgs, userName, ... }:
+{ userName, ... }:
 
 {
-  programs.git.userEmail = "christoffer.nissen@gmail.com";
+  programs.git.settings.user.email = "christoffer.nissen@gmail.com";
 
   home.username = "${userName}";
   home.homeDirectory = "/home/${userName}";
@@ -13,6 +13,7 @@
     ./packages/main.nix
     ./packages/extra.nix
     ./packages/sqlite.nix
+    ./packages/azure.nix
     ./configs/main.nix
     ./configs/desktopenvironment.nix
   ];

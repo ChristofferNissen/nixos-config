@@ -1,7 +1,7 @@
 { userName, ... }:
 
 {
-  programs.git.userEmail = "cnis@bankingcircle.com";
+  programs.git.settings.user.email = "cnis@bankingcircle.com";
 
   home.username = "${userName}";
   home.homeDirectory = "/home/${userName}";
@@ -10,6 +10,7 @@
     ./common.nix
     ./packages/main.nix
     ./packages/sqlite.nix
+    ./packages/azure.nix
     ./configs/main.nix
   ];
 

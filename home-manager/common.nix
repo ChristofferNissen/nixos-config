@@ -1,4 +1,4 @@
-{ inputs, pkgs, userName, stateVersion, ... }:
+{ inputs, pkgs, stateVersion, ... }:
 
 {
   home.stateVersion = stateVersion;
@@ -17,9 +17,14 @@
 
   programs.git = {
     enable = true;
-    userName = "Christoffer Nissen";
-    extraConfig = {
-      init = { defaultBranch = "main"; };
+    settings = {
+      user =
+        {
+          name = "Christoffer Nissen";
+        };
+      init = {
+        defaultBranch = "main";
+      };
       push = { autoSetupRemote = true; };
       core = { editor = "nvim"; };
     };
