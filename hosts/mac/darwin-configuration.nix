@@ -9,9 +9,7 @@
   programs.zsh.enable = true;
 
   # Add more darwin-specific settings or packages here
-  environment.variables = {
-    "PATH" = "$PATH:/opt/homebrew/bin";
-  };
+  environment.variables = { "PATH" = "$PATH:/opt/homebrew/bin"; };
 
   nix.gc = {
     automatic = true;
