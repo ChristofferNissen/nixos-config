@@ -6,8 +6,6 @@
   home.username = "${userName}";
   home.homeDirectory = "/home/${userName}";
 
-  home.sessionVariables = { NIXOS_OZONE_WAYLAND = "1"; };
-
   imports = [
     ./common.nix
     ./packages/main.nix

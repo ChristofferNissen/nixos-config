@@ -85,7 +85,7 @@ in
     delve
     mockgen
     zig
-    rustup
+    # rustup
     #jetbrains.goland
     go-task
     lazygit

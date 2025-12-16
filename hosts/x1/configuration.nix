@@ -30,6 +30,7 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = true;
 
+  # Custom hostnames (development projects) 
   networking.extraHosts = ''
     127.0.0.1 grafana.local
   '';
@@ -79,12 +80,13 @@
   };
 
   # Start bluetooth
-  # hardware.bluetooth.enable = true; # enables support for Bluetooth
-  # hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  # hardware.bluetooth.package = pkgs.bluez; # the Bluetooth stack to use
-  # # hardware.bluetooth.settings.Policy.AutoEnable = true;
-  # hardware.bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
-  # # services.blueman.enable = true;
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot =
+    true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.package = pkgs.bluez; # the Bluetooth stack to use
+  # hardware.bluetooth.settings.Policy.AutoEnable = true;
+  hardware.bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
+  # services.blueman.enable = true;
   hardware.enableAllFirmware = true;
 
   # QMK
@@ -110,7 +112,7 @@
   programs.hyprland = {
     enable = true;
     withUWSM = true; # recommended for most users
-    xwayland.enable = true; # Xwayland can be disabled.
+    # xwayland.enable = true;
   };
 
   # Enable sound with pipewire.

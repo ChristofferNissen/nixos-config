@@ -7,7 +7,7 @@ let
     hypridle
     hyprlock
     hyprsunset
-    inputs.hyprland-qtutils.packages."${pkgs.system}".default
+    inputs.hyprland-qtutils.packages."${stdenv.hostPlatform.system}".default
     libinput
     libnotify
     wofi

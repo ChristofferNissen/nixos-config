@@ -1,5 +1,5 @@
 ---
-version: '3'
+version: "3"
 tasks:
   check-nix:
     desc: Check if nix is installed
@@ -8,17 +8,29 @@ tasks:
     desc: Repair nix store
     cmds: [sudo nix-store --verify --check-contents --repair]
   clean:
-    desc: Clean system
+    desc: Clean nix
+    cmds:
+      - nix run github:nix-community/nh -- clean all
+  clean-docker:
+    desc: Clean docker
+    cmds:
+      - docker system prune -a -f
+  clean-go:
+    desc: Clean go
     cmds:
       - go clean -modcache
       - go clean -cache
-      - docker system prune -a -f
-      - nix run github:nix-community/nh -- clean all
+  clean-all:
+    deps:
+      - clean-go
+      - clean
+      - clean-docker
   format:
     desc: Format nix files
     cmds: [fd '.nix' | xargs nixfmt]
   switch:
-    desc: "Switch OS configuration using nh (platform-specific: 'darwin' for macOS,\
+    desc:
+      "Switch OS configuration using nh (platform-specific: 'darwin' for macOS,\
       \ 'os' for others)"
     deps: [check-nix]
     vars:
