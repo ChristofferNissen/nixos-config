@@ -12,8 +12,8 @@
     systemd.variables = [ "--all" ];
     extraConfig = (builtins.readFile ./hypr/hyprland.conf);
     # set the Hyprland and XDPH packages to null to use the ones from the NixOS module
-    # package = null;
-    # portalPackage = null;
+    package = null;
+    portalPackage = null;
   };
 
   home.file."./.config/hypr" = {
