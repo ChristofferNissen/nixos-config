@@ -1,9 +1,9 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 
 {
   programs.hyprlock.enable = true;
 
-  home.packages = with pkgs; [ wl-clipboard ];
+  home.packages = with pkgs; [ hyprsunset hyprpaper wl-clipboard ];
 
   wayland.windowManager.hyprland = {
     enable = true;
