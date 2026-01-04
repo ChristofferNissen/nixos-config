@@ -1,7 +1,8 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
-  home.packages = [ inputs.ghostty.packages."x86_64-linux".default ];
+  home.packages =
+    [ inputs.ghostty.packages."${pkgs.stdenv.hostPlatform.system}".default ];
 
   home.file."./.config/ghostty/config".text = ''
     theme = "dark:Catppuccin Mocha,light:Catppuccin Latte"
@@ -12,5 +13,4 @@
     window-decoration = false
     command = "/run/current-system/sw/bin/zsh"
   '';
-
 }

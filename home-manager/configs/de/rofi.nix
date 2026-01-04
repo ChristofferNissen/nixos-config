@@ -1,15 +1,13 @@
-{ pkgs, ... }:
-
-{
+{ ... }: {
   programs.rofi = { enable = true; };
 
-  home.file."./.config/rofi" = {
-    source = ./rofi/.config/rofi;
+  home.file."./.config/rofi/config.rasi" = {
+    source = ./rofi/config.rasi;
     recursive = true;
   };
 
   home.file.".local/share/rofi/themes" = {
-    source = ./rofi/.local/share/rofi/themes;
+    source = ./rofi/themes;
     recursive = true;
   };
 }

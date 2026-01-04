@@ -9,6 +9,7 @@ let
 
   # Define terminal-related packages
   terminalPackages = [
+    ffmpeg
     any-nix-shell
     neofetch
     zip
@@ -43,9 +44,35 @@ let
     tmate
     direnv
     gnumake
+    lf
+    yazi
   ];
 
   qmkPackages = [ qmk ];
+
+  neovimPackages = (with unstable; [
+    tree-sitter
+    ripgrep
+    fd
+    wget
+    luarocks
+    biome
+    tectonic
+    texliveSmall
+    mermaid-cli
+    ghostscript
+    python312Packages.pylatexenc
+    nixd
+    nodejs_22
+    php84Packages.composer
+    jdk21
+    kotlin
+    gradle
+    php
+    luajit
+    julia-bin
+    mercurial
+  ]);
 
 in
 {
@@ -97,7 +124,7 @@ in
     dotnet-ef
     dotnetPackages.Nuget
     # csharp-ls
-  ])
+  ]) ++ neovimPackages
   # Gleam
   ++ (with pkgs; [ gleam erlang rebar3 ]) ++ (with pkgs; [ home-manager ])
   ++ terminalPackages ++ qmkPackages ++ pythonPackages;

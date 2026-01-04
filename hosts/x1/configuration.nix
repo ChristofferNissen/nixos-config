@@ -1,5 +1,5 @@
 # Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
+# your system.Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { pkgs, ... }:
@@ -22,13 +22,15 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "btusb" ];
+  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.powersave = true;
+  # networking.networkmanager.wifi.powersave = true;
 
   # Custom hostnames (development projects) 
   networking.extraHosts = ''
@@ -66,7 +68,7 @@
     ] ++ builtins.filter lib.attrsets.isDerivation
       (builtins.attrValues pkgs.nerd-fonts);
 
-  # enable firmware udpate daemon
+  # enable firmware update daemon
   services.fwupd.enable = true;
 
   # Enable the X11 windowing system.
@@ -80,14 +82,34 @@
   };
 
   # Start bluetooth
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot =
-    true; # powers up the default Bluetooth controller on boot
-  hardware.bluetooth.package = pkgs.bluez; # the Bluetooth stack to use
-  # hardware.bluetooth.settings.Policy.AutoEnable = true;
-  hardware.bluetooth.settings.General.Enable = "Source,Sink,Media,Socket";
-  # services.blueman.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    package = pkgs.bluez5-experimental;
+    settings = {
+      General = {
+        # Privacy = "off";
+        Privacy = "device"; # Prevent random MAC address changes
+        JustWorksRepairing = "always";
+        # Enable = "Source,Sink,Media,Socket";
+        Class = "0x000100";
+        ControllerMode = "bredr"; # Fix frequent Bluetooth audio dropouts
+        Experimental = true; # Often helps with modern devices
+        FastConnectable = true;
+      };
+      Policy = { AutoEnable = true; };
+    };
+  };
+
+  services.blueman.enable = true;
+
+  # Bluetooth dependencies
+  hardware.firmware = with pkgs; [ linux-firmware ];
   hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
+  services.dbus.enable = true;
+  systemd.tmpfiles.rules = [ "d /var/lib/bluetooth 700 root root - -" ];
+  systemd.targets."bluetooth".after = [ "systemd-tmpfiles-setup.service" ];
 
   # QMK
   hardware.keyboard.qmk.enable = true;
@@ -107,12 +129,12 @@
   services.printing.enable = true;
 
   # Hyprland
-  #security.polkit.enable = true;
+  security.polkit.enable = true;
   # security.pam.services.swaylock = { };
   programs.hyprland = {
     enable = true;
     withUWSM = true; # recommended for most users
-    # xwayland.enable = true;
+    xwayland.enable = true;
   };
 
   # Enable sound with pipewire.
@@ -121,17 +143,19 @@
   services.pipewire = {
     enable = true;
     audio.enable = true;
-    pulse.enable = true;
     alsa = {
       enable = true;
       support32Bit = true;
     };
+    pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    jack.enable = true;
+    # jack.enable = true;
+
+    wireplumber.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    # media-session.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -147,7 +171,6 @@
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
       zsh
-      # thinkfan
       # https://nixos.wiki/wiki/Battle.net
       vulkan-tools
       (wineWowPackages.full.override {
@@ -155,8 +178,13 @@
         mingwSupport = true;
       })
       winetricks
-      # lutris
       mesa
+      # audio
+      bluez5-experimental
+      bluez-tools
+      pipewire
+      wireplumber # audio session manager for PipeWire
+      pwvucontrol
     ];
     variables.EDITOR = "vim";
   };

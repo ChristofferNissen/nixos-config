@@ -1,44 +1,33 @@
 { pkgs, unstable, inputs, ... }:
 
-with pkgs;
 let
-  hyprlandPackages = [
-    hyprland
-    hypridle
-    hyprlock
-    hyprsunset
-    inputs.hyprland-qtutils.packages."${stdenv.hostPlatform.system}".default
-    libinput
-    libnotify
-    wofi
-    waybar
-    kitty # required for the default Hyprland config
-    pavucontrol
-    seatd
-  ];
-
   # Define miscellaneous packages
-  miscPackages = [
+  miscPackages = with pkgs; [
     appimage-run
-    # appimagekit
     arandr
     autorandr
-    # bluez
     brightnessctl
-    pamixer
     playerctl
-    escrotum
-    qmk_hid
-    lynx
+    # pamixer
+    # escrotum
+    # qmk_hid
   ];
-  neovimPackages = [ inotify-tools ];
-
+  programs = with pkgs; [
+    signal-desktop
+    bitwarden-desktop
+    tidal-hifi
+    tidal-dl
+    high-tide
+    discord
+    vlc
+    # lidarr
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
+  programs_unstable = with unstable; [ bitwarden-cli alacritty ];
+  kubernetesLinuxOnly = with unstable; [ containerd nerdctl kaniko ];
+  neovimLinuxOnlyPackages = with pkgs; [ inotify-tools lynx ];
 in
 {
-  home.packages =
-    (with pkgs; [ signal-desktop bitwarden-desktop tidal-hifi discord vlc ])
-    ++ (with unstable; [ bitwarden-cli alacritty ])
-    # Kubernetes (linux only)
-    ++ (with unstable; [ containerd nerdctl kaniko ]) ++ miscPackages
-    ++ neovimPackages ++ hyprlandPackages;
+  home.packages = programs ++ programs_unstable ++ kubernetesLinuxOnly
+    ++ miscPackages ++ neovimLinuxOnlyPackages;
 }

@@ -10,6 +10,7 @@
     ./common.nix
     ./packages/main.nix
     ./packages/extra.nix
+    ./packages/hyprland.nix
     ./packages/sqlite.nix
     ./packages/azure.nix
     ./configs/main.nix

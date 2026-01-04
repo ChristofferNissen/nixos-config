@@ -33,6 +33,13 @@
     nixgl.url = "github:nix-community/nixGL";
 
     # ladybird.url = "github:LadybirdBrowser/ladybird";
+
+    elephant.url = "github:abenz1267/elephant";
+
+    walker = {
+      url = "github:abenz1267/walker";
+      inputs.elephant.follows = "elephant";
+    };
   };
 
   outputs =
