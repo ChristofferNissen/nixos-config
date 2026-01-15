@@ -164,6 +164,21 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  # Wireguard / ProtonVPN
+  networking.firewall.checkReversePath = false;
+
+  fileSystems."/mnt/media" = {
+    device = "//192.168.1.65/D";
+    fsType = "cifs";
+    options = [
+      "x-systemd.automount,noauto,x-systemd.idle-timeout=600,x-systemd.mount-timeout=15"
+      "uid=1000,gid=100"
+      "file_mode=0600,dir_mode=0700"
+      "username=cn"
+      "password=@ChristofferNissen1995"
+    ];
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
@@ -185,6 +200,9 @@
       pipewire
       wireplumber # audio session manager for PipeWire
       pwvucontrol
+      # wireguard
+      wireguard-tools
+      protonvpn-gui
     ];
     variables.EDITOR = "vim";
   };

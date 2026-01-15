@@ -22,9 +22,10 @@ let
     vlc
     # lidarr
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    qbittorrent
   ];
   programs_unstable = with unstable; [ bitwarden-cli alacritty ];
-  kubernetesLinuxOnly = with unstable; [ containerd nerdctl kaniko ];
+  kubernetesLinuxOnly = with unstable; [ containerd nerdctl kaniko talosctl ];
   neovimLinuxOnlyPackages = with pkgs; [ inotify-tools lynx ];
 in
 {
