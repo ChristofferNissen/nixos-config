@@ -46,7 +46,7 @@ let
     gnumake
     lf
     yazi
-    # github-copilot-cli
+    github-copilot-cli
   ];
 
   qmkPackages = [ qmk ];

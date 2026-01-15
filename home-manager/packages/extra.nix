@@ -11,6 +11,7 @@ let
     # pamixer
     # escrotum
     # qmk_hid
+    plexamp
   ];
   programs = with pkgs; [
     signal-desktop
