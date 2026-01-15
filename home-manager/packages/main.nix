@@ -60,7 +60,7 @@ let
     biome
     tectonic
     texliveSmall
-    mermaid-cli
+    # mermaid-cli
     ghostscript
     python312Packages.pylatexenc
     nixd
