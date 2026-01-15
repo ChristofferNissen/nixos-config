@@ -85,6 +85,7 @@
                 home-manager.users.${userName} = import ./home-manager/mac.nix;
               }
 
+              ./hosts/common/lix.nix
             ];
             specialArgs = { inherit inputs; };
           };
@@ -121,6 +122,7 @@
                   };
                 };
               }
+
               ./hosts/x1/configuration.nix
 
               # Create home folder
@@ -137,6 +139,7 @@
                 home-manager.users.${userName} = import ./home-manager/linux.nix;
               }
 
+              ./hosts/common/lix.nix
             ];
           };
           wsl = nixpkgs.lib.nixosSystem {
@@ -186,6 +189,8 @@
                 home-manager.useUserPackages = true;
                 home-manager.users.${userName} = import ./home-manager/wsl.nix;
               }
+
+              ./hosts/common/lix.nix
             ];
           };
         };
