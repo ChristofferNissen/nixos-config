@@ -4,7 +4,7 @@ let
   repo = builtins.fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
-    rev = "82489abe6daf2fb6882114e44511acaa58871552";
+    rev = "377e48b8796e8bbcd25b8a50b924e41b4944c956";
   };
 in
 {
