@@ -9,7 +9,8 @@ let
 
   # Define terminal-related packages
   terminalPackages = [
-    ffmpeg
+    # ffmpeg
+    ffmpeg-full
     any-nix-shell
     neofetch
     zip
@@ -46,6 +47,7 @@ let
     gnumake
     lf
     yazi
+    github-copilot-cli
   ];
 
   qmkPackages = [ qmk ];
@@ -59,7 +61,7 @@ let
     biome
     tectonic
     texliveSmall
-    mermaid-cli
+    # mermaid-cli
     ghostscript
     python312Packages.pylatexenc
     nixd
@@ -120,7 +122,7 @@ in
     mdbook
     tenv
     bruno
-    (with dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 ]) # sdk_10_0
+    (with dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 sdk_10_0 ])
     dotnet-ef
     dotnetPackages.Nuget
     # csharp-ls

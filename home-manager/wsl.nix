@@ -6,6 +6,8 @@
   home.username = "${userName}";
   home.homeDirectory = "/home/${userName}";
 
+  home.sessionVariables = { NVIM_APPNAME = "local"; };
+
   imports = [
     ./common.nix
     ./packages/main.nix

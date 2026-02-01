@@ -60,23 +60,31 @@
       darwinConfigurations =
         let
           system = "aarch64-darwin"; # Change to "x86_64-darwin" if needed
-          unstable = import nixpkgs-unstable { inherit system; };
+          unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
         in
         {
           mac = darwin.lib.darwinSystem {
             system = system;
             modules = [
-
               { users.users.${userName} = { home = "/Users/${userName}"; }; }
 
               ./hosts/mac/darwin-configuration.nix
+              ./hosts/common/lix.nix
 
               home-manager.darwinModules.home-manager
               {
                 home-manager.extraSpecialArgs = {
                   inherit inputs;
-                  inherit unstable;
                   inherit system;
+                  inherit unstable;
+                  inherit pkgs;
                   inherit userName;
                   inherit stateVersion;
                 };
@@ -84,7 +92,6 @@
                 home-manager.useUserPackages = true;
                 home-manager.users.${userName} = import ./home-manager/mac.nix;
               }
-
             ];
             specialArgs = { inherit inputs; };
           };
@@ -92,27 +99,20 @@
       nixosConfigurations =
         let
           system = "x86_64-linux";
-          unstable = import nixpkgs-unstable { inherit system; };
+          unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
         in
         {
           x1 = nixpkgs.lib.nixosSystem {
             system = system;
+            specialArgs = { inherit inputs system userName description; };
             modules = [
-
-              # Create user
-              {
-                users.users.${userName} = {
-                  isNormalUser = true;
-                  description = description;
-                  extraGroups = [ "networkmanager" "wheel" "docker" ];
-                  home = "/home/${userName}";
-                };
-              }
-
-              # ref: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
-              nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
-
-              # Create NixOS
               {
                 nixpkgs = {
                   config = {
@@ -121,7 +121,15 @@
                   };
                 };
               }
+              # Create user
+              ./hosts/common/user.nix
+
+              # ref: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+              nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
+
+              # NixOS
               ./hosts/x1/configuration.nix
+              ./hosts/common/lix.nix
 
               # Create home folder
               home-manager.nixosModules.home-manager
@@ -129,6 +137,7 @@
                 home-manager.extraSpecialArgs = {
                   inherit inputs;
                   inherit unstable;
+                  inherit pkgs;
                   inherit userName;
                   inherit stateVersion;
                 };
@@ -136,28 +145,22 @@
                 home-manager.useUserPackages = true;
                 home-manager.users.${userName} = import ./home-manager/linux.nix;
               }
-
             ];
           };
           wsl = nixpkgs.lib.nixosSystem {
             system = system;
-            specialArgs = { inherit inputs nixos-wsl system userName; };
+            specialArgs = {
+              inherit inputs nixos-wsl system userName description;
+            };
             modules = [
-
               # Create User
-              {
-                users.users.${userName} = {
-                  isNormalUser = true;
-                  description = description;
-                  extraGroups = [ "networkmanager" "wheel" "docker" ];
-                  home = "/home/${userName}";
-                };
-              }
+              ./hosts/common/user.nix
 
               # basic configuration
               ./hosts/wsl/configuration.nix
+              ./hosts/common/lix.nix
 
-              # wsl specific configuration
+              # WSL specific configuration
               nixos-wsl.nixosModules.default
               {
                 system.stateVersion = stateVersion;
@@ -178,6 +181,7 @@
                 home-manager.extraSpecialArgs = {
                   inherit inputs;
                   inherit unstable;
+                  inherit pkgs;
                   inherit system;
                   inherit userName;
                   inherit stateVersion;

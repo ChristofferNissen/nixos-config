@@ -11,6 +11,7 @@
   security.pki.certificateFiles = [ /etc/pki/tls/certs/ca-zscaler.crt ];
   environment.variables = {
     "NIX_SSL_CERT_FILE" = "/etc/ssl/certs/ca-certificates.crt";
+    "CONFIG" = "wsl";
   };
   security.sudo.extraConfig = ''Defaults env_keep += "NIX_SSL_CERT_FILE"'';
 
@@ -27,9 +28,7 @@
   # Docker
   virtualisation.docker = {
     enable = true;
-    daemon.settings = {
-      "features" = { "containerd-snapshotter" = true; };
-    };
+    daemon.settings = { "features" = { "containerd-snapshotter" = true; }; };
   };
 
   environment.systemPackages = with pkgs; [
