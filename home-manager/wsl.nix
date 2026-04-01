@@ -12,7 +12,7 @@
     ./common.nix
     ./packages/main.nix
     ./packages/sqlite.nix
-    ./packages/azure.nix
+    ./packages/azure-wsl.nix
     ./configs/main.nix
   ];
 }

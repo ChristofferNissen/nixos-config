@@ -20,7 +20,7 @@ let
     high-tide
     discord
     vlc
-    # lidarr
+    rpi-imager
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
   programs_unstable = with unstable; [ bitwarden-cli alacritty ];

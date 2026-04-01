@@ -12,7 +12,7 @@ let
     # ffmpeg
     ffmpeg-full
     any-nix-shell
-    neofetch
+    fastfetch
     zip
     unzip
     tree
@@ -29,7 +29,6 @@ let
     pay-respects
     yq
     jq
-    neofetch
     tmux
     gcc
     tt
@@ -48,6 +47,7 @@ let
     lf
     yazi
     github-copilot-cli
+    nh
   ];
 
   qmkPackages = [ qmk ];
@@ -101,6 +101,7 @@ in
     kubectl-tree
     stern
     dive
+    krew
   ])
   # Development
   ++ (with unstable; [

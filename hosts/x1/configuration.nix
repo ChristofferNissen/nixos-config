@@ -54,6 +54,8 @@
     LC_TIME = "da_DK.UTF-8";
   };
 
+  qt.enable = true; qt.platformTheme = "gtk2"; qt.style = "gtk2";
+
   # Fonts!
   fonts.packages = with pkgs;
     [
@@ -167,6 +169,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
+    shellAliases = {
+      open = "nautilus";
+    };
     systemPackages = with pkgs; [
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
