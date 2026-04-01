@@ -178,7 +178,7 @@
       zsh
       # https://nixos.wiki/wiki/Battle.net
       vulkan-tools
-      (wineWowPackages.full.override {
+      (wineWow64Packages.full.override {
         wineRelease = "staging";
         mingwSupport = true;
       })
