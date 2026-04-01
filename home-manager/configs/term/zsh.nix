@@ -16,12 +16,11 @@
     eval "$(pay-respects zsh --alias)"
 
     export GOBIN=$HOME/go/bin
-    export PATH=$HOME/go/bin:$PATH
-    export PATH="$HOME/.local/share/nvim/mason/bin/:$PATH"
-    export PATH=$PATH:$HOME/.dotnet/tools
-    export PATH=$PATH:$HOME/.local/scripts/
-    # export DOTNET_ROOT=$HOME/.dotnet
-    # export PATH=$PATH:$DOTNET_ROOT
+    export MASONBIN="$HOME/.local/share/''${NVIM_APPNAME:-nvim}/mason/bin/:$PATH"
+    export PATH=$GOBIN:$PATH
+    export PATH=$MASONBIN:$PATH
+    export PATH=$HOME/.dotnet/tools:$PATH
+    export PATH=$HOME/.local/scripts/:$PATH
 
     # export YSU_MESSAGE_POSITION="after"
 

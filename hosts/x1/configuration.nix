@@ -80,7 +80,8 @@
   };
   services.displayManager = {
     # defaultSession = "none+i3";
-    defaultSession = "hyprland-uwsm";
+    # defaultSession = "hyprland-uwsm";
+    defaultSession = "hyprland";
   };
 
   # Start bluetooth
