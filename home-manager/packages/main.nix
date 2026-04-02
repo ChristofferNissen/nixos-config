@@ -21,6 +21,7 @@ let
     imagemagick
     feh
     gotop
+    dtop
     htop
     btop
     zsh
@@ -91,6 +92,7 @@ in
     kubectl
     kind
     kubernetes-helm
+    kustomize
     oras
     skopeo
     argocd
