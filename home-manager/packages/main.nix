@@ -89,6 +89,7 @@ in
   # Kubernetes
   ++ (with unstable; [
     k9s
+    flux9s
     kubectl
     kind
     kubernetes-helm

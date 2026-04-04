@@ -5,10 +5,13 @@
 { pkgs, ... }:
 
 {
-  imports = [ /etc/nixos/hardware-configuration.nix ];
+  imports = [/etc/nixos/hardware-configuration.nix ];
 
   # Enable Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Nix-LD
   programs.nix-ld.enable = true;
@@ -21,9 +24,20 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "btusb" ];
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelModules = [
+    "btusb"
+    "uinput"
+    "hidp"
+    "hid_sony"
+  ];
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
+  # Disable ERTM (Enhanced Retransmission Mode) — required for stable DS4 BT connection
+  boot.extraModprobeConfig = ''
+    options bluetooth disable_ertm=1
+    options iwlwifi bt_coex_active=0
+  '';
 
   networking.hostName = "nixos"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -32,7 +46,7 @@
   networking.networkmanager.enable = true;
   # networking.networkmanager.wifi.powersave = true;
 
-  # Custom hostnames (development projects) 
+  # Custom hostnames (development projects)
   networking.extraHosts = ''
     127.0.0.1 grafana.local
   '';
@@ -54,10 +68,13 @@
     LC_TIME = "da_DK.UTF-8";
   };
 
-  qt.enable = true; qt.platformTheme = "gtk2"; qt.style = "gtk2";
+  qt.enable = true;
+  qt.platformTheme = "gtk2";
+  qt.style = "gtk2";
 
   # Fonts!
-  fonts.packages = with pkgs;
+  fonts.packages =
+    with pkgs;
     [
       jetbrains-mono
       noto-fonts
@@ -67,8 +84,8 @@
       fira-code
       fira-mono
       fira-code-symbols
-    ] ++ builtins.filter lib.attrsets.isDerivation
-      (builtins.attrValues pkgs.nerd-fonts);
+    ]
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # enable firmware update daemon
   services.fwupd.enable = true;
@@ -91,24 +108,38 @@
     package = pkgs.bluez5-experimental;
     settings = {
       General = {
-        # Privacy = "off";
-        Privacy = "device"; # Prevent random MAC address changes
+        ControllerMode = "dual";
+        FastConnectable = "true";
+        Experimental = "true";
         JustWorksRepairing = "always";
-        # Enable = "Source,Sink,Media,Socket";
-        Class = "0x000100";
-        ControllerMode = "bredr"; # Fix frequent Bluetooth audio dropouts
-        Experimental = true; # Often helps with modern devices
-        FastConnectable = true;
       };
-      Policy = { AutoEnable = true; };
+      Policy = {
+        AutoEnable = true;
+        ReconnectAttempts = 7;
+        ReconnectIntervals = "1,2,4,8,16,32,64";
+      };
+      Input = {
+        UserspaceHID = true;
+        ClassicBondedOnly = false;
+      };
     };
   };
+  hardware.steam-hardware.enable = true;
+  programs.gamemode.enable = true;
 
   services.blueman.enable = true;
+
+  # Disable power-profiles-daemon (GNOME enables it by default) — it fights
+  # with usbcore.autosuspend=-1 and can put the BT adapter to sleep.
+  services.power-profiles-daemon.enable = false;
+
+  services.speechd.enable = false;
+  services.orca.enable = false;
 
   # Bluetooth dependencies
   hardware.firmware = with pkgs; [ linux-firmware ];
   hardware.enableAllFirmware = true;
+  nixpkgs.config.allowUnfree = true;
   hardware.enableRedistributableFirmware = true;
   services.dbus.enable = true;
   systemd.tmpfiles.rules = [ "d /var/lib/bluetooth 700 root root - -" ];
@@ -117,6 +148,20 @@
   # QMK
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = [ pkgs.qmk-udev-rules ];
+
+  # DS4 touchpad: tag it so libinput treats it as a pointer device
+  services.udev.extraRules = ''
+    SUBSYSTEM=="input", ATTRS{name}=="*Wireless Controller Touchpad*", ENV{ID_INPUT_TOUCHPAD}="1", ENV{ID_INPUT_MOUSE}="1"
+  '';
+
+  # DS4 touchpad: tell libinput this is a PlayStation controller touchpad so it
+  # applies the correct absolute-to-relative coordinate mapping and gestures.
+  environment.etc."libinput/local-overrides.quirks".text = ''
+    [Sony DualShock 4 Touchpad]
+    MatchName=*Wireless Controller Touchpad*
+    MatchBus=bluetooth
+    ModelSonyPlayStationController=1
+  '';
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
@@ -196,7 +241,10 @@
   };
 
   # Graphics driver intel gpu
-  services.xserver.videoDrivers = [ "modesetting" "intel" ];
+  services.xserver.videoDrivers = [
+    "modesetting"
+    "intel"
+  ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -223,8 +271,7 @@
 
   # https://nixos.wiki/wiki/Storage_optimization
   nix.optimise.automatic = true;
-  nix.optimise.dates =
-    [ "03:45" ]; # Optional; allows customizing optimisation schedule
+  nix.optimise.dates = [ "03:45" ]; # Optional; allows customizing optimisation schedule
 
   nix.gc = {
     automatic = true;
