@@ -24,20 +24,20 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelModules = [
-    "btusb"
-    "uinput"
-    "hidp"
-    "hid_sony"
-  ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelModules = [
+  #   "btusb"
+  #   "uinput"
+  #   "hidp"
+  #   "hid_sony"
+  # ];
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
   # Disable ERTM (Enhanced Retransmission Mode) — required for stable DS4 BT connection
-  boot.extraModprobeConfig = ''
-    options bluetooth disable_ertm=1
-    options iwlwifi bt_coex_active=0
-  '';
+  # boot.extraModprobeConfig = ''
+  #   options bluetooth disable_ertm=1
+  #   options iwlwifi bt_coex_active=0
+  # '';
 
   networking.hostName = "nixos"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -102,66 +102,66 @@
   };
 
   # Start bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    package = pkgs.bluez5-experimental;
-    settings = {
-      General = {
-        ControllerMode = "dual";
-        FastConnectable = "true";
-        Experimental = "true";
-        JustWorksRepairing = "always";
-      };
-      Policy = {
-        AutoEnable = true;
-        ReconnectAttempts = 7;
-        ReconnectIntervals = "1,2,4,8,16,32,64";
-      };
-      Input = {
-        UserspaceHID = true;
-        ClassicBondedOnly = false;
-      };
-    };
-  };
-  hardware.steam-hardware.enable = true;
-  programs.gamemode.enable = true;
+  # hardware.bluetooth = {
+  #   enable = true;
+  #   powerOnBoot = true;
+  #   package = pkgs.bluez5-experimental;
+  #   settings = {
+  #     General = {
+  #       ControllerMode = "dual";
+  #       FastConnectable = "true";
+  #       Experimental = "true";
+  #       JustWorksRepairing = "always";
+  #     };
+  #     Policy = {
+  #       AutoEnable = true;
+  #       ReconnectAttempts = 7;
+  #       ReconnectIntervals = "1,2,4,8,16,32,64";
+  #     };
+  #     Input = {
+  #       UserspaceHID = true;
+  #       ClassicBondedOnly = false;
+  #     };
+  #   };
+  # };
+  # hardware.steam-hardware.enable = true;
+  # programs.gamemode.enable = true;
 
-  services.blueman.enable = true;
+  # services.blueman.enable = true;
 
   # Disable power-profiles-daemon (GNOME enables it by default) — it fights
   # with usbcore.autosuspend=-1 and can put the BT adapter to sleep.
-  services.power-profiles-daemon.enable = false;
-
-  services.speechd.enable = false;
-  services.orca.enable = false;
+  # services.power-profiles-daemon.enable = false;
+  #
+  # services.speechd.enable = false;
+  # services.orca.enable = false;
 
   # Bluetooth dependencies
-  hardware.firmware = with pkgs; [ linux-firmware ];
-  hardware.enableAllFirmware = true;
-  nixpkgs.config.allowUnfree = true;
-  hardware.enableRedistributableFirmware = true;
-  services.dbus.enable = true;
-  systemd.tmpfiles.rules = [ "d /var/lib/bluetooth 700 root root - -" ];
-  systemd.targets."bluetooth".after = [ "systemd-tmpfiles-setup.service" ];
+  # hardware.firmware = with pkgs; [ linux-firmware ];
+  # hardware.enableAllFirmware = true;
+  # nixpkgs.config.allowUnfree = true;
+  # hardware.enableRedistributableFirmware = true;
+  # services.dbus.enable = true;
+  # systemd.tmpfiles.rules = [ "d /var/lib/bluetooth 700 root root - -" ];
+  # systemd.targets."bluetooth".after = [ "systemd-tmpfiles-setup.service" ];
 
   # QMK
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = [ pkgs.qmk-udev-rules ];
 
   # DS4 touchpad: tag it so libinput treats it as a pointer device
-  services.udev.extraRules = ''
-    SUBSYSTEM=="input", ATTRS{name}=="*Wireless Controller Touchpad*", ENV{ID_INPUT_TOUCHPAD}="1", ENV{ID_INPUT_MOUSE}="1"
-  '';
-
-  # DS4 touchpad: tell libinput this is a PlayStation controller touchpad so it
-  # applies the correct absolute-to-relative coordinate mapping and gestures.
-  environment.etc."libinput/local-overrides.quirks".text = ''
-    [Sony DualShock 4 Touchpad]
-    MatchName=*Wireless Controller Touchpad*
-    MatchBus=bluetooth
-    ModelSonyPlayStationController=1
-  '';
+  # services.udev.extraRules = ''
+  #   SUBSYSTEM=="input", ATTRS{name}=="*Wireless Controller Touchpad*", ENV{ID_INPUT_TOUCHPAD}="1", ENV{ID_INPUT_MOUSE}="1"
+  # '';
+  #
+  # # DS4 touchpad: tell libinput this is a PlayStation controller touchpad so it
+  # # applies the correct absolute-to-relative coordinate mapping and gestures.
+  # environment.etc."libinput/local-overrides.quirks".text = ''
+  #   [Sony DualShock 4 Touchpad]
+  #   MatchName=*Wireless Controller Touchpad*
+  #   MatchBus=bluetooth
+  #   ModelSonyPlayStationController=1
+  # '';
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
