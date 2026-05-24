@@ -10,7 +10,7 @@ let
   # Define terminal-related packages
   terminalPackages = [
     # ffmpeg
-    ffmpeg-full
+    # ffmpeg-full
     any-nix-shell
     fastfetch
     zip
