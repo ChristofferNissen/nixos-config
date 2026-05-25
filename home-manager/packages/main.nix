@@ -91,6 +91,7 @@ in
     k9s
     flux9s
     kubectl
+    talosctl
     kind
     kubernetes-helm
     kustomize
