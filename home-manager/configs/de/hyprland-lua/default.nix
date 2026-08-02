@@ -15,5 +15,6 @@
     ./workspaces.nix
     ./hypridle.nix
     ./hyprsunset.nix
+    ./hyprpaper.nix
   ];
 }
