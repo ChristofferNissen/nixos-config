@@ -16,5 +16,7 @@
     ./hypridle.nix
     ./hyprsunset.nix
     ./hyprpaper.nix
+    ./waybar.nix
+    ./mako.nix
   ];
 }

@@ -22,6 +22,29 @@
     roles = {
       desktop = {
         enable = lib.mkEnableOption "Desktop role configuration";
+        monitor0 = {
+          name = lib.mkOption {
+            default = "eDP-1";
+            description = "Monitor to be used as the primary";
+          };
+          mode = lib.mkOption {
+            # default = "highres";
+            default = "preferred";
+            description = "Resolution and refresh rate for primary monitor";
+          };
+          position = lib.mkOption {
+            default = "auto";
+            description = "Position for primary monitor";
+          };
+          scale = lib.mkOption {
+            default = "1";
+            description = "Scale for primary monitor";
+          };
+          bitdepth = lib.mkOption {
+            default = 8;
+            description = "Bitdepth for primary monitor";
+          };
+        };
         monitor1 = {
           name = lib.mkOption {
             default = "DP-2";
@@ -40,7 +63,7 @@
             description = "Scale for primary monitor";
           };
           bitdepth = lib.mkOption {
-            default = "10";
+            default = 10;
             description = "Bitdepth for primary monitor";
           };
           vrr = lib.mkOption {
@@ -78,7 +101,7 @@
             description = "Scale for secondary monitor";
           };
           bitdepth = lib.mkOption {
-            default = "10";
+            default = 10;
             description = "Bitdepth for secondary monitor";
           };
           vrr = lib.mkOption {

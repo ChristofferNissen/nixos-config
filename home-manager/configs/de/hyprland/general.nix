@@ -1,5 +1,9 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
+  # Hyprland UWSM session variables
+  xdg.configFile."uwsm/env".source =
+    "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
+
   wayland.windowManager.hyprland = {
     settings = {
       config = {
