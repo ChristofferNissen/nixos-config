@@ -14,5 +14,6 @@
     # ./windowrules.nix
     ./workspaces.nix
     ./hypridle.nix
+    ./hyprsunset.nix
   ];
 }
