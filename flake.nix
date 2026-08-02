@@ -3,10 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-unstable = { url = "github:NixOS/nixpkgs?ref=master"; };
+    # nixpkgs.url = "github:NixOS/nixpkgs/release-26.05";
+    nixpkgs-unstable = {
+      url = "github:NixOS/nixpkgs?ref=master";
+    };
 
     # ref: https://github.com/NixOS/nixos-hardware/tree/master
-    nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
 
     # ref: https://github.com/nix-community/NixOS-WSL/
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
@@ -16,6 +21,8 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
+    # home-manager.url = "github:nix-community/home-manager/release-26.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland-qtutils = {
       url = "github:hyprwm/hyprland-qtutils";
@@ -25,10 +32,10 @@
     catppuccin.url = "github:catppuccin/nix";
 
     ghostty.url = "github:ghostty-org/ghostty";
-    ghostty.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # ghostty.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     zen-browser.url = "github:youwen5/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     nixgl.url = "github:nix-community/nixGL";
 
@@ -43,13 +50,14 @@
   };
 
   outputs =
-    { nixpkgs
-    , nixpkgs-unstable
-    , nixos-hardware
-    , nixos-wsl
-    , darwin
-    , home-manager
-    , ...
+    {
+      nixpkgs,
+      nixpkgs-unstable,
+      nixos-hardware,
+      nixos-wsl,
+      darwin,
+      home-manager,
+      ...
     }@inputs:
     let
       userName = "cn";
@@ -73,7 +81,11 @@
           mac = darwin.lib.darwinSystem {
             system = system;
             modules = [
-              { users.users.${userName} = { home = "/Users/${userName}"; }; }
+              {
+                users.users.${userName} = {
+                  home = "/Users/${userName}";
+                };
+              }
 
               ./hosts/mac/darwin-configuration.nix
               ./hosts/common/lix.nix
@@ -111,18 +123,28 @@
         {
           x1 = nixpkgs.lib.nixosSystem {
             system = system;
-            specialArgs = { inherit inputs system userName description; };
+            specialArgs = {
+              inherit
+                inputs
+                system
+                userName
+                description
+                ;
+            };
             modules = [
               {
                 nixpkgs = {
                   config = {
                     allowUnfree = true;
                     allowUnfreePredicate = (_: true);
+                    # permittedInsecurePackages = [ "electron-39.8.10"];
                   };
                 };
               }
               # Create user
               ./hosts/common/user.nix
+
+              ./options.nix
 
               # ref: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
               nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
@@ -150,7 +172,13 @@
           wsl = nixpkgs.lib.nixosSystem {
             system = system;
             specialArgs = {
-              inherit inputs nixos-wsl system userName description;
+              inherit
+                inputs
+                nixos-wsl
+                system
+                userName
+                description
+                ;
             };
             modules = [
               # Create User
@@ -171,8 +199,11 @@
                 wsl.wslConf.automount.enabled = true;
                 wsl.wslConf.boot.systemd = true;
                 wsl.wslConf.network.generateResolvConf = false;
-                networking.nameservers =
-                  [ "10.41.2.10" "10.41.2.11" "10.41.18.10" ];
+                networking.nameservers = [
+                  "10.41.2.10"
+                  "10.41.2.11"
+                  "10.41.18.10"
+                ];
               }
 
               # Create home folder

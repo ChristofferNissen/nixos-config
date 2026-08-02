@@ -23,8 +23,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.supportedFilesystems = [ "nfs" ];
+
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages;
   # boot.kernelModules = [
   #   "btusb"
@@ -32,7 +34,7 @@
   #   "hidp"
   #   "hid_sony"
   # ];
-  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
+  # boot.kernelParams = [ "usbcore.autosuspend=-1" ];
   # Disable ERTM (Enhanced Retransmission Mode) — required for stable DS4 BT connection
   # boot.extraModprobeConfig = ''
   #   options bluetooth disable_ertm=1
@@ -46,10 +48,10 @@
   networking.networkmanager.enable = true;
   # networking.networkmanager.wifi.powersave = true;
 
-  # Custom hostnames (development projects)
-  networking.extraHosts = ''
-    127.0.0.1 grafana.local
-  '';
+  # # Custom hostnames (development projects)
+  # networking.extraHosts = ''
+  #   127.0.0.1 grafana.local
+  # '';
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -97,8 +99,8 @@
   };
   services.displayManager = {
     # defaultSession = "none+i3";
-    # defaultSession = "hyprland-uwsm";
-    defaultSession = "hyprland";
+    defaultSession = "hyprland-uwsm";
+    # defaultSession = "hyprland";
   };
 
   # Start bluetooth
@@ -138,12 +140,17 @@
 
   # Bluetooth dependencies
   # hardware.firmware = with pkgs; [ linux-firmware ];
-  # hardware.enableAllFirmware = true;
-  # nixpkgs.config.allowUnfree = true;
-  # hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
+  nixpkgs.config.allowUnfree = true;
+  hardware.enableRedistributableFirmware = true;
   # services.dbus.enable = true;
   # systemd.tmpfiles.rules = [ "d /var/lib/bluetooth 700 root root - -" ];
   # systemd.targets."bluetooth".after = [ "systemd-tmpfiles-setup.service" ];
+
+   # Start bluetooth
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
 
   # QMK
   hardware.keyboard.qmk.enable = true;
@@ -186,25 +193,25 @@
   };
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    audio.enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    # jack.enable = true;
-
-    wireplumber.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    # media-session.enable = true;
-  };
+  # services.pulseaudio.enable = false;
+  # security.rtkit.enable = true;
+  # services.pipewire = {
+  #   enable = true;
+  #   audio.enable = true;
+  #   alsa = {
+  #     enable = true;
+  #     support32Bit = true;
+  #   };
+  #   pulse.enable = true;
+  #   # If you want to use JACK applications, uncomment this
+  #   # jack.enable = true;
+  #
+  #   wireplumber.enable = true;
+  #
+  #   # use the example session manager (no others are packaged yet so this is enabled by default,
+  #   # no need to redefine it in your config for now)
+  #   # media-session.enable = true;
+  # };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -231,24 +238,25 @@
       winetricks
       mesa
       # audio
-      bluez5-experimental
-      bluez-tools
+      # bluez5-experimental
+      # bluez-tools
       pipewire
       wireplumber # audio session manager for PipeWire
       pwvucontrol
+      nfs-utils
     ];
     variables.EDITOR = "vim";
   };
 
   # Graphics driver intel gpu
-  services.xserver.videoDrivers = [
-    "modesetting"
-    "intel"
-  ];
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+  # services.xserver.videoDrivers = [
+  #   "modesetting"
+  #   "intel"
+  # ];
+  # hardware.graphics = {
+  #   enable = true;
+  #   enable32Bit = true;
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

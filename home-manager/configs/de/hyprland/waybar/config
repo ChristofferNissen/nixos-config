@@ -34,7 +34,7 @@
 	},
 	"tray": {
 		"icon-size": 21,
-		"spacing": 0
+		"spacing": 50
 	},
 	"custom/music": {
 		"format": " {}",

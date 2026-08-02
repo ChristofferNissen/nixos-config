@@ -13,6 +13,7 @@ in
     enable = true;
     vimAlias = true;
     extraLuaPackages = ps: [ ps.jsregexp ps.tiktoken_core ps.luasql-sqlite3 ];
+    withRuby = false;
   };
 
   home.file = {

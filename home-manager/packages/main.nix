@@ -47,8 +47,8 @@ let
     gnumake
     lf
     yazi
-    github-copilot-cli
-    nh
+    # github-copilot-cli
+    # nh
   ];
 
   qmkPackages = [ qmk ];
@@ -133,6 +133,6 @@ in
     # csharp-ls
   ]) ++ neovimPackages
   # Gleam
-  ++ (with pkgs; [ gleam erlang rebar3 ]) ++ (with pkgs; [ home-manager ])
+  ++ (with pkgs; [ gleam beamPackages.erlang rebar3 ]) ++ (with pkgs; [ home-manager ])
   ++ terminalPackages ++ qmkPackages ++ pythonPackages;
 }

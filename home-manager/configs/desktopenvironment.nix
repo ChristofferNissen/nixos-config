@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./de/hyprland/hyprland.nix
+    ./de/hyprland-lua/default.nix
     ./term/ghostty.nix
     ./de/walker.nix
     # ./de/i3/polybar.nix

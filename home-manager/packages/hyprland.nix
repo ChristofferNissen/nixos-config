@@ -17,7 +17,7 @@
     seatd
     # wofi
     # hyprshutdown
-    retroarch-full
+    # retroarch-full
     rpcs3
   ];
 }
