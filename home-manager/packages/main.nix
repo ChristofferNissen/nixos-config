@@ -106,6 +106,7 @@ in
     stern
     dive
     krew
+    age
   ])
   # Development
   ++ (with unstable; [

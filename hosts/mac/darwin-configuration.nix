@@ -10,8 +10,10 @@
 
   # Add more darwin-specific settings or packages here
   environment.variables = {
-    "PATH" = "$PATH:/opt/homebrew/bin";
-    "CONFIG" = "mac";
+    PATH = "$PATH:/opt/homebrew/bin";
+    CONFIG = "mac";
+    TALOSCONFIG = "/Users/cn/homek8s/talos/talosconfig";
+    K9S_CONFIG_DIR = "/Users/cn/.config/k9s";
   };
 
   nix.gc = {
