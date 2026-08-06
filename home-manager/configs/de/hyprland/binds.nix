@@ -15,6 +15,16 @@ let
       dispatcher
     ];
   };
+
+  # New three-argument binder for options like { locked = true }
+  bindOpts = keys: dispatcher: opts: {
+    _args = [
+      keys
+      dispatcher
+      opts
+    ];
+  };
+
 in
 {
   wayland.windowManager.hyprland = {
@@ -54,6 +64,29 @@ in
         (bind "XF86AudioPause" (dsp.exec "playerctl play-pause"))
         (bind "XF86AudioPlay" (dsp.exec "playerctl play-pause"))
         (bind "XF86AudioPrev" (dsp.exec "playerctl previous"))
+
+
+        # Close lid switch binding
+        (bindOpts "switch:on:Lid Switch" 
+          (lua ''
+            function()
+                hl.monitor({ output = "eDP-1", disabled = true })
+                hl.dsp.exec_cmd("loginctl lock-session")
+            end
+          '') 
+          { locked = true; } 
+        )
+
+        # Open lid switch binding
+        (bindOpts "switch:off:Lid Switch" 
+          (lua ''
+            function()
+                hl.monitor({ output = "eDP-1", disabled = false })
+            end
+          '') 
+          { locked = true; } 
+        )
+
       ];
     };
   };

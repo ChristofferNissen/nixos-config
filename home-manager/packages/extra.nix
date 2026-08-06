@@ -24,8 +24,9 @@ let
     hyprpwcenter
     hyprpolkitagent
 
-    # ladybird
+    ladybird
 
+    wlr-randr
     wl-clipboard
     udiskie
     libinput

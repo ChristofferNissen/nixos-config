@@ -26,15 +26,15 @@
   boot.supportedFilesystems = [ "nfs" ];
 
   # Kernel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [
     "thunderbolt"
     "usbcore"
-    # "btusb"
-    # "uinput"
-    # "hidp"
-    # "hid_sony"
+    "btusb"
+    "uinput"
+    "hidp"
+    "hid_sony"
   ];
   # boot.kernelParams = [ "usbcore.autosuspend=-1" ];
   boot.kernelParams = [ "thunderbolt.pcie_aspm=0" ];
@@ -189,7 +189,11 @@
   };
 
   services.logind = {
-    lidSwitch = "ignore"; # Inhibits systemd from forcing suspend instantly
+      settings = {
+          Login = {
+              HandleLidSwitch = "ignore"; # Inhibits systemd from forcing suspend instantly
+          };
+      };
   };
 
   # Enable sound with pipewire.
