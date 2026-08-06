@@ -1,24 +1,6 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 {
   options = {
-    # aquatic = {
-    #   ntfyUrl = lib.mkOption {
-    #     type = lib.types.str;
-    #     default = "http://192.168.0.80:4351";
-    #     description = "NTFY Server to use";
-    #   };
-    #
-    #   path = lib.mkOption {
-    #     default = "path:/home/aqua/AquaticOS";
-    #     description = "Path to rebuild from";
-    #   };
-    #
-    #   kernel = lib.mkOption {
-    #     default = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
-    #     description = "Kernel to use";
-    #   };
-    # };
-
     roles = {
       desktop = {
         enable = lib.mkEnableOption "Desktop role configuration";
@@ -37,7 +19,7 @@
             description = "Position for primary monitor";
           };
           scale = lib.mkOption {
-            default = "1";
+            default = "1.2";
             description = "Scale for primary monitor";
           };
           bitdepth = lib.mkOption {
@@ -51,7 +33,8 @@
             description = "Monitor to be used as the primary";
           };
           mode = lib.mkOption {
-            default = "preferred";
+            # default = "preferred";
+            default = "5120x1440@239.76";
             description = "Resolution and refresh rate for primary monitor";
           };
           position = lib.mkOption {
@@ -89,13 +72,14 @@
             description = "Monitor to be used as the secondary";
           };
           mode = lib.mkOption {
-            default = "preferred";
+            # default = "preferred";
+            default = "5120x1440@239.76";
             description = "Resolution and refresh rate for secondary monitor";
           };
-          # position = lib.mkOption {
-          #   default = "2561x0";
-          #   description = "Position for secondary monitor";
-          # };
+          position = lib.mkOption {
+            default = "0x0";
+            description = "Position for secondary monitor";
+          };
           scale = lib.mkOption {
             default = "1";
             description = "Scale for secondary monitor";
@@ -131,31 +115,7 @@
           description = "If second monitor should be in use";
         };
       };
-      # gaming = {
-      #   enable = lib.mkEnableOption "Gaming role configuration";
-      # };
-      #
-      # ai = {
-      #   enable = lib.mkEnableOption "AI role configuration";
-      # };
-      #
-      # nixdev = {
-      #   enable = lib.mkEnableOption "Nixdev role configuration";
-      # };
     };
-
-    # drivers = {
-    #   vm = {
-    #     enable = lib.mkEnableOption "Virtualbox Drivers";
-    #   };
-    #   bluetooth = {
-    #     enable = lib.mkEnableOption "Bluetooth Drivers";
-    #   };
-    #   gpu.amd = {
-    #     enable = lib.mkEnableOption "AMD Gpu Drivers";
-    #   };
-    # };
-
   };
 }
 

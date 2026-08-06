@@ -37,8 +37,7 @@
 
   home.file = {
     ".tmux/kube-tmux" = {
-      source =
-        builtins.fetchGit { url = "https://github.com/jonmosco/kube-tmux"; };
+      source = fetchGit { url = "https://github.com/jonmosco/kube-tmux"; };
       recursive = true;
     };
     ".local/scripts/tmux-sessionizer" = {

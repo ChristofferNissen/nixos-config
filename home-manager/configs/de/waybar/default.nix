@@ -1,6 +1,6 @@
 { ... }: {
   home.file."./.config/waybar" = {
-    source = ./waybar;
+    source = ./files;
     recursive = true;
   };
 }

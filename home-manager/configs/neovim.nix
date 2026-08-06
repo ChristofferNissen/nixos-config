@@ -1,7 +1,7 @@
 { unstable, ... }:
 
 let
-  repo = builtins.fetchGit {
+  repo = fetchGit {
     url = "https://github.com/ChristofferNissen/nvim-config";
     ref = "main";
     rev = "c31569db63a903cb77ca12c04b802a1de80edf1b";
@@ -14,6 +14,7 @@ in
     vimAlias = true;
     extraLuaPackages = ps: [ ps.jsregexp ps.tiktoken_core ps.luasql-sqlite3 ];
     withRuby = false;
+    withPython3 = false;
   };
 
   home.file = {

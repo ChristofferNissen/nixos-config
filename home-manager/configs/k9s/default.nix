@@ -1,6 +1,6 @@
 { ... }: {
   home.file."./.config/k9s" = {
-    source = ./k9s;
+    source = ./dotfiles;
     recursive = true;
   };
 }

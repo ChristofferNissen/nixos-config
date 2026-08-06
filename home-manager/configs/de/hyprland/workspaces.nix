@@ -44,8 +44,8 @@ in
       # ];
 
       bind =
-        lib.imap1 (i: v: bind "${mainMod} + ${v}" (dsp.workspace "1${toString i}")) workspacecount
-        ++ lib.imap1 (i: v: bind "${mainMod} + SHIFT + ${v}" (dsp.moveToWorkspaceSilent "1${toString i}")) workspacecount;
+        lib.imap1 (i: v: bind "${mainMod} + ${v}" (dsp.workspace "${toString i}")) workspacecount
+        ++ lib.imap1 (i: v: bind "${mainMod} + SHIFT + ${v}" (dsp.moveToWorkspaceSilent "${toString i}")) workspacecount;
         # ++ lib.imap1 (i: v: bind "${mainMod} + ${secondMonKey} + ${v}" (dsp.workspace "2${toString i}")) workspacecount
         # ++ lib.imap1 (i: v: bind "${mainMod} + ${secondMonKey} + SHIFT + ${v}" (dsp.moveToWorkspaceSilent "2${toString i}")) workspacecount;
     };

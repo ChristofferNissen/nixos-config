@@ -1,10 +1,12 @@
-{ lib, config, ... }:
+{ inputs, pkgs, lib, config, ... }:
 {
   # Hyprland UWSM session variables
   xdg.configFile."uwsm/env".source =
     "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
 
   wayland.windowManager.hyprland = {
+    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     settings = {
       config = {
         general = {
@@ -22,6 +24,10 @@
 
         render = {
           # direct_scanout = 2;
+        };
+
+        xwayland = {
+            force_zero_scaling = true;
         };
 
         decoration = {

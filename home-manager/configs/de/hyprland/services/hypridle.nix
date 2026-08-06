@@ -1,5 +1,6 @@
-{ ... }: {
+{ inputs, pkgs, ... }: {
   services.hypridle.enable = true;
+  # services.hypridle.package = inputs.hypridle.packages.${pkgs.stdenv.hostPlatform.system}.default;
   services.hypridle.settings = {
     general = {
         lock_cmd = "pidof hyprlock || hyprlock";

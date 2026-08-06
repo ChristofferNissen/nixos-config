@@ -1,4 +1,7 @@
-{ pkgs, config, ... }:
+{ pkgs
+, config
+, ...
+}:
 let
   # Create a fixed Zscaler certificate with trust anchors
   fixedZscalerCert = pkgs.runCommand "zscaler-fixed.pem" { } ''
@@ -145,4 +148,3 @@ in
     SSL_CERT_FILE = "${customCaBundle}";
   };
 }
-

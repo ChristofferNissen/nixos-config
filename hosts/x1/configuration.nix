@@ -5,7 +5,8 @@
 { pkgs, ... }:
 
 {
-  imports = [/etc/nixos/hardware-configuration.nix ];
+  imports = [ /etc/nixos/hardware-configuration.nix ];
+
 
   # Enable Flakes
   nix.settings.experimental-features = [
@@ -27,19 +28,17 @@
 
   # Kernel
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxPackages;
-  # boot.kernelModules = [
-  #   "btusb"
-  #   "uinput"
-  #   "hidp"
-  #   "hid_sony"
-  # ];
+  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelModules = [
+    "thunderbolt"
+    "usbcore"
+    # "btusb"
+    # "uinput"
+    # "hidp"
+    # "hid_sony"
+  ];
   # boot.kernelParams = [ "usbcore.autosuspend=-1" ];
-  # Disable ERTM (Enhanced Retransmission Mode) — required for stable DS4 BT connection
-  # boot.extraModprobeConfig = ''
-  #   options bluetooth disable_ertm=1
-  #   options iwlwifi bt_coex_active=0
-  # '';
+  boot.kernelParams = [ "thunderbolt.pcie_aspm=0" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -49,9 +48,9 @@
   # networking.networkmanager.wifi.powersave = true;
 
   # # Custom hostnames (development projects)
-  # networking.extraHosts = ''
-  #   127.0.0.1 grafana.local
-  # '';
+  networking.extraHosts = ''
+    127.0.0.1 grafana.local
+  '';
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -99,8 +98,8 @@
   };
   services.displayManager = {
     # defaultSession = "none+i3";
-    defaultSession = "hyprland-uwsm";
-    # defaultSession = "hyprland";
+    # defaultSession = "hyprland-uwsm";
+    defaultSession = "hyprland";
   };
 
   # Start bluetooth
@@ -139,7 +138,7 @@
   # services.orca.enable = false;
 
   # Bluetooth dependencies
-  # hardware.firmware = with pkgs; [ linux-firmware ];
+  hardware.firmware = with pkgs; [ linux-firmware ];
   hardware.enableAllFirmware = true;
   nixpkgs.config.allowUnfree = true;
   hardware.enableRedistributableFirmware = true;
@@ -147,28 +146,13 @@
   # systemd.tmpfiles.rules = [ "d /var/lib/bluetooth 700 root root - -" ];
   # systemd.targets."bluetooth".after = [ "systemd-tmpfiles-setup.service" ];
 
-   # Start bluetooth
+  # Start bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-
 
   # QMK
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = [ pkgs.qmk-udev-rules ];
-
-  # DS4 touchpad: tag it so libinput treats it as a pointer device
-  # services.udev.extraRules = ''
-  #   SUBSYSTEM=="input", ATTRS{name}=="*Wireless Controller Touchpad*", ENV{ID_INPUT_TOUCHPAD}="1", ENV{ID_INPUT_MOUSE}="1"
-  # '';
-  #
-  # # DS4 touchpad: tell libinput this is a PlayStation controller touchpad so it
-  # # applies the correct absolute-to-relative coordinate mapping and gestures.
-  # environment.etc."libinput/local-overrides.quirks".text = ''
-  #   [Sony DualShock 4 Touchpad]
-  #   MatchName=*Wireless Controller Touchpad*
-  #   MatchBus=bluetooth
-  #   ModelSonyPlayStationController=1
-  # '';
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
@@ -183,11 +167,21 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Cachix Hyprland
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    # Required so non-root users are allowed to use the above substituter/keys.
+    # Use @wheel for all sudo users, or list your username explicitly.
+    trusted-users = ["root" "@wheel"];
+  };
   # Hyprland
   security.polkit.enable = true;
   # security.pam.services.swaylock = { };
   programs.hyprland = {
     enable = true;
+    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     withUWSM = true; # recommended for most users
     xwayland.enable = true;
   };
@@ -249,14 +243,14 @@
   };
 
   # Graphics driver intel gpu
-  # services.xserver.videoDrivers = [
-  #   "modesetting"
-  #   "intel"
-  # ];
-  # hardware.graphics = {
-  #   enable = true;
-  #   enable32Bit = true;
-  # };
+  services.xserver.videoDrivers = [
+    "modesetting"
+    "intel"
+  ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

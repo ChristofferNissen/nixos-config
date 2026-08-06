@@ -1,5 +1,6 @@
-{ ... }: {
+{ inputs, pkgs, ... }: {
   services.hyprsunset.enable = true;
+  # services.hyprsunset.package = inputs.hyprsunset.packages.${pkgs.stdenv.hostPlatform.system}.default;
   services.hyprsunset.settings = {
     max-gamma = 150;
     profile = [

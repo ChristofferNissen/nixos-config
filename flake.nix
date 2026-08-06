@@ -13,6 +13,9 @@
       url = "github:NixOS/nixos-hardware/master";
     };
 
+    # nixvim.url = "github:nix-community/nixvim";
+    # nixvim.url = "github:nix-community/nixvim/nixos-26.05";
+
     # ref: https://github.com/nix-community/NixOS-WSL/
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -24,10 +27,31 @@
     # home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland-qtutils = {
-      url = "github:hyprwm/hyprland-qtutils";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    # hyprsunset.url = "github:hyprwm/hyprsunset";
+    # hyprsunset.inputs.nixpkgs.follows = "hyprland";
+    # hyprsunset.inputs.systems.follows = "hyprland/systems";
+    # hyprlock.url = "github:hyprwm/hyprlock";
+    # hyprlock.inputs.nixpkgs.follows = "hyprland";
+    # hyprlock.inputs.systems.follows = "hyprland/systems";
+    # hyprpaper.url = "github:hyprwm/hyprpaper";
+    # hyprpaper.inputs.nixpkgs.follows = "hyprland";
+    # hyprpaper.inputs.systems.follows = "hyprland/systems";
+    # hypridle.url = "github:hyprwm/hypridle";
+    # hypridle.inputs.nixpkgs.follows = "hyprland";
+    # hypridle.inputs.systems.follows = "hyprland/systems";
+    # hyprpolkitagent.url = "github:hyprwm/hypridle";
+    # hyprpolkitagent.inputs.nixpkgs.follows = "hyprland";
+    # hyprpolkitagent.inputs.systems.follows = "hyprland/systems";
+    # hyprpwcenter.url = "github:hyprwm/hyprpwcenter";
+    # hyprpwcenter.inputs.nixpkgs.follows = "hyprland";
+    # hyprpwcenter.inputs.systems.follows = "hyprland/systems";
+
+    hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
+    # hyprland-qtutils.inputs.nixpkgs.follows = "hyprland";
+    # hyprland-qtutils.inputs.systems.follows = "hyprland/systems";
 
     catppuccin.url = "github:catppuccin/nix";
 
@@ -39,30 +63,29 @@
 
     nixgl.url = "github:nix-community/nixGL";
 
-    # ladybird.url = "github:LadybirdBrowser/ladybird";
-
     elephant.url = "github:abenz1267/elephant";
-
-    walker = {
-      url = "github:abenz1267/walker";
-      inputs.elephant.follows = "elephant";
-    };
+    walker.url = "github:abenz1267/walker";
+    walker.inputs.elephant.follows = "elephant";
   };
 
   outputs =
-    {
-      nixpkgs,
-      nixpkgs-unstable,
-      nixos-hardware,
-      nixos-wsl,
-      darwin,
-      home-manager,
-      ...
+    { nixpkgs
+    , nixpkgs-unstable
+    , nixos-hardware
+    , nixos-wsl
+    , darwin
+    , home-manager
+    , ...
     }@inputs:
     let
       userName = "cn";
       description = "Christoffer Nissen";
       stateVersion = "24.11";
+      nixpkgs-config = {
+        allowUnfree = true;
+        allowUnfreePredicate = (_: true);
+        permittedInsecurePackages = [ "electron-39.8.10" ];
+      };
     in
     {
       darwinConfigurations =
@@ -70,16 +93,17 @@
           system = "aarch64-darwin"; # Change to "x86_64-darwin" if needed
           unstable = import nixpkgs-unstable {
             inherit system;
-            config.allowUnfree = true;
+            config = nixpkgs-config;
           };
           pkgs = import nixpkgs {
             inherit system;
-            config.allowUnfree = true;
+            config = nixpkgs-config;
           };
         in
         {
           mac = darwin.lib.darwinSystem {
             system = system;
+            specialArgs = { inherit inputs; };
             modules = [
               {
                 users.users.${userName} = {
@@ -105,7 +129,6 @@
                 home-manager.users.${userName} = import ./home-manager/mac.nix;
               }
             ];
-            specialArgs = { inherit inputs; };
           };
         };
       nixosConfigurations =
@@ -113,11 +136,11 @@
           system = "x86_64-linux";
           unstable = import nixpkgs-unstable {
             inherit system;
-            config.allowUnfree = true;
+            config = nixpkgs-config;
           };
           pkgs = import nixpkgs {
             inherit system;
-            config.allowUnfree = true;
+            config = nixpkgs-config;
           };
         in
         {
@@ -126,42 +149,33 @@
             specialArgs = {
               inherit
                 inputs
-                system
                 userName
                 description
                 ;
             };
             modules = [
-              {
-                nixpkgs = {
-                  config = {
-                    allowUnfree = true;
-                    allowUnfreePredicate = (_: true);
-                    # permittedInsecurePackages = [ "electron-39.8.10"];
-                  };
-                };
-              }
-              # Create user
+              ./hosts/common/lix.nix
               ./hosts/common/user.nix
 
               ./options.nix
 
-              # ref: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
-              nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
-
               # NixOS
               ./hosts/x1/configuration.nix
-              ./hosts/common/lix.nix
+
+              # ref: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+              nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
 
               # Create home folder
               home-manager.nixosModules.home-manager
               {
                 home-manager.extraSpecialArgs = {
-                  inherit inputs;
-                  inherit unstable;
-                  inherit pkgs;
-                  inherit userName;
-                  inherit stateVersion;
+                  inherit
+                    inputs
+                    unstable
+                    pkgs
+                    userName
+                    stateVersion
+                    ;
                 };
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
@@ -173,29 +187,23 @@
             system = system;
             specialArgs = {
               inherit
-                inputs
-                nixos-wsl
-                system
+                # inputs
+                # nixos-wsl
+                # system
                 userName
                 description
                 ;
             };
             modules = [
-              # Create User
-              ./hosts/common/user.nix
-
-              # basic configuration
               ./hosts/wsl/configuration.nix
+              ./hosts/common/user.nix
               ./hosts/common/lix.nix
 
-              # WSL specific configuration
+              # WSL configuration
               nixos-wsl.nixosModules.default
               {
-                system.stateVersion = stateVersion;
                 wsl.enable = true;
                 wsl.defaultUser = userName;
-
-                # WSL Configuration
                 wsl.wslConf.automount.enabled = true;
                 wsl.wslConf.boot.systemd = true;
                 wsl.wslConf.network.generateResolvConf = false;
@@ -204,18 +212,21 @@
                   "10.41.2.11"
                   "10.41.18.10"
                 ];
+                system.stateVersion = stateVersion;
               }
 
               # Create home folder
               home-manager.nixosModules.home-manager
               {
                 home-manager.extraSpecialArgs = {
-                  inherit inputs;
-                  inherit unstable;
-                  inherit pkgs;
-                  inherit system;
-                  inherit userName;
-                  inherit stateVersion;
+                  inherit
+                    inputs
+                    unstable
+                    pkgs
+                    system
+                    userName
+                    stateVersion
+                    ;
                 };
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;

@@ -9,11 +9,25 @@ let
     fullscreen = lua "hl.dsp.window.fullscreen()";
   };
 
-  bind = keys: dispatcher: { _args = [ keys dispatcher ]; };
+  bind = keys: dispatcher: {
+    _args = [
+      keys
+      dispatcher
+    ];
+  };
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
+      # bindm = [
+      #   # Move/resize windows with mod + LMB/RMB and dragging
+      #   "$mod, mouse:272, movewindow"
+      #   "$mod, mouse:273, resizewindow"
+      # ];
+      # bindl = [
+      #   " , switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, disable\""
+      #   " , switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, enable\""
+      # ];
       bind = [
         # Actions
         (bind "${mainMod} + Return" (dsp.exec "ghostty"))
@@ -40,7 +54,6 @@ in
         (bind "XF86AudioPause" (dsp.exec "playerctl play-pause"))
         (bind "XF86AudioPlay" (dsp.exec "playerctl play-pause"))
         (bind "XF86AudioPrev" (dsp.exec "playerctl previous"))
-
       ];
     };
   };

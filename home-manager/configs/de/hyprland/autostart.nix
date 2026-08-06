@@ -17,7 +17,6 @@ in
               hl.exec_cmd("elephant")
               hl.exec_cmd("signal-desktop")
               hl.exec_cmd("bitwarden")
-              hl.exec_cmd("hyprpaper")
             end
           '')
         ];

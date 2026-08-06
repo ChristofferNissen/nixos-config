@@ -3,8 +3,17 @@
 with pkgs;
 let
   pythonPackages = [
-    (unstable.python312.withPackages
-      (ps: with ps; [ pip black flake8 setuptools wheel twine virtualenv ]))
+    (unstable.python312.withPackages (
+      ps: with ps; [
+        pip
+        black
+        flake8
+        setuptools
+        wheel
+        twine
+        virtualenv
+      ]
+    ))
   ];
 
   # Define terminal-related packages
@@ -53,36 +62,36 @@ let
 
   qmkPackages = [ qmk ];
 
-  neovimPackages = (with unstable; [
-    tree-sitter
-    ripgrep
-    fd
-    wget
-    luarocks
-    biome
-    tectonic
-    texliveSmall
-    # mermaid-cli
-    ghostscript
-    python312Packages.pylatexenc
-    nixd
-    nodejs_22
-    php84Packages.composer
-    jdk21
-    kotlin
-    gradle
-    php
-    luajit
-    julia-bin
-    mercurial
-  ]);
+  neovimPackages = (
+    with unstable;
+    [
+      tree-sitter
+      ripgrep
+      fd
+      wget
+      luarocks
+      biome
+      tectonic
+      texliveSmall
+      # mermaid-cli
+      ghostscript
+      python312Packages.pylatexenc
+      nixd
+      nodejs_22
+      php84Packages.composer
+      jdk21
+      kotlin
+      gradle
+      php
+      luajit
+      julia-bin
+      mercurial
+    ]
+  );
 
 in
 {
-  imports = [ ./helm.nix ];
-
   home.packages = [
-    # inputs.ladybird.packages."x86_64-linux".default
     yarn
     powershell
   ]
@@ -128,12 +137,16 @@ in
     mdbook
     tenv
     bruno
-    (with dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 sdk_10_0 ])
-    dotnet-ef
-    dotnetPackages.Nuget
-    # csharp-ls
-  ]) ++ neovimPackages
+  ])
+  ++ neovimPackages
   # Gleam
-  ++ (with pkgs; [ gleam beamPackages.erlang rebar3 ]) ++ (with pkgs; [ home-manager ])
-  ++ terminalPackages ++ qmkPackages ++ pythonPackages;
+  ++ (with pkgs; [
+    gleam
+    beamPackages.erlang
+    rebar3
+  ])
+  ++ (with pkgs; [ home-manager ])
+  ++ terminalPackages
+  ++ qmkPackages
+  ++ pythonPackages;
 }

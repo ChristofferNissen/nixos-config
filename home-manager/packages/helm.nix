@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let
-  my-kubernetes-helm = with pkgs;
+  my-kubernetes-helm =
+    with pkgs;
     wrapHelm kubernetes-helm {
       plugins = with pkgs.kubernetes-helmPlugins; [
         helm-secrets
