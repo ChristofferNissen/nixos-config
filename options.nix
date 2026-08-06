@@ -34,7 +34,7 @@
           };
           mode = lib.mkOption {
             # default = "preferred";
-            default = "5120x1440@239.76";
+            default = "5120x1440@239.76Hz";
             description = "Resolution and refresh rate for primary monitor";
           };
           position = lib.mkOption {
@@ -73,7 +73,7 @@
           };
           mode = lib.mkOption {
             # default = "preferred";
-            default = "5120x1440@239.76";
+            default = "5120x1440@239.76Hz";
             description = "Resolution and refresh rate for secondary monitor";
           };
           position = lib.mkOption {

@@ -10,12 +10,12 @@
 
   home.packages = with pkgs; [ zsh-powerlevel10k meslo-lgs-nf kubectx ];
 
-  # home.file = {
-  #   ".p10k.zsh" = {
-  #     source = ./dotfiles/p10k.zsh;
-  #     executable = true;
-  #   };
-  # };
+  home.file = {
+    ".p10k.zsh" = {
+      source = ./dotfiles/p10k.zsh;
+      executable = true;
+    };
+  };
 
   home.sessionVariables = {
     SHELL = "${pkgs.zsh}/bin/zsh";
@@ -24,8 +24,8 @@
 
   programs.zsh.initContent = ''
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-    source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/config/p10k-pure.zsh
-    # source ~/.p10k.zsh
+    # source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/config/p10k-pure.zsh
+    source ~/.p10k.zsh
     eval "$(pay-respects zsh --alias)"
 
     export GOBIN=$HOME/go/bin
