@@ -7,6 +7,18 @@
   wayland.windowManager.hyprland = {
     # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    extraConfig = ''
+      -- Close Lid Action (Disables laptop screen, locks session)
+      hl.bind("switch:on:Lid Switch", function()
+          hl.monitor({ output = "eDP-1", disabled = true })
+          hl.dsp.exec_cmd("loginctl lock-session")
+      end, { locked = true })
+
+      -- Open Lid Action (Re-enables laptop screen)
+      hl.bind("switch:off:Lid Switch", function()
+          hl.monitor({ output = "eDP-1", disabled = false })
+      end, { locked = true })
+    '';
     settings = {
       config = {
         general = {

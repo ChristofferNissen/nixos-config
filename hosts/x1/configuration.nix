@@ -7,7 +7,6 @@
 {
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
-
   # Enable Flakes
   nix.settings.experimental-features = [
     "nix-command"
@@ -169,12 +168,15 @@
 
   # Cachix Hyprland
   nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     # Required so non-root users are allowed to use the above substituter/keys.
     # Use @wheel for all sudo users, or list your username explicitly.
-    trusted-users = ["root" "@wheel"];
+    trusted-users = [
+      "root"
+      "@wheel"
+    ];
   };
   # Hyprland
   security.polkit.enable = true;
@@ -184,6 +186,10 @@
     # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     withUWSM = true; # recommended for most users
     xwayland.enable = true;
+  };
+
+  services.logind = {
+    lidSwitch = "ignore"; # Inhibits systemd from forcing suspend instantly
   };
 
   # Enable sound with pipewire.

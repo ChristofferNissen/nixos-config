@@ -1,4 +1,5 @@
-{ userName, description, ... }: {
+{ userName, description, ... }:
+{
   users.users.${userName} = {
     isNormalUser = true;
     description = description;

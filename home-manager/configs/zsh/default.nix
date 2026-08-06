@@ -19,6 +19,7 @@
 
   home.sessionVariables = {
     SHELL = "${pkgs.zsh}/bin/zsh";
+    KUBE_EDITOR = "vim";
   };
 
   programs.zsh.initContent = ''
