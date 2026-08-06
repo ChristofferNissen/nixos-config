@@ -1,0 +1,5 @@
+{
+  catppuccin = {
+    autoEnable = false;
+  };
+}
