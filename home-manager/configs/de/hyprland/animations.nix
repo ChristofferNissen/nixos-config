@@ -1,8 +1,10 @@
 {
   wayland.windowManager.hyprland = {
     settings = {
-      animations = {
-        enabled = "true";
+      # https://github.com/hyprwm/Hyprland/blob/7d4a3c5768d5a04c7b62e63265c82a3659529fd7/example/hyprland.lua#L135
+      animation = [];
+      # {
+      #   enabled = "true";
 
         # bezier = [
         #   "linear, 0, 0, 1, 1"
@@ -32,7 +34,7 @@
         #   "fadeLayersIn, 1, 2, menu_decel"
         #   "fadeLayersOut, 1, 4.5, menu_accel"
         # ];
-      };
+      # };
     };
   };
 }

@@ -9,6 +9,9 @@
     # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     settings = {
       config = {
+        dwindle = {
+            preserve_split = true;
+        };
         general = {
           gaps_in = 5;
           gaps_out = 20;

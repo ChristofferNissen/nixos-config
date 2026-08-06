@@ -19,7 +19,7 @@
             description = "Position for primary monitor";
           };
           scale = lib.mkOption {
-            default = "1.2";
+            default = "1";
             description = "Scale for primary monitor";
           };
           bitdepth = lib.mkOption {
@@ -58,7 +58,7 @@
             description = "Color Management for primary monitor";
           };
           sdrbrightness = lib.mkOption {
-            default = "1.4";
+            default = "1.0";
             description = "SDR Brightness for primary monitor";
           };
           sdrsaturation = lib.mkOption {
@@ -97,7 +97,7 @@
             description = "Color Management for secondary monitor";
           };
           sdrbrightness = lib.mkOption {
-            default = "1.4";
+            default = "1.0";
             description = "SDR Brightness for secondary monitor";
           };
           sdrsaturation = lib.mkOption {

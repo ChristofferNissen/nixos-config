@@ -2,7 +2,7 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.configType = "lua";
   imports = [
-    # ./animations.nix
+    ./animations.nix
     ./autostart.nix
     ./binds.nix
     ./environments.nix
