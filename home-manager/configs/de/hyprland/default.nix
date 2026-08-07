@@ -1,6 +1,7 @@
 {
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.configType = "lua";
+  wayland.windowManager.hyprland.systemd.enable = false;
   imports = [
     ./animations.nix
     ./autostart.nix
