@@ -42,6 +42,7 @@ in
         # Actions
         (bind "${mainMod} + Return" (dsp.exec "ghostty"))
         (bind "${mainMod} + SHIFT + Return" (dsp.exec "zen"))
+        (bind "${mainMod} + CTRL + Return" (dsp.exec "zen --blank-window"))
         (bind "${mainMod} + SHIFT + W" dsp.close)
         (bind "${mainMod} + SHIFT + E" (dsp.exec "dms ipc call powermenu toggle"))
         (bind "${mainMod} + F" dsp.fullscreen)

@@ -95,6 +95,7 @@
     enable = true;
     windowManager.i3.enable = true;
   };
+  services.displayManager.ly.enable = true;
   services.displayManager = {
     # defaultSession = "none+i3";
     defaultSession = "hyprland-uwsm";
@@ -147,14 +148,15 @@
   services.udev.packages = [ pkgs.qmk-udev-rules ];
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
+  # services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = false;
   services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  # services.xserver.xkb = {
+  #   layout = "us";
+  #   variant = "";
+  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -201,7 +203,7 @@
     };
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    # jack.enable = true;
+    jack.enable = true;
 
     wireplumber.enable = true;
 
@@ -227,13 +229,13 @@
       wget
       zsh
       # https://nixos.wiki/wiki/Battle.net
-      vulkan-tools
-      (wineWow64Packages.full.override {
-        wineRelease = "staging";
-        mingwSupport = true;
-      })
-      winetricks
-      mesa
+      # vulkan-tools
+      # (wineWow64Packages.full.override {
+      #   wineRelease = "staging";
+      #   mingwSupport = true;
+      # })
+      # winetricks
+      # mesa
       # audio
       # bluez5-experimental
       # bluez-tools
@@ -246,10 +248,10 @@
   };
 
   # Graphics driver intel gpu
-  services.xserver.videoDrivers = [
-    "modesetting"
-    "intel"
-  ];
+  # services.xserver.videoDrivers = [
+  #   "modesetting"
+  #   "intel"
+  # ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

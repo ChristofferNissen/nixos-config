@@ -1,5 +1,5 @@
 { inputs, ... }: {
   imports = [
-    inputs.catppuccin.homeModules.catppuccin
+    inputs.catppuccin.homeManagerModules.catppuccin
   ];
 }

@@ -28,7 +28,7 @@
       set-option -sg escape-time 10
 
       # kube-tmux
-      # set -g status-right "#(/run/current-system/sw/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan)"
+      set -g status-right "#(/run/current-system/sw/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan)"
 
       # tmux-sessionizer <https://github.com/edr3x/tmux-sessionizer>
       bind-key -r f run-shell "tmux neww ~/.local/scripts/tmux-sessionizer"
@@ -77,23 +77,26 @@
     };
   };
 
-  catppuccin.tmux = {
-    enable = true;
-    extraConfig = ''
-      set -g @catppuccin_flavor "macchiato"
-      set -g @catppuccin_status_background "none"
+  catppuccin.tmux.enable = true;
+  catppuccin.tmux.flavor = "macchiato";
 
-      set -g @catppuccin_window_current_number_color "#{@thm_peach}"
-      set -g @catppuccin_window_current_text " #W"
-      set -g @catppuccin_window_current_text_color "#{@thm_bg}"
-      set -g @catppuccin_window_number_color "#{@thm_blue}"
-      set -g @catppuccin_window_text " #W"
-      set -g @catppuccin_window_text_color "#{@thm_surface_0}"
-      set -g @catppuccin_status_left_separator "█"
-
-      set -g status-right "#(/run/current-system/sw/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan) #{E:@catppuccin_status_host}#{E:@catppuccin_status_date_time}"
-      set -g status-right-length 200
-      set -g status-left ""
-    '';
-  };
+  # catppuccin.tmux = {
+  #   enable = true;
+  #   extraConfig = ''
+  #     set -g @catppuccin_flavor "macchiato"
+  #     set -g @catppuccin_status_background "none"
+  #
+  #     set -g @catppuccin_window_current_number_color "#{@thm_peach}"
+  #     set -g @catppuccin_window_current_text " #W"
+  #     set -g @catppuccin_window_current_text_color "#{@thm_bg}"
+  #     set -g @catppuccin_window_number_color "#{@thm_blue}"
+  #     set -g @catppuccin_window_text " #W"
+  #     set -g @catppuccin_window_text_color "#{@thm_surface_0}"
+  #     set -g @catppuccin_status_left_separator "█"
+  #
+  #     set -g status-right "#(/run/current-system/sw/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan) #{E:@catppuccin_status_host}#{E:@catppuccin_status_date_time}"
+  #     set -g status-right-length 200
+  #     set -g status-left ""
+  #   '';
+  # };
 }

@@ -25,6 +25,8 @@ let
     hyprpolkitagent
 
     ladybird
+    vivaldi
+    vivaldi-ffmpeg-codecs
 
     wlr-randr
     wl-clipboard
@@ -36,8 +38,8 @@ let
     seatd
     # wofi
     # hyprshutdown
-    # retroarch-full
     rpcs3
+
   ];
   # Define miscellaneous packages
   miscPackages = with pkgs; [
@@ -54,14 +56,16 @@ let
     signal-desktop
     bitwarden-desktop
     tidal-hifi
-    tidal-dl
+    # tidal-dl
     # high-tide
     # discord
     vlc
     # rpi-imager
+    # retroarch-full
   ];
   programs_unstable = with unstable; [
     bitwarden-cli
+    feishin
   ];
   kubernetesLinuxOnly = with unstable; [
     containerd
