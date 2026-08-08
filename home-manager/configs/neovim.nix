@@ -28,7 +28,7 @@ in
     };
   };
 
-  # home.sessionPath = [
-  #  "$HOME/.local/share/\${NVIM_APPNAME:-nvim}/mason/bin/"
-  # ];
+  home.sessionPath = [
+   "$HOME/.local/share/\${NVIM_APPNAME:-nvim}/mason/bin/"
+  ];
 }

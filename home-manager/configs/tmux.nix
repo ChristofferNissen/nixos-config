@@ -95,9 +95,9 @@
     };
   };
 
-  # home.sessionPath = [
-  #   "$HOME/.local/scripts/"
-  # ];
+  home.sessionPath = [
+    "$HOME/.local/scripts/"
+  ];
 
   catppuccin.tmux.enable = true;
   catppuccin.tmux.flavor = "macchiato";
