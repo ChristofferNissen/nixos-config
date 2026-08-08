@@ -1,7 +1,18 @@
-{pkgs, unstable, ...}:
+{ pkgs, unstable, ... }:
+let
+  # Step out of configs/ and look inside packages/
+  myDotnetPkgs = import ../packages/dotnet.nix { inherit unstable; };
+in
 {
+  home.packages = [
+    myDotnetPkgs
+    unstable.dotnet-ef
+    unstable.dotnetPackages.Nuget
+    # csharp-ls
+  ];
+
   home.sessionVariables = {
-    DOTNET_ROOT = "${(with unstable.dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 sdk_10_0 ])}/share/dotnet";
+    DOTNET_ROOT = "${myDotnetPkgs}/share/dotnet";
     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 0;
     LD_LIBRARY_PATH = "${pkgs.icu}/lib\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}";
   };
