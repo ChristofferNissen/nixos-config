@@ -16,4 +16,8 @@ in
     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 0;
     LD_LIBRARY_PATH = "${pkgs.icu}/lib\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}";
   };
+
+  # home.sessionPath = [
+  #   "$HOME/.dotnet/tools"
+  # ];
 }

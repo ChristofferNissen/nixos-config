@@ -58,6 +58,10 @@ let
     yazi
     # github-copilot-cli
     # nh
+    # starship
+    zoxide
+    atuin
+    delta
   ];
 
   qmkPackages = [ qmk ];
