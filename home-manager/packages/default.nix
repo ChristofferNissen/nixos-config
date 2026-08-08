@@ -10,7 +10,6 @@ in
 {
   imports = [
     ./catppuccin.nix
-    ./dotnet.nix
     ./helm.nix
     ./main.nix
   ]
