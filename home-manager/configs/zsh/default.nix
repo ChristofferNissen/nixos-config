@@ -10,13 +10,6 @@
     "$HOME/go/bin"
   ];
   
-  home.file = {
-    ".p10k.zsh" = {
-      source = ./dotfiles/p10k.zsh;
-      executable = true;
-    };
-  };
-
   home.packages = with pkgs; [
     zsh-powerlevel10k
     meslo-lgs-nf
@@ -29,12 +22,19 @@
     GOBIN = "$HOME/go/bin";
   };
 
-  programs.zsh.initContent = ''
-    eval "$(pay-respects zsh --alias)"
-    bindkey -s ^f "tmux-sessionizer\n"
+  home.file = {
+    ".p10k.zsh" = {
+      source = ./dotfiles/p10k.zsh;
+      executable = true;
+    };
+  };
 
+  programs.zsh.initContent = ''
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     source ~/.p10k.zsh
+
+    eval "$(pay-respects zsh --alias)"
+    bindkey -s ^f "tmux-sessionizer\n"
   '';
 
   programs.zsh.profileExtra = ''
@@ -100,12 +100,12 @@
   };
 
   programs.delta.enable = true;
+  programs.delta.enableGitIntegration = true;
   programs.delta.options = {
     navigate = true;
     line-numbers = true;
     # side-by-side = true;
   };
-  programs.delta.enableGitIntegration = true;
 
   # programs.starship = {
   #   enable = true;
@@ -127,9 +127,5 @@
     enable = true;
     enableZshIntegration = true;
     flags = [ "--disable-up-arrow" ];
-    # settings = {
-    #     search_mode = "skim";
-    #     style = "compact";
-    # };
   };
 }

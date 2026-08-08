@@ -59,6 +59,7 @@ let
     # github-copilot-cli
     # nh
     # starship
+    eza
     zoxide
     atuin
     delta
