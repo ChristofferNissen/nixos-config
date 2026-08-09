@@ -1,19 +1,18 @@
 { pkgs, ... }:
 
 {
-  # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.systemPackages = with pkgs; [ git vim ];
 
   programs.zsh.enable = true;
 
-  # Add more darwin-specific settings or packages here
+  environment.systemPath = [
+    "/opt/homebrew/bin"
+  ];
+
   environment.variables = {
-    PATH = "$PATH:/opt/homebrew/bin";
     CONFIG = "mac";
-    TALOSCONFIG = "/Users/cn/homek8s/talos/talosconfig";
-    K9S_CONFIG_DIR = "/Users/cn/.config/k9s";
   };
 
   nix.gc = {

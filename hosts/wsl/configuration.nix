@@ -15,17 +15,13 @@
   };
   security.sudo.extraConfig = ''Defaults env_keep += "NIX_SSL_CERT_FILE"'';
 
-  # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
 
-  # Nix-LD
   programs.nix-ld.enable = true;
 
-  # QMK
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = [ pkgs.qmk-udev-rules ];
 
-  # Docker
   virtualisation.docker = {
     enable = true;
     daemon.settings = { "features" = { "containerd-snapshotter" = true; }; };
@@ -46,7 +42,6 @@
     # }
   ];
 
-  # Install firefox.
   programs.firefox.enable = true;
 
   nix.gc = {
