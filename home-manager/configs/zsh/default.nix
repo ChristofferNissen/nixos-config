@@ -20,6 +20,7 @@
     SHELL = "${pkgs.zsh}/bin/zsh";
     KUBE_EDITOR = "vim";
     GOBIN = "$HOME/go/bin";
+    # ATUIN_SYNC_ADDRESS = "https://atuin.houseofsnit.casa";
   };
 
   home.file = {
@@ -127,5 +128,10 @@
     enable = true;
     enableZshIntegration = true;
     flags = [ "--disable-up-arrow" ];
+    # settings = {
+    #   auto_sync = true;
+    #   sync_frequency = "5m";
+    #   sync_address = "https://atuin.houseofsnit.casa"; # Replace with your custom URL if self-hosting
+    # };
   };
 }
