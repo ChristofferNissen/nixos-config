@@ -124,8 +124,7 @@ in
   ])
   # Development
   ++ (with unstable; [
-    vim
-    nh
+    (lib.lowPrio vim)
     go
     gotools
     gofumpt
