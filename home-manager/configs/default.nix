@@ -6,6 +6,7 @@
     ./dotnet.nix
     ./git.nix
     ./neovim.nix
+    # ./nixvim.nix
     ./tmux.nix
   ];
 }
