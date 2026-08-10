@@ -10,7 +10,7 @@ tasks:
   clean:
     desc: Clean nix
     cmds:
-      - nix run github:nix-community/nh -- clean all
+      - nh -- clean all
   clean-docker:
     desc: Clean docker
     cmds:
@@ -40,8 +40,17 @@ tasks:
       OS:
         sh: uname | tr '[:upper:]' '[:lower:]'
     cmds:
-      - nix run github:nix-community/nh -- "$SUBCOMMAND" switch . -H {{.CONFIG}} --
-        --impure
+      - nh -- "$SUBCOMMAND" switch . -H {{.CONFIG}} -- --impure
+  boot:
+    desc: Build boot config
+    vars:
+      CONFIG: '{{.CONFIG | default "x1"}}'
+    env:
+      SUBCOMMAND: '{{if eq OS "darwin"}}darwin{{else}}os{{end}}'
+      OS:
+        sh: uname | tr '[:upper:]' '[:lower:]'
+    cmds:
+      - nh "$SUBCOMMAND" boot . -H {{.CONFIG}} -- --impure
   build:
     desc: Build OS configuration using nh from github:nix-community/nh
     deps: [check-nix]
@@ -52,5 +61,4 @@ tasks:
       OS:
         sh: uname | tr '[:upper:]' '[:lower:]'
     cmds:
-      - nix run github:nix-community/nh -- "$SUBCOMMAND" build . -H {{.CONFIG}} --
-        --impure
+      - nh -- "$SUBCOMMAND" build . -H {{.CONFIG}} -- --impure
