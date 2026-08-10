@@ -184,11 +184,11 @@
   };
 
   services.logind = {
-      settings = {
-          Login = {
-              HandleLidSwitch = "ignore"; # Inhibits systemd from forcing suspend instantly
-          };
+    settings = {
+      Login = {
+        HandleLidSwitch = "ignore"; # Inhibits systemd from forcing suspend instantly
       };
+    };
   };
 
   # Enable sound with pipewire.
@@ -248,10 +248,9 @@
   };
 
   # Graphics driver intel gpu
-  # services.xserver.videoDrivers = [
-  #   "modesetting"
-  #   "intel"
-  # ];
+  services.xserver.videoDrivers = [
+    "modesetting"
+  ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -275,6 +274,25 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
+
+  # Laptop power management via TLP.
+  # TLP and power-profiles-daemon are mutually exclusive; GNOME pulls in PPD by
+  # default, so it must be disabled for TLP to take over.
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      PLATFORM_PROFILE_ON_AC = "performance";
+      PLATFORM_PROFILE_ON_BAT = "low-power";
+      # Battery health
+      START_CHARGE_THRESH_BAT0 = 75;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+    };
+  };
 
   # https://nixos.wiki/wiki/Storage_optimization
   nix.optimise.automatic = true;
