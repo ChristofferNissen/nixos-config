@@ -40,9 +40,10 @@ tasks:
       OS:
         sh: uname | tr '[:upper:]' '[:lower:]'
     cmds:
-      - nh -- "$SUBCOMMAND" switch . -H {{.CONFIG}} -- --impure
+      - nh "$SUBCOMMAND" switch . -H {{.CONFIG}} -- --impure
   boot:
     desc: Build boot config
+    deps: [check nix]
     vars:
       CONFIG: '{{.CONFIG | default "x1"}}'
     env:
