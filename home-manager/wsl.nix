@@ -1,4 +1,4 @@
-{ userName }:
+{ userName, ... }:
 {
   programs.git.settings.user.email = "@.com";
 

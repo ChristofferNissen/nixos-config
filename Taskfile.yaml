@@ -10,7 +10,7 @@ tasks:
   clean:
     desc: Clean nix
     cmds:
-      - nh -- clean all
+      - nh clean all
   clean-docker:
     desc: Clean docker
     cmds:
@@ -62,4 +62,4 @@ tasks:
       OS:
         sh: uname | tr '[:upper:]' '[:lower:]'
     cmds:
-      - nh -- "$SUBCOMMAND" build . -H {{.CONFIG}} -- --impure
+      - nh "$SUBCOMMAND" build . -H {{.CONFIG}} -- --impure
