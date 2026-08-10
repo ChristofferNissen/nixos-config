@@ -1,7 +1,10 @@
 { pkgs, system, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   nixpkgs.hostPlatform = system;
 
@@ -22,14 +25,35 @@
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = [ pkgs.qmk-udev-rules ];
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = [
+      pkgs.nvidia-vaapi-driver
+      pkgs.libvdpau-va-gl
+    ];
+  };
+
+  # systemd.tmpfiles.rules = [
+  #   "L+ /usr/lib/wsl/lib/libnvidia-ml.so.1 - - - - /usr/lib/wsl/lib/libnvidia-wl.so"
+  # ];
+  environment.variables.LD_LIBRARY_PATH = "/usr/lib/wsl/lib";
+
   virtualisation.docker = {
     enable = true;
-    daemon.settings = { "features" = { "containerd-snapshotter" = true; }; };
+    daemon.settings = {
+      "features" = {
+        "containerd-snapshotter" = true;
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [
     gitFull
     vim
+    # NVIDIA
+    nvidia-vaapi-driver
+    nvtopPackages.full
+    pciutils
     # jdk17.override
     # {
     #   cacert = pkgs.runCommand "mycacert" { } ''
