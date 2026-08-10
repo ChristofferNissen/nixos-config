@@ -55,7 +55,11 @@
 
   home.file = {
     ".tmux/kube-tmux" = {
-      source = fetchGit { url = "https://github.com/jonmosco/kube-tmux"; };
+      source = fetchGit { 
+          url = "https://github.com/jonmosco/kube-tmux";
+          ref = "master";
+          rev = "8b7e1d127c16b6dc87ff5743f4d775b245198b69";
+      };
       recursive = true;
     };
     ".local/scripts/tmux-sessionizer" = {

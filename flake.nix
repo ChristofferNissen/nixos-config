@@ -4,9 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:NixOS/nixpkgs/release-26.05";
-    nixpkgs-unstable = {
-      url = "github:NixOS/nixpkgs?ref=master";
-    };
+    # nixpkgs-unstable = {
+    #   url = "github:NixOS/nixpkgs?ref=master";
+    # };
+    nixpkgs-unstable.follows = "nixpkgs";
 
     # ref: https://github.com/NixOS/nixos-hardware/tree/master
     nixos-hardware = {
@@ -15,6 +16,14 @@
 
     # nixvim.url = "github:nix-community/nixvim";
     # nixvim.url = "github:nix-community/nixvim/nixos-26.05";
+
+    # Personal Neovim configuration
+    # For local development this points at the working tree. After pushing the
+    # repo, switch to: url = "github:ChristofferNissen/nixvim-config"
+    # nixvim-config = {
+    #   url = "git+file:///home/cn/configs/nixvim-config";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # ref: https://github.com/nix-community/NixOS-WSL/
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
@@ -207,6 +216,15 @@
                 wsl.wslConf.automount.enabled = true;
                 wsl.wslConf.boot.systemd = true;
                 wsl.wslConf.network.generateResolvConf = false;
+                wsl.useWindowsDriver = true; # Allow WSL to talk to Windows GPU drivers
+                wsl.wslConf.wsl2 = {
+                    memory = "24GB";
+                    swap = "16GB";
+                };
+                # Optional but recommended for AI workflows
+                # wsl.wslConf.experimental = {
+                #     autoMemoryReclaim = "gradual";
+                # };
                 networking.nameservers = [
                   "10.41.2.10"
                   "10.41.2.11"

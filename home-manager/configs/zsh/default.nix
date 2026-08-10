@@ -87,7 +87,6 @@
         "helm"
         "kind"
         "golang"
-        "tmux"
         "tldr"
         "kube-ps1"
         "zoxide"

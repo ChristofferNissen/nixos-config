@@ -18,6 +18,7 @@ let
 
   # Define terminal-related packages
   terminalPackages = [
+    nh
     # ffmpeg
     # ffmpeg-full
     any-nix-shell
