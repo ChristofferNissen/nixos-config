@@ -196,9 +196,9 @@
             system = system;
             specialArgs = {
               inherit
-                # inputs
-                # nixos-wsl
-                # system
+                inputs
+                nixos-wsl
+                system
                 userName
                 description
                 ;
@@ -217,10 +217,10 @@
                 wsl.wslConf.boot.systemd = true;
                 wsl.wslConf.network.generateResolvConf = false;
                 wsl.useWindowsDriver = true; # Allow WSL to talk to Windows GPU drivers
-                wsl.wslConf.wsl2 = {
-                    memory = "24GB";
-                    swap = "16GB";
-                };
+                # wsl.wslConf.wsl2 = {
+                #     memory = "24GB";
+                #     swap = "16GB";
+                # };
                 # Optional but recommended for AI workflows
                 # wsl.wslConf.experimental = {
                 #     autoMemoryReclaim = "gradual";

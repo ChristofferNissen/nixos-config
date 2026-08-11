@@ -7,4 +7,6 @@
       text-color = "#cdd6f4";
     };
   };
+
+  # catppuccin.mako.enable = true;
 }

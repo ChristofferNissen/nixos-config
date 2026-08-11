@@ -13,6 +13,8 @@
 
   nix.package = pkgs.lixPackageSets.stable.lix;
 
+  nixpkgs.config.allowUnfree = true;
+
   nix.settings = {
     extra-substituters = [
       "https://nix-community.cachix.org"

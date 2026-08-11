@@ -12,4 +12,6 @@
     window-decoration = false
     command = "${pkgs.zsh}/bin/zsh"
   '';
+
+  # catppuccin.ghostty.enable = true;
 }

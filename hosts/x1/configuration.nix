@@ -183,13 +183,13 @@
     xwayland.enable = true;
   };
 
-  services.logind = {
-    settings = {
-      Login = {
-        HandleLidSwitch = "ignore"; # Inhibits systemd from forcing suspend instantly
-      };
-    };
-  };
+  # services.logind = {
+  #   settings = {
+  #     Login = {
+  #       HandleLidSwitch = "ignore"; # Inhibits systemd from forcing suspend instantly
+  #     };
+  #   };
+  # };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;

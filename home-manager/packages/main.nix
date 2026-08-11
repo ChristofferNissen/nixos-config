@@ -57,13 +57,15 @@ let
     gnumake
     lf
     yazi
-    # github-copilot-cli
-    # nh
-    # starship
+    github-copilot-cli
+    starship
     eza
     zoxide
     atuin
     delta
+    fnm
+    mise
+    ripgrep
   ];
 
   qmkPackages = [ qmk ];

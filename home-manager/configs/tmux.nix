@@ -30,11 +30,20 @@
       # Reload tmux config by pressing prefix + R
       bind R source-file ~/.config/tmux/tmux.conf \; display "Configuration reloaded"
 
+      # Apply Tc
+      set -ga terminal-overrides ",xterm-256color:RGB:smcup@:rmcup@"
+
+      # Enable focus-events
+      set -g focus-events on
+
+      # Set default escape-time
+      set-option -sg escape-time 10
+
       # kube-tmux
-      set -g status-right "#(/run/current-system/sw/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan)"
+      set -g status-right "#(${pkgs.bash}/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan)"
 
       # tmux-sessionizer <https://github.com/edr3x/tmux-sessionizer>
-      bind-key -r f run-shell "tmux neww ~/.local/scripts/tmux-sessionizer"
+      bind-key -r f run-shell "tmux new ~/.local/scripts/tmux-sessionizer"
 
       # split panes using | and -
       bind | split-window -h
@@ -49,16 +58,15 @@
       bind -n M-Down select-pane -D
 
       set -g status-left ""
-
     '';
   };
 
   home.file = {
     ".tmux/kube-tmux" = {
-      source = fetchGit { 
-          url = "https://github.com/jonmosco/kube-tmux";
-          ref = "master";
-          rev = "8b7e1d127c16b6dc87ff5743f4d775b245198b69";
+      source = fetchGit {
+        url = "https://github.com/jonmosco/kube-tmux";
+        ref = "master";
+        rev = "8b7e1d127c16b6dc87ff5743f4d775b245198b69";
       };
       recursive = true;
     };
@@ -105,4 +113,19 @@
 
   catppuccin.tmux.enable = true;
   catppuccin.tmux.flavor = "macchiato";
+  catppuccin.tmux.extraConfig = ''
+    set -g @catppuccin_status_background "none"
+
+    set -g @catppuccin_window_current_number_color "#{@thm_peach}"
+    set -g @catppuccin_window_current_text " #W"
+    set -g @catppuccin_window_current_text_color "#{@thm_bg}"
+    set -g @catppuccin_window_number_color "#{@thm_blue}"
+    set -g @catppuccin_window_text " #W"
+    set -g @catppuccin_window_text_color "#{@thm_surface_0}"
+    set -g @catppuccin_status_left_separator "█"
+
+    set -g status-right "#(/run/current-system/sw/bin/bash $HOME/.tmux/kube-tmux/kube.tmux 250 red cyan) #{E:@catppuccin_status_host}#{E:@catppuccin_status_date_time}"
+    set -g status-right-length 200
+    set -g status-left ""
+  '';
 }
