@@ -62,6 +62,7 @@ let
     vlc
     # rpi-imager
     # retroarch-full
+    retroarch-free
   ];
   programs_unstable = with unstable; [
     bitwarden-cli

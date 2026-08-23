@@ -66,6 +66,8 @@ let
     fnm
     mise
     ripgrep
+    zola
+    velero
   ];
 
   qmkPackages = [ qmk ];
