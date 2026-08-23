@@ -11,8 +11,8 @@
   ];
   
   home.packages = with pkgs; [
-    zsh-powerlevel10k
-    meslo-lgs-nf
+    # zsh-powerlevel10k
+    # meslo-lgs-nf
     kubectx
   ];
 
@@ -23,16 +23,16 @@
     # ATUIN_SYNC_ADDRESS = "https://atuin.houseofsnit.casa";
   };
 
-  home.file = {
-    ".p10k.zsh" = {
-      source = ./dotfiles/p10k.zsh;
-      executable = true;
-    };
-  };
+  # home.file = {
+  #   ".p10k.zsh" = {
+  #     source = ./dotfiles/p10k.zsh;
+  #     executable = true;
+  #   };
+  # };
 
   programs.zsh.initContent = ''
-    source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-    source ~/.p10k.zsh
+    # source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+    # source ~/.p10k.zsh
 
     eval "$(pay-respects zsh --alias)"
     bindkey -s ^f "tmux-sessionizer\n"
@@ -107,14 +107,14 @@
     # side-by-side = true;
   };
 
-  # programs.starship = {
-  #   enable = true;
-  #   enableZshIntegration = true;
-  #   settings = {
-  #     add_newline = false;
-  #     line_break.disabled = true;
-  #   };
-  # };
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      add_newline = false;
+      line_break.disabled = true;
+    };
+  };
 
   programs.zoxide = {
     enable = true;
