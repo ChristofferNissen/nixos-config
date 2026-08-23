@@ -68,5 +68,5 @@
     source = ./dotfiles/plugins.yaml;
   };
 
-  # catppuccin.k9s.enable = true;
+  catppuccin.k9s.enable = true;
 }
